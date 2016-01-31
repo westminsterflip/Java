@@ -37,3 +37,14 @@ public class Change_Program {
 	}
 
 }
+/*
+ * Fifties: 0
+Twenties: 2
+Tens: 0
+Fives: 1
+Ones: 0
+Quarters: 2
+Dimes: 1
+Nickels: 0
+Pennies: 1
+ */

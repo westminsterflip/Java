@@ -1,2 +1,2 @@
 # Java
-Simple Java programs
+Just some rather simple Java programs

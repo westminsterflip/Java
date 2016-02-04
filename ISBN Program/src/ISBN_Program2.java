@@ -30,3 +30,23 @@ public class ISBN_Program2 {
 		}
 	}
 }
+/*
+ISBN Number:       0-7645-0417-7
+Check Digit From Number:       7
+Check Digit From Calculations: 7
+ISBN Number:       0-7654-0417-6
+Check Digit From Number:       6
+Check Digit From Calculations: 6
+ISBN Number:       0-912517-31-X
+Check Digit From Number:       X
+Check Digit From Calculations: X
+ISBN Number:       3-314-21145-7
+Check Digit From Number:       7
+Check Digit From Calculations: 7
+ISBN Number:       91-29-65497-1
+Check Digit From Number:       1
+Check Digit From Calculations: 1
+ISBN Number:       957-621-541-2
+Check Digit From Number:       2
+Check Digit From Calculations: 2
+*/

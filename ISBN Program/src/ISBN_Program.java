@@ -30,3 +30,12 @@ public class ISBN_Program {
 		}
 	}
 }
+/*
+ISBN Numbers: Given Chk#: Calculated Chk#:
+0-7645-0417-7      7             7
+0-7654-0417-6      6             6
+0-912517-31-X      X             X
+3-314-21145-7      7             7
+91-29-65497-1      1             1
+957-621-541-2      2             2
+*/

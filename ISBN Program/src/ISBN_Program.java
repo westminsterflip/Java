@@ -16,16 +16,16 @@ public class ISBN_Program {
 					num1++;
 					}
 				}
-			int num2 = 10,num5 = 0;
+			int multby = 10,calcchecknum = 0;
 			for(int num3:positions2){
 				String character = ISBN[plchld].substring(num3,num3+1);
 				int num4 = Integer.parseInt(character);
-				num5 = num5 + num2*num4;
-				num2--;
+				calcchecknum = calcchecknum + multby*num4;
+				multby--;
 				}	
-			num5 = 10-((num5-1)%11);
+			calcchecknum = 10-((calcchecknum-1)%11);
 			char chknum = ISBN[plchld].charAt(12);
-			System.out.println(ISBN[plchld]+"      "+chknum+"             "+checknumbers.charAt(num5));
+			System.out.println(ISBN[plchld]+"      "+chknum+"             "+checknumbers.charAt(calcchecknum));
 			
 		}
 	}

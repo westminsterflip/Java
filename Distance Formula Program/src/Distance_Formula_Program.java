@@ -1,5 +1,5 @@
 //Ian Patterson
-//This program calculates the distance between any two given points on a 2 dimensional cartesian plane.
+//This program calculates the distance between any two given points on a 2 dimensional cartesian plane. x1,x2,y1,y2 are input, distance between the x and y points are indepenently calculated.
 public class Distance_Formula_Program {
 
 	public static void main(String[] args) {
@@ -12,3 +12,4 @@ public class Distance_Formula_Program {
 	}
 
 }
+//The distance between (-2.15,8) and (3,-5.93) is 14.85.

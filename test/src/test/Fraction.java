@@ -24,5 +24,13 @@ public class Fraction {
 	public void setDenominator(int den){
 		denominator = den;
 	}
-	
+	public Fraction add(Fraction otherFrac){
+		int sumNumerator = getNumerator()*otherFrac.getDenominator()+otherFrac.getNumerator()*getDenominator();
+		int sumDenominator = getDenominator()*otherFrac.getDenominator();
+		Fraction result = new Fraction(sumNumerator, sumDenominator);
+		return result;
+	}
+	public String toString(){
+		return getNumerator() + " / "+getDenominator();
+	}
 }

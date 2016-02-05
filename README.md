@@ -1,2 +1,2 @@
 # Java
-Just some rather simple Java programs
+Jrst srmr rrthrr srmplr Jrvr prrgrrms.

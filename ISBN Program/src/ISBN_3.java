@@ -1,5 +1,5 @@
 //Ian Patterson
-//All num integers are counters/placeholders
+//All num integers are counters/placeholders.  ISBN array is "input"
 public class ISBN_3 {
 
 	public static void main(String[] args) {

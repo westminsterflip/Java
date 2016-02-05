@@ -26,7 +26,8 @@ public class ISBN_Program2 {
 			char chknum = ISBN[plchld].charAt(12);
 			System.out.println("ISBN Number:       "+ISBN[plchld]);
 			System.out.println("Check Digit From Number:       "+chknum);
-			System.out.println("Check Digit From Calculations: "+checknumbers.charAt(num5));	
+			System.out.println("Check Digit From Calculations: "+checknumbers.charAt(num5));
+			System.out.println();
 		}
 	}
 }

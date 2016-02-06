@@ -4,17 +4,15 @@ public class Fraction {
 	private int numerator;
 	private int denominator;
 	
-
-
 	public Fraction(int num, int den){
-		numerator=num;
-		denominator=den;
-	
-	
+		denominator = den;
+		numerator = num;
 	}
+	
 	public int getNumerator(){
 		return numerator;
 	}
+
 	public int getDenominator(){
 		return denominator;
 	}

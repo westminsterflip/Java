@@ -1,31 +1,33 @@
 package JavaLand;
-import java.io.*;
-public class JavaLand {
-	
-	public class Taxes{
-		
-		private int income;
-		
-		public Taxes(int inco){
-			income = inco;
-		}
-		public void setIncome(int inco) throws IOException{
-			income = inco;
-			InputStreamReader reader = new InputStreamReader(System.in);
-			BufferedReader input = new BufferedReader(reader);
-			
-			System.out.print("Enter a String: ");
-			String inputString = input.readLine();
-			System.out.println("String is: " + inputString);
-		}
-		public int getIncome(){
-			return income;
-		}
-	}
-	
-	public static void main(String[] args) {
-		Taxes t1 = new Taxes(1);
-		t1.getIncome();
-	}
 
+public class JavaLand {
+	private int income;
+	
+	public JavaLand(int inc){
+		income = inc;
+	}
+	
+	public int getNumerator(){
+		return numerator;
+	}
+	public void setNumerator(int num){
+		numerator = num;
+	}
+	
+	public JavaLand add(JavaLand otherFrac){
+		int sumNumerator = getNumerator()+otherFrac.getNumerator();
+		JavaLand result = new JavaLand(sumNumerator);
+		return result;
+	}
+	public static void main(String[] args){
+		JavaLand f1 = new JavaLand(1);
+		JavaLand f2 = new JavaLand(3);
+		JavaLand sum, difference, product, quotient;
+		sum = f1.add(f2);
+		System.out.println(f1.toString()+" + " + f2.toString()+ " = " + sum.toString());
+		
+	}
+	public String toString(){
+		return getNumerator() + " / ";
+ 	}
 }

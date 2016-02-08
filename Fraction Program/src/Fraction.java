@@ -10,51 +10,51 @@ public class Fraction {
 		numerator = num;
 	}
 	
-	public int getNumerator(){
+	public int getNumerator(){//Accesses private numerator int
 		return numerator;
 	}
 
-	public int getDenominator(){
+	public int getDenominator(){//Accesses private denominator int
 		return denominator;
 	}
 	
-	public void setNumerator(int num){
+	public void setNumerator(int num){//Stores int to private int numerator
 		numerator = num;
 	}
 	
-	public void setDenominator(int den){
+	public void setDenominator(int den){//Stores int to private denominator
 		denominator = den;
 	}
 	
-	public Fraction add(Fraction otherFrac){
+	public Fraction add(Fraction otherFrac){//Adds fraction with common denominator, input is another frac
 		int sumNumerator = getNumerator()*otherFrac.getDenominator()+otherFrac.getNumerator()*getDenominator();
 		int sumDenominator = getDenominator()*otherFrac.getDenominator();
 		Fraction result = new Fraction(sumNumerator, sumDenominator);
 		return result;
 	}
 	
-	public Fraction subtract(Fraction otherFrac){
+	public Fraction subtract(Fraction otherFrac){//subtracts fraction with common denominator, input is another frac
 		int diffNumerator = getNumerator()*otherFrac.getDenominator()-otherFrac.getNumerator()*getDenominator();
 		int diffDenominator = getDenominator()*otherFrac.getDenominator();
 		Fraction result = new Fraction(diffNumerator, diffDenominator);
 		return result;
 	}
 	
-	public Fraction multiply(Fraction otherFrac){
+	public Fraction multiply(Fraction otherFrac){//Multiplies numerator and denominator separately , input is another frac
 		int multNumerator = getNumerator()*otherFrac.getNumerator();
 		int multDenominator = getDenominator()*otherFrac.getDenominator();
 		Fraction result = new Fraction(multNumerator,multDenominator);
 		return result;
 	}
 	
-	public Fraction divide(Fraction otherFrac){
+	public Fraction divide(Fraction otherFrac){//Divides numerator and denominator separately , input is another frac
 		int divNumerator = getNumerator()*otherFrac.getDenominator();
 		int divDenominator = getDenominator()*otherFrac.getNumerator();
 		Fraction result = new Fraction(divNumerator,divDenominator);
 		return result;
 	}
 	
-	public String toString(){
+	public String toString(){ //Setup fraction bar given int,int fraction
 		return getNumerator() + "/"+getDenominator();
 	}
 	

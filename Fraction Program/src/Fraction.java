@@ -1,6 +1,7 @@
 //Ian Patterson
 //Class takes two predetermined fractions, holds the private variables numerator and denominator
 // and calculates and outputs the sum, difference, quotient, and product of the two fractions
+
 public class Fraction {
 	private int numerator;
 	private int denominator;

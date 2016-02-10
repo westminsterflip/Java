@@ -53,13 +53,18 @@ public class Rectangle {
 			BufferedReader inputL = new BufferedReader(readerL);
 		
 			System.out.print("Length: ");
-			length1 = Integer.parseInt(inputL.readLine());
-			
+			String lenthy = inputL.readLine();
+			if (lenthy.equals("")){
+				inputCorrect = false;
+				System.out.println("Length must be given a value");
+			} else {
+			length1 = Integer.parseInt(lenthy);
 			if (length1 > 0 && length1 < 26){
 				inputCorrect = true;
 			} else {
 				inputCorrect = false;
 				System.out.println("Length can be any value from 1 to 25.");
+			}
 			}
 		}
 		return length1;
@@ -73,7 +78,12 @@ public class Rectangle {
 			BufferedReader inputW = new BufferedReader(readerW);
 		
 			System.out.print("Width: ");
-			width1 = Integer.parseInt(inputW.readLine());
+			String withy = inputW.readLine();
+			if (withy.equals("")){
+				inputCorrect = false;
+				System.out.println("Width must be given a value");
+			} else {
+			width1 = Integer.parseInt(withy);
 			
 			if (width1 > 0 && width1 < 81){
 				inputCorrect = true;
@@ -82,8 +92,10 @@ public class Rectangle {
 				System.out.println("Width can be any value from 1 to 80.");
 			}
 		}
+		}	
 		return width1;
-	}
+	
+	}		
 	
 	public static void main(String[] args)throws IOException{
 		String affirmation = "";

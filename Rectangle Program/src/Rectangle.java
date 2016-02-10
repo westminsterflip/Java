@@ -45,7 +45,7 @@ public class Rectangle {
 		return area;
 	}
 	
-	public int inputLength()throws IOException{
+	public int inputLength()throws IOException{//Error traps input length to be 1 to 25
 		boolean inputCorrect = false;
 		int length1 = 0;
 		while (inputCorrect == false){
@@ -65,7 +65,7 @@ public class Rectangle {
 		return length1;
 	}
 	
-	public int inputWidth()throws IOException{
+	public int inputWidth()throws IOException{//Error traps input width to be 1 to 25
 		boolean inputCorrect = false;
 		int width1 = 0;
 		while (inputCorrect == false){
@@ -102,7 +102,7 @@ public class Rectangle {
 			System.out.print("Continue? (exit to end) ");
 			affirmation = inputa.readLine();
 		}
-		while (!affirmation.equals("exit"));
+		while (!affirmation.equals("exit"));//Any input other than "exit" will continue the program
 	}
 	
 }
@@ -153,7 +153,7 @@ Your rectangle is 10 stars across and 2 stars down, with an area of 20 square st
 * * * * * * * * * * 
 * * * * * * * * * * 
 
-Continue? (exit to end) yup
+Continue? (exit to end) cheese noodles
 Width: 5
 Length: 8
 Your rectangle is 5 stars across and 8 stars down, with an area of 40 square stars.

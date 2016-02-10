@@ -38,7 +38,7 @@ public class JavaLand_ver2 {
 		InputStreamReader reader = new InputStreamReader(System.in);
 		BufferedReader input = new BufferedReader(reader);
 		
-		System.out.print("Enter income amount:");
+		System.out.print("Enter income amount: ");
 		for (String inputString = input.readLine(); !inputString.equals("-999"); inputString = input.readLine()){
 		int dot = inputString.indexOf(".");
 		int inputNum;
@@ -61,39 +61,40 @@ public class JavaLand_ver2 {
 		}
 		System.out.println("$" + taxesOwed);
 		System.out.println("");
-		totalTaxes += taxesOwed;}
+		totalTaxes += taxesOwed;
+		System.out.print("Enter income amount: ");
 		}
 		System.out.println("");
 		System.out.println("Total taxes paid:               $" + (totalTaxes));
 	}
-
+}
 
 /*
-Enter income amount:0
+Enter income amount: 0
 Income:                         Tax:
 $0                              $0.0
 
-Enter income amount:500
+Enter income amount: 500
 Income:                         Tax:
 $500                            $5.0
 
-Enter income amount:5432
+Enter income amount: 5432
 Income:                         Tax:
 $5432                           $554.32
 
-Enter income amount:15006
+Enter income amount: 15006
 Income:                         Tax:
 $15006                          $850.3
 
-Enter income amount:32999
+Enter income amount: 32999
 Income:                         Tax:
 $32999                          $1899.9
 
-Enter income amount:100555
+Enter income amount: 100555
 Income:                         Tax:
 $100555                         $8655.5
 
-Enter income amount:-999
+Enter income amount: -999
 
 Total taxes paid:               $11965.02
  */

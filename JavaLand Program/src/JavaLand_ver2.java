@@ -1,5 +1,6 @@
 //Ian Patterson
 //JavaLand calculates an income tax on given multipliers, holds private variable income.  It calculates a double tax.  Input can only be an integer, although the length is not limited by the class.
+//This program will run until -999 is entered as income, at which point it will output total taxes paid.
 import java.io.*;
 public class JavaLand_ver2 {
 	private int income;
@@ -57,7 +58,7 @@ public class JavaLand_ver2 {
 		counter = t1.getIncome();
 		double taxesOwed = t1.taxify();
 		
-		if (t1.getIncome() != -999){
+		if (t1.getIncome() != -999){//Determines if the income is -999 to avoid printing tax on -999 and throwing off totalTaxes
 		System.out.println(t1.toString());
 		System.out.print("$"+t1.getIncome());
 		for(int w = inputString.length()+2; w < 33; w++){

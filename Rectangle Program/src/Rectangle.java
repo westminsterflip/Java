@@ -1,4 +1,6 @@
 //Ian Patterson
+//Class has private variables length, width, and area, area is calculated.  
+//Length can be 1 to 25, width 1 to 80.  
 import java.io.*;
 public class Rectangle {
 
@@ -11,23 +13,23 @@ public class Rectangle {
 		width = 0;
 	}
 	
-	public void setLength(int leng){
+	public void setLength(int leng){//Sets private int length
 		length = leng;
 	}
 	
-	public void setWidth(int wid){	
+	public void setWidth(int wid){	//Sets private int length
 		width = wid;
 	}
 	
-	public int getWidth(){
+	public int getWidth(){ //Accesses private int width
 		return width;
 	}
 	
-	public int getLength(){
+	public int getLength(){ //Accesses private int length
 		return length;
 	}
 	
-	public String toString(){
+	public String toString(){ //forms stars string; the rectangle
 		String stars = "";
 		for (int lengthy = 0; lengthy < getLength(); lengthy++){
 			for (int widthy = 0; widthy < getWidth(); widthy++){
@@ -38,7 +40,7 @@ public class Rectangle {
 		return stars;
 	}
 	
-	public int areaify(){
+	public int areaify(){ //Calculates area given a length and a width
 		area = getLength()*getWidth();
 		return area;
 	}
@@ -57,6 +59,7 @@ public class Rectangle {
 				inputCorrect = true;
 			} else {
 				inputCorrect = false;
+				System.out.println("Length can be any value from 1 to 25.");
 			}
 		}
 		return length1;
@@ -72,10 +75,11 @@ public class Rectangle {
 			System.out.print("Width: ");
 			width1 = Integer.parseInt(inputW.readLine());
 			
-			if (width1 > 0 && width1 < 26){
+			if (width1 > 0 && width1 < 81){
 				inputCorrect = true;
 			} else {
 				inputCorrect = false;
+				System.out.println("Width can be any value from 1 to 80.");
 			}
 		}
 		return width1;
@@ -83,13 +87,13 @@ public class Rectangle {
 	
 	public static void main(String[] args)throws IOException{
 		String affirmation = "";
-		do{
+		do {
 			Rectangle r1 = new Rectangle();
 			
 			r1.setWidth(r1.inputWidth());
 			r1.setLength(r1.inputLength());
 			System.out.println("Your rectangle is " + r1.getWidth() + " stars across and "
-			+ r1.getLength() + " stars down, whith an area of " + r1.areaify() + " square stars.");
+			+ r1.getLength() + " stars down, with an area of " + r1.areaify() + " square stars.");
 			System.out.println(r1.toString());
 			
 			InputStreamReader reader = new InputStreamReader(System.in);
@@ -98,7 +102,69 @@ public class Rectangle {
 			System.out.print("Continue? (exit to end) ");
 			affirmation = inputa.readLine();
 		}
-		while (affirmation != "exit");
+		while (!affirmation.equals("exit"));
 	}
 	
 }
+/*
+Width: -8
+Width can be any value from 1 to 80.
+Width: 100
+Width can be any value from 1 to 80.
+Width: 81
+Width can be any value from 1 to 80.
+Width: 1
+Length: -5
+Length can be any value from 1 to 25.
+Length: 30
+Length can be any value from 1 to 25.
+Length: 25
+Your rectangle is 1 stars across and 25 stars down, with an area of 25 square stars.
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+
+Continue? (exit to end) maybe
+Width: 10
+Length: 2
+Your rectangle is 10 stars across and 2 stars down, with an area of 20 square stars.
+* * * * * * * * * * 
+* * * * * * * * * * 
+
+Continue? (exit to end) yup
+Width: 5
+Length: 8
+Your rectangle is 5 stars across and 8 stars down, with an area of 40 square stars.
+* * * * * 
+* * * * * 
+* * * * * 
+* * * * * 
+* * * * * 
+* * * * * 
+* * * * * 
+* * * * * 
+
+Continue? (exit to end) exit
+*/

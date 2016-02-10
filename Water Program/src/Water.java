@@ -1,5 +1,5 @@
 //Ian Patterson
-
+//Class stores private variables ID, code, galused, and calculates cost.  Cost is calculated given user entered code and number of gallons used.  
 import java.io.*;
 public class Water {
 	
@@ -13,31 +13,31 @@ public class Water {
 		galused = galUsed;
 	}
 	
-	public int getID(){
+	public int getID(){//Accesses private ID int
 		return ID;
 	}
 	
-	public char getCode(){
+	public char getCode(){//Accesses private code char
 		return code;
 	}
 	
-	public int getUsed(){
+	public int getUsed(){//Accesses private gallons used int
 		return galused;
 	}
 	
-	public void setID(int id){
+	public void setID(int id){//Sets value of ID
 		ID = id;
 	}
 	
-	public void setCode(char cde){
+	public void setCode(char cde){//Sets value of Code
 		code = cde;
 	}
 	
-	public void setUsed(int galUsed){
+	public void setUsed(int galUsed){//Sets value of Gallons Used
 		galused = galUsed;
 	}
 	
-	public double costify(){
+	public double costify(){//Determines cost of water given char code
 		double cost = 0;
 		
 		if (getCode() == 'h' || getCode() == 'H'){
@@ -58,7 +58,7 @@ public class Water {
 		return cost;
 	}
 	
-	public String toString(){
+	public String toString(){//Set up for output cost
 		return "Cost: $"  + costify();
 	}
 	
@@ -123,7 +123,7 @@ public class Water {
  * 
  * 15 i 20000000:
  * 
- * ID: 14
+ * ID: 15
  * Code: i
  * Gallons Used: 20000000
  * Cost: $3000.0

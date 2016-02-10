@@ -35,14 +35,11 @@ public class JavaLand_ver2 {
 	
 	public static void main(String[] args)throws IOException{
 		double totalTaxes = 0;
-		int counter = 0;
-		while (counter != -999){
-		
 		InputStreamReader reader = new InputStreamReader(System.in);
 		BufferedReader input = new BufferedReader(reader);
 		
 		System.out.print("Enter income amount:");
-		String inputString = input.readLine();
+		for (String inputString = input.readLine(); !inputString.equals("-999"); inputString = input.readLine()){
 		int dot = inputString.indexOf(".");
 		int inputNum;
 		
@@ -55,10 +52,8 @@ public class JavaLand_ver2 {
 		}
 		
 		JavaLand_ver2 t1 = new JavaLand_ver2(inputNum);
-		counter = t1.getIncome();
 		double taxesOwed = t1.taxify();
 		
-		if (t1.getIncome() != -999){//Determines if the income is -999 to avoid printing tax on -999 and throwing off totalTaxes
 		System.out.println(t1.toString());
 		System.out.print("$"+t1.getIncome());
 		for(int w = inputString.length()+2; w < 33; w++){
@@ -71,8 +66,8 @@ public class JavaLand_ver2 {
 		System.out.println("");
 		System.out.println("Total taxes paid:               $" + (totalTaxes));
 	}
-	
-}
+
+
 /*
 Enter income amount:0
 Income:                         Tax:

@@ -40,26 +40,26 @@ public class Water {
 	public double costify(){
 		double cost = 0;
 		
-		if (getCode() == 'h'){
+		if (getCode() == 'h' || getCode() == 'H'){
 			cost = 5 + .0005*getUsed();
-		} else if (getCode()=='c'){
+		} else if (getCode()=='c' || getCode() == 'H'){
 			cost = 1000;
 			if (getUsed()>4000000){
 				cost += .00025 * (getUsed()-4000000);
 			}
-		} else if (getCode()=='i'){
+		} else if (getCode()=='i' || getCode() == 'I'){
 			if (getUsed()>10000000){
 				cost = 3000;
 			} else if (getUsed()>4000000){
 				cost = 2000;
 			} else cost = 1000;
 		}
-		cost = Math.round(cost*100)/100;
+		cost = Math.round(cost*100.0)/100.0;
 		return cost;
 	}
 	
 	public String toString(){
-		return "ID  Code  Gallons Used  Cost";
+		return "Cost: $"  + costify();
 	}
 	
 	public static void main(String[] args) throws IOException{
@@ -80,13 +80,52 @@ public class Water {
 		int gallonsused = Integer.parseInt(galused);
 		
 		Water w1 = new Water(identification, cOde, gallonsused);
-		double cost = w1.costify();
-		System.out.println("ID:  Code:  Gallons Used:  Cost");
-		System.out.print(w1.getID() + "     " + w1.getCode() + "    " + w1.getUsed());
-		for (int w = galused.length(); w<15; w++){
-			System.out.print(" ");
-		}
-		System.out.println(cost);
+		System.out.println(w1.toString());
 	}
 	
 }
+
+/*
+ * 10 c 5000022:
+ * 
+ * ID: 10
+ * Code: c
+ * Gallons Used: 5000022
+ * Cost: $1250.01
+ * 
+ * 11 i 1234567:
+ * 
+ * ID: 11
+ * Code: i
+ * Gallons Used: 1234567
+ * Cost: $1000.0
+ * 
+ * 12 h 8765:
+ * 
+ * ID: 12
+ * Code: h
+ * Gallons Used: 8765
+ * Cost: $9.38
+ * 
+ * 13 c 444444:
+ * 
+ * ID: 13
+ * Code: c
+ * Gallons Used: 444444
+ * Cost: $1000.0
+ * 
+ * 14 i 5555555:
+ * 
+ * ID: 14
+ * Code: i
+ * Gallons Used: 5555555
+ * Cost: $2000.0
+ * 
+ * 15 i 20000000:
+ * 
+ * ID: 14
+ * Code: i
+ * Gallons Used: 20000000
+ * Cost: $3000.0
+ * 
+ */

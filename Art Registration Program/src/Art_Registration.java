@@ -1,4 +1,6 @@
-
+//Ian Patterson
+//Class stores privat integers ID, classNum, batikSize, calligraphySize, paintingSize, sculptureSize, weavingSize, coursenum,
+//calculates the number of people in a class, and how many sections should be made for that class
 import java.io.*;
 public class Art_Registration {
 	
@@ -9,71 +11,71 @@ public class Art_Registration {
 		classNum = 0;
 	}
 	
-	public void setID(int id){
+	public void setID(int id){ //Stores private int ID
 		ID = id;
 	}
 	
-	public void setClassNum(int number){
+	public void setClassNum(int number){//Stores private int classNum
 		classNum = number;
 	}
 	
-	public void addtoBatik(){
+	public void setCourse(int cse){// Stores private int coursenum
+		coursenum = cse;
+	}
+
+	public void addtoBatik(){//counter for number of people in the Batik class
 		batikSize += 1; 
 	}
 	
-	public void addtoCalli(){
+	public void addtoCalli(){//counter for number of people in the Calligraphy class
 		calligraphySize += 1;
 	}
 	
-	public void addtoPaint(){
+	public void addtoPaint(){//counter for number of people in the painting class
 		paintingSize += 1;
 	}
 	
-	public void addtoSculpt(){
+	public void addtoSculpt(){//counter for number of people in the sculpture class
 		sculptureSize += 1;
 	}
 	
-	public void addtoWeav(){
+	public void addtoWeav(){// counter fot number of people in weaving class
 		weavingSize += 1;
 	}
 	
-	public int getID(){
+	public int getID(){//Accesses private int ID
 		return ID;
 	}
 	
-	public int getClassNum(){
+	public int getClassNum(){//Accesses private int classnum
 		return classNum;
 	}
 	
-	public int getBatik(){
+	public int getBatik(){//Accesses private int batikSize
 		return batikSize;
 	}
 	
-	public int getCalli(){
+	public int getCalli(){//Accesses private int calligraphySize
 		return calligraphySize;
 	}
 	
-	public int getPaint(){
+	public int getPaint(){//Accesses private int paintingSize
 		return paintingSize;
 	}
 	
-	public int getSculp(){
+	public int getSculp(){//Accesses private int sculptureSize
 		return sculptureSize;
 	}
 	
-	public int getWeav(){
+	public int getWeav(){//Accesses private int weavingSize
 		return weavingSize;
 	}
 	
-	public void setCourse(int cse){
-		coursenum = cse;
-	}
-	
-	public int getCourse(){
+	public int getCourse(){//Accesses private int coursenum
 		return coursenum;
 	}
 	
-	public int inputID()throws IOException{
+	public int inputID()throws IOException{//Input for id, error traps so only a positive integer may be entered, and returns the input as an integer
 		InputStreamReader readerID = new InputStreamReader(System.in);
 		BufferedReader inputID = new BufferedReader(readerID);
 		boolean validIn = false;
@@ -101,7 +103,7 @@ public class Art_Registration {
 		return id;
 	}
 	
-	public int inputCourse()throws IOException{
+	public int inputCourse()throws IOException{//Input for coursenum, error traps so only an approved code may be entered lower or uppercase, and returns the input as an integer to be used in the toString
 		InputStreamReader readerCourse = new InputStreamReader(System.in);
 		BufferedReader inputCourse = new BufferedReader(readerCourse);
 		String characters = "bBcCpPsSwW";
@@ -136,7 +138,7 @@ public class Art_Registration {
 		return coursenum;
 	}
 		
-	public String counter(){
+	public String counter(){//Counters for number of students in a class and outputs the ID and full class name
 		
 		String student = "ID  Preferred Class" + '\r';
 		if (getClassNum() == 0){
@@ -158,7 +160,7 @@ public class Art_Registration {
 		return student;
 	}
 	
-	public String toString(){
+	public String toString(){//Checks sections needed, unassigned students, and total number in each class, returns data as string
 		int[] classSizes = {getBatik(),getCalli(),getPaint(),getSculp(),getWeav()},size = {6,4,7,4,5};
 		String[] classNames = {"Batik", "Calligraphy", "Painting", "Sculpture", "Weaving"};
 		int county = 0, length = 0, unassigned = 0, length1 = 0, sections = 0;

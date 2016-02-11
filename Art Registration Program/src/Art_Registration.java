@@ -5,6 +5,10 @@ public class Art_Registration {
 	
 	private int ID, classNum, batikSize, calligraphySize, paintingSize, sculptureSize, weavingSize;
 	
+	
+		
+	
+	
 	public Art_Registration(){
 		ID = 0;
 		classNum = 0;
@@ -66,7 +70,7 @@ public class Art_Registration {
 		return weavingSize;
 	}
 	
-	public int inputID()throws IOException{
+	public int[] inputData()throws IOException{
 		InputStreamReader readerID = new InputStreamReader(System.in);
 		BufferedReader inputID = new BufferedReader(readerID);
 		boolean validIn = false;
@@ -83,14 +87,11 @@ public class Art_Registration {
 				validIn = true;
 			}
 		}
-		return id;
-	}
-		
-	public int inputCourse() throws IOException{
+	
 		InputStreamReader readerCourse = new InputStreamReader(System.in);
 		BufferedReader inputCourse = new BufferedReader(readerCourse);
 		String characters = "bBcCpPsSwW";
-		boolean validIn = false;
+		validIn = false;
 		int coursenum = 0;
 		
 		while (validIn == false){
@@ -118,7 +119,26 @@ public class Art_Registration {
 				coursenum = 4;
 			}
 		}
-		return coursenum;
+		int[] data = {id,coursenum};
+		return data;
 	}
-
+	
+	public void counter(){
+		
+	}
+	
+	public String toString(){
+		
+	}
+	
+	public static void main(String[] args)throws IOException{
+		Art_Registration aR7 = new Art_Registration();
+		int[] data1 = {0,0};
+		for(data1 = aR7.inputData(); aR7.inputData()[0] == 0; data1 = aR7.inputData()){
+			aR7.setID(aR7.inputData()[0]);
+			aR7.setClassNum(aR7.inputData()[1]);
+			
+		}
+	}
+	
 }

@@ -163,7 +163,7 @@ public class Art_Registration {
 	public String toString(){//Checks sections needed, unassigned students, and total number in each class, returns data as string
 		int[] classSizes = {getBatik(),getCalli(),getPaint(),getSculp(),getWeav()},size = {6,4,7,4,5};
 		String[] classNames = {"Batik", "Calligraphy", "Painting", "Sculpture", "Weaving"};
-		int county = 0, length = 0, unassigned = 0, length1 = 0, sections = 0;
+		int county = 0, length = 0, length1 = 0, sections = 0;
 		String output = "Class Name:  Number of Students:  Sections:";
 		
 		
@@ -173,7 +173,6 @@ public class Art_Registration {
 				output += " ";
 			}
 			if (classSizes[county] < 3){
-				unassigned += classSizes[county];
 				output += "Class will not be offered due to lack of requests.";
 			} else {
 				String number = classSizes[county] + "";

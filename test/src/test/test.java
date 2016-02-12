@@ -8,7 +8,7 @@ public class test {
 			System.out.print(x+",");
 			
 		}
-		System.out.print(Math.pow(-2,4));
+		System.out.print((double)(55/3));
 	}
 
 }

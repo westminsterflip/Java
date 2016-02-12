@@ -185,7 +185,6 @@ public class Art_Registration {
 				output += sections;
 			}
 		}
-		output += '\r' + "Unassigned Students: " + unassigned;
 		return output;
 		
 	}
@@ -309,5 +308,4 @@ Calligraphy  6                     2
 Painting     Class will not be offered due to lack of requests.
 Sculpture    9                     3
 Weaving      4                     1
-Unassigned Students: 0
 */

@@ -42,7 +42,7 @@ public class Water {
 		
 		if (getCode() == 'h' || getCode() == 'H'){
 			cost = 5 + .0005*getUsed();
-		} else if (getCode()=='c' || getCode() == 'H'){
+		} else if (getCode()=='c' || getCode() == 'C'){
 			cost = 1000;
 			if (getUsed()>4000000){
 				cost += .00025 * (getUsed()-4000000);
@@ -59,7 +59,16 @@ public class Water {
 	}
 	
 	public String toString(){//Set up for output cost
-		return "Cost: $"  + costify();
+		String output = "Cost: $"  + costify();
+		
+		if (getCode() == 'h' || getCode() == 'H'){
+			output += '\r' + "Home Use";
+		} else if (getCode()=='c' || getCode() == 'C'){
+			output += '\r' + "Commercial Use";
+		} else if (getCode()=='i' || getCode() == 'I'){
+			output += '\r' + "Industrial Use";
+		}
+		return output;
 	}
 	
 	public static void main(String[] args) throws IOException{
@@ -92,6 +101,7 @@ public class Water {
  * Code: c
  * Gallons Used: 5000022
  * Cost: $1250.01
+ * Commercial Use
  * 
  * 11 i 1234567:
  * 
@@ -99,6 +109,7 @@ public class Water {
  * Code: i
  * Gallons Used: 1234567
  * Cost: $1000.0
+ * Industrial Use
  * 
  * 12 h 8765:
  * 
@@ -106,6 +117,7 @@ public class Water {
  * Code: h
  * Gallons Used: 8765
  * Cost: $9.38
+ * Home Use
  * 
  * 13 c 444444:
  * 
@@ -113,6 +125,7 @@ public class Water {
  * Code: c
  * Gallons Used: 444444
  * Cost: $1000.0
+ * Commercial Use
  * 
  * 14 i 5555555:
  * 
@@ -120,6 +133,7 @@ public class Water {
  * Code: i
  * Gallons Used: 5555555
  * Cost: $2000.0
+ * Industrial Use
  * 
  * 15 i 20000000:
  * 
@@ -127,5 +141,6 @@ public class Water {
  * Code: i
  * Gallons Used: 20000000
  * Cost: $3000.0
+ * Industrial Use
  * 
  */

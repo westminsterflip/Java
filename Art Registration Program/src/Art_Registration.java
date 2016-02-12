@@ -240,14 +240,13 @@ ID  Preferred Class
 Input ID code: 35
 Input course code: R
 Invalid course code
-Input course code: b  <------- batik class code was used as the loop will not continue without a valid course number
+Input course code: Y
+Invalid course code
+Input course code: M
+Invalid course code
+Input course code: W
 ID  Preferred Class
-35  Batik
-Input ID code: Y
-ID must be a non-negative integer
-Input ID code: M
-ID must be a non-negative integer
-Input ID code: W
+35  Weaving
 ID must be a non-negative integer
 Input ID code: 38
 Input course code: W
@@ -302,9 +301,9 @@ ID  Preferred Class
 Input ID code: 0
 Input course code: w
 Class Name:  Number of Students:  Sections:
-Batik        3                     1
+Batik        Class will not be offered due to lack of requests.
 Calligraphy  6                     2
 Painting     Class will not be offered due to lack of requests.
 Sculpture    9                     3
-Weaving      4                     1
+Weaving      5                     1
 */

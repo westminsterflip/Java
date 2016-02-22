@@ -35,32 +35,24 @@ public class JavaLand2 {
 	public static void main(String[] args)throws IOException{
 		InputStreamReader reader = new InputStreamReader(System.in);
 		BufferedReader input = new BufferedReader(reader);
+		int inputNum = 0;
+		String inputString = "";
 		
-		System.out.print("Enter income amount:");
-		String inputString = input.readLine();
-		int dot = inputString.indexOf(".");
-		int inputNum;
 		
-		if (dot>0){
-			double part1 = (double) Integer.parseInt(inputString.substring(0,dot));
-			double part2 = (double) (Integer.parseInt(inputString.substring(dot+1))/100);
-		inputNum = (int) Math.round(part1 + part2);
-		} else {
-			inputNum = Integer.parseInt(inputString);
-		}
-		
+		for(System.out.print("Enter income amount:"),inputNum = Integer.parseInt(input.readLine()); inputNum != -999; System.out.print("Enter income amount:"),inputNum = Integer.parseInt(input.readLine())){
 		JavaLand2 t1 = new JavaLand2(inputNum);
 		double taxesOwed = t1.taxify();
 		
 		System.out.println(t1.toString());
 		System.out.print("$"+t1.getIncome());
+		inputString = inputNum + "";
 		for(int w = inputString.length()+2; w < 33; w++){
 			System.out.print(" ");
 		}
 		System.out.println("$" + taxesOwed);
 		
 	}
-	
+	}
 }
 /* Output for:
  * 0:
@@ -99,4 +91,5 @@ public class JavaLand2 {
  * Income:                         Tax:
  * $100555                         $8655.5
  * 
+ * Enter income amount:-999
  */

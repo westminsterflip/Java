@@ -1,4 +1,5 @@
 //Ian Patterson
+//This program outputs interest starting at an initial value of $1000 and rates of 6% to 12%
 public class Interest {
 	
 	public static void main(String[] args){

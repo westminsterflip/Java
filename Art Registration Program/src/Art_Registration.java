@@ -1,5 +1,5 @@
 //Ian Patterson
-//Class stores privat integers ID, classNum, batikSize, calligraphySize, paintingSize, sculptureSize, weavingSize, coursenum,
+//Class stores private integers ID, classNum, batikSize, calligraphySize, paintingSize, sculptureSize, weavingSize, coursenum,
 //calculates the number of people in a class, and how many sections should be made for that class
 import java.io.*;
 public class Art_Registration {

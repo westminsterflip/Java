@@ -158,14 +158,14 @@ Your rectangle is 1 stars across and 25 stars down, with an area of 25 square st
 * 
 * 
 
-Continue? (exit to end) maybe
+Continue? (exit to end) yar
 Width: 10
 Length: 2
 Your rectangle is 10 stars across and 2 stars down, with an area of 20 square stars.
 * * * * * * * * * * 
 * * * * * * * * * * 
 
-Continue? (exit to end) cheese noodles
+Continue? (exit to end) cheese noodles, captain fluufles
 Width: 5
 Length: 8
 Your rectangle is 5 stars across and 8 stars down, with an area of 40 square stars.

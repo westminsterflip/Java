@@ -1,2 +1,7 @@
-The quick brown fox jumps over the lazy dog. EOL
-EOF
+The quick brown fox jumps over the lazy dog.
+d
+d
+d
+d
+d
+g

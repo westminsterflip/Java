@@ -22,17 +22,13 @@ public class button {
 	   mainFrame = new JFrame("Java SWING Examples");
       mainFrame.setSize(400,400);
 	   mainFrame.setLocation((int)(dimension.getWidth()-400)/2,(int)(dimension.getHeight()-400)/2);
-      mainFrame.setLayout(new GridLayout(3, 1));
+      mainFrame.setLayout(new GridLayout(3,1));
 
       headerLabel = new JLabel("",JLabel.CENTER );
       statusLabel = new JLabel("",JLabel.CENTER);        
 
       statusLabel.setSize(350,100);
-      mainFrame.addWindowListener(new WindowAdapter() {
-         public void windowClosing(WindowEvent windowEvent){
-	        System.exit(0);
-         }        
-      });    
+      mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  
       controlPanel = new JPanel();
       controlPanel.setLayout(new FlowLayout());
 
@@ -46,9 +42,10 @@ public class button {
       headerLabel.setText("Listener in action: ActionListener");      
 
       JPanel panel = new JPanel();      
-      panel.setBackground(Color.magenta);            
+      panel.setBackground(Color.red);            
 		
-      JButton okButton = new JButton("OK");
+      JButton okButton = new JButton("Light Things on Fire!");
+      okButton.setBackground(Color.orange);
 
       okButton.addActionListener(new CustomActionListener());        
       panel.add(okButton);
@@ -58,8 +55,10 @@ public class button {
    
    class CustomActionListener implements ActionListener{
       public void actionPerformed(ActionEvent e) {
-    	      button  swingListenerDemo = new button();  
-    	      swingListenerDemo.showActionListenerDemo();
+    	  for(int x=0;x<100;x++){
+    		  button  swingListenerDemo = new button();  
+    		  swingListenerDemo.showActionListenerDemo();
+    	  }
       }
    }	
 }

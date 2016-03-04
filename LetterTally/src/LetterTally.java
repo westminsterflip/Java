@@ -64,10 +64,14 @@ public class LetterTally {
 		
 	}
 	
+	public String runThis() throws IOException{
+		tallyStuff();
+		return toString();
+	}
+	
 	public static void main(String[] args) throws IOException{
 		LetterTally t1 = new LetterTally();
-		t1.tallyStuff();
-		System.out.println(t1.toString());
+		System.out.println(t1.runThis());
 	}
 	
 

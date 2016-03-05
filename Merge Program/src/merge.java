@@ -11,9 +11,15 @@ public class merge {
 		try{
 			System.out.print("Length of list one: ");
 			int len = s1.nextInt();
-			System.out.print("Input Numbers: ");
-			for(x=0;x<len;x++){
-				a.add(s1.nextInt());
+			if(len<=0){
+				System.out.println("List length must be greater than 0");
+				s1.nextLine();
+				array1In();
+			}else{
+				System.out.print("Input Numbers: ");
+				for(x=0;x<len;x++){
+					a.add(s1.nextInt());
+				}
 			}
 		}
 		catch(InputMismatchException exception){
@@ -33,9 +39,15 @@ public class merge {
 		try{
 			System.out.print("Length of list two: ");
 			int len = s1.nextInt();
-			System.out.print("Input Numbers: ");
-			for(x=0;x<len;x++){
-				a.add(s1.nextInt());
+			if(len<=0){
+				System.out.println("List length must be greater than 0");
+				s1.nextLine();
+				array2In();
+			}else{
+				System.out.print("Input Numbers: ");
+				for(x=0;x<len;x++){
+					a.add(s1.nextInt());
+				}
 			}
 		}
 		catch(InputMismatchException exception){

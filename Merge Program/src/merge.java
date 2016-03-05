@@ -1,35 +1,56 @@
 import java.util.*;
 public class merge {
 	
-	public merge(){
-	}
+	public merge(){}
 	Scanner s1 = new Scanner(System.in);
+	ArrayList<Integer> a = new ArrayList<Integer>();
+	ArrayList<Integer> b = new ArrayList<Integer>();
 	
-	public ArrayList<Integer> array1In(){
-		System.out.print("Length of list one: ");
-		int len = s1.nextInt();
-		ArrayList<Integer> a = new ArrayList<Integer>();
-		System.out.print("Input Numbers: ");
-		for(int x=0;x<len;x++){
-			a.add(s1.nextInt());
+	public void array1In(){
+		int x=0;
+		try{
+			System.out.print("Length of list one: ");
+			int len = s1.nextInt();
+			System.out.print("Input Numbers: ");
+			for(x=0;x<len;x++){
+				a.add(s1.nextInt());
+			}
 		}
-		return a;
+		catch(InputMismatchException exception){
+			System.out.println("Input must be integers.");
+			s1.nextLine();
+			int d = a.size()-x;
+			for(int y=a.size()-1;y>=d;y--){
+				a.remove(y);
+			}
+			array1In();
+			
+		}
 	}
 	
-	public ArrayList<Integer> array2In(){
-		System.out.print("Length of list two: ");
-		int len = s1.nextInt();
-		ArrayList<Integer> a = new ArrayList<Integer>();
-		System.out.print("Input Numbers: ");
-		for(int x=0;x<len;x++){
-			a.add(s1.nextInt());
+	public void array2In(){
+		int x=0;
+		try{
+			System.out.print("Length of list two: ");
+			int len = s1.nextInt();
+			System.out.print("Input Numbers: ");
+			for(x=0;x<len;x++){
+				a.add(s1.nextInt());
+			}
 		}
-		return a;
+		catch(InputMismatchException exception){
+			System.out.println("Input must be integers.");
+			s1.nextLine();
+			int d = a.size()-x;
+			for(int y=a.size()-1;y>=d;y--){
+				a.remove(y);
+			}
+			array2In();
+		}
 	}
 	
 	public ArrayList<Integer> sortThose(){
-		ArrayList<Integer> a1 = array1In(), a2 = array2In(), a3 = new ArrayList<Integer>();
-		s1.close();
+		ArrayList<Integer> a1 = a, a2 = b, a3 = new ArrayList<Integer>();
 		int t1 = 0, t2 = 0,pi=(int)(Math.PI*1000000);
 		int c,d;
 		if(a1.size()==1 && a2.size()==1){
@@ -58,7 +79,6 @@ public class merge {
 							}
 						}
 					}
-					
 				if(t1==t2&&(a1.indexOf(t1)!=-1||a2.indexOf(t2)!=-1)){
 					if(a1.indexOf(t1)!=-1){
 						a1.remove(a1.indexOf(t1));
@@ -66,14 +86,20 @@ public class merge {
 					if(a2.indexOf(t2)!=-1){
 						a2.remove(a2.indexOf(t2));
 					}
-					a3.add(t1);
+					if(a3.indexOf(t1)==-1){
+						a3.add(t1);
+					}
 					w3+=2;
 				}else if((t1<t2||a2.isEmpty())&&a1.indexOf(t1)!=-1){
-					a3.add(t1);
+					if(a3.indexOf(t1)==-1){
+						a3.add(t1);
+					}
 					a1.remove(a1.indexOf(t1));
 					w3++;
 				}else if ((t2<t1||a1.isEmpty())&&a2.indexOf(t2)!=-1){
-					a3.add(t2);
+					if(a3.indexOf(t2)==-1){
+						a3.add(t2);
+					}
 					w3++;
 					a2.remove(a2.indexOf(t2));
 				}else w3=pi;
@@ -84,6 +110,9 @@ public class merge {
 	}
 	
 	public String toString(){
+		array1In();
+		array2In();
+		s1.close();
 		String output = '\r'+"";
 		ArrayList<Integer> a5 = sortThose();
 		for(int t=0;t < a5.size();t++){

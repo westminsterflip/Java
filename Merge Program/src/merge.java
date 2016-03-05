@@ -59,9 +59,13 @@ public class merge {
 						}
 					}
 					
-				if(t1==t2){
-					a1.remove(a1.indexOf(t1));
-					a2.remove(a2.indexOf(t2));
+				if(t1==t2&&(a1.indexOf(t1)!=-1||a2.indexOf(t2)!=-1)){
+					if(a1.indexOf(t1)!=-1){
+						a1.remove(a1.indexOf(t1));
+					}
+					if(a2.indexOf(t2)!=-1){
+						a2.remove(a2.indexOf(t2));
+					}
 					a3.add(t1);
 					w3+=2;
 				}else if((t1<t2||a2.isEmpty())&&a1.indexOf(t1)!=-1){

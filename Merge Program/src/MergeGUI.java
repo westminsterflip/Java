@@ -25,6 +25,7 @@ public class MergeGUI extends JFrame implements ActionListener{
 		add(ar3);
 		add(arr3);
 		add(clear);
+		arr3.setEditable(false);
 		go.setActionCommand("go");
 		clear.setActionCommand("clear");
 		go.addActionListener(this);

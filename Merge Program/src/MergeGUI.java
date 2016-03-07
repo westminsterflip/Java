@@ -4,47 +4,49 @@ import java.util.*;
 import javax.swing.*;
 @SuppressWarnings("serial")
 public class MergeGUI extends JFrame implements ActionListener{
-	Scanner s1;
-	JLabel ar1 = new JLabel("Array 1: "),ar2 = new JLabel("Array 2: "),ar3 = new JLabel("Result: ");
-	ArrayList<Integer> a = new ArrayList<Integer>();
-	ArrayList<Integer> b = new ArrayList<Integer>();
+	JLabel ar1 = new JLabel("Array 1: ");
+	JLabel ar2 = new JLabel("Array 2: ");
+	JLabel ar3 = new JLabel("Result: ");
 	JTextField arr1 = new JTextField(10);
 	JTextField arr2 = new JTextField(10);
 	JTextField arr3 = new JTextField(35);
 	JButton go = new JButton("Merge");
 	JButton clear = new JButton("Clear");
-	JPanel arra1 = new JPanel();
-	JPanel arra2 = new JPanel();
+	JPanel arra = new JPanel();
+	JPanel arrb = new JPanel();
 	JPanel arra3 = new JPanel();
 	JPanel buttons = new JPanel();
+	Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
+	ArrayList<Integer> a = new ArrayList<Integer>();
+	ArrayList<Integer> a3 = new ArrayList<Integer>();
+	ArrayList<Integer> b = new ArrayList<Integer>();
+	int c,d,t1 = 0,t2 = 0;
+	
 	
 	public MergeGUI(String title){
 		super(title);
 		setResizable(false);
 		setLayout(new FlowLayout());
-		arra1.add(ar1);
-		arra1.add(arr1);
-		arra2.add(ar2);
-		arra2.add(arr2);
-		arra3.add(ar3);
-		arra3.add(arr3);
-		buttons.add(go);
-		buttons.add(clear);
-		add(arra1);
-		add(arra2);
-		add(arra3);
-		add(buttons);
+		arra.add(ar1); arra.add(arr1);
+		arrb.add(ar2); arrb.add(arr2);
+		arra3.add(ar3); arra3.add(arr3);
+		buttons.add(go); buttons.add(clear);
+		add(arra); add(arrb); add(arra3); add(buttons);
 		arr3.setEditable(false);
 		go.setActionCommand("go");
 		clear.setActionCommand("clear");
 		go.addActionListener(this);
 		clear.addActionListener(this);
+		int wid = (int)Math.round((scr.getWidth()-500)/2);
+		int hig = (int)Math.round((scr.getHeight()-150)/2);
+		setBounds(wid,hig,500,150); setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	public void actionPerformed(ActionEvent evt){
 		if(evt.getActionCommand().equals("go")){
-			array1In();
+			arrayIn();
+			sortThose();
 			godostuff();
 		}else{
 			arr1.setText(null);
@@ -53,7 +55,7 @@ public class MergeGUI extends JFrame implements ActionListener{
 		}
 	}
 
-	public void array1In(){
+	public void arrayIn(){
 		Scanner s1 = new Scanner(arr1.getText());
 		for(;s1.hasNext()==true;){
 			for(;s1.hasNextInt()==true;){
@@ -78,88 +80,70 @@ public class MergeGUI extends JFrame implements ActionListener{
 		s2.close();
 	}
 
-	public ArrayList<Integer> sortThose(){
-		ArrayList<Integer> a1 = a, a2 = b, a3 = new ArrayList<Integer>();
-		System.out.println(a);
-		System.out.println(b);
-		int t1 = 0, t2 = 0,pi=(int)(Math.PI*1000000);
-		int c,d;
-		if(a1.size()==1 && a2.size()==1){
-			if(a1.get(0)<a2.get(0)){
-				a3.add(a1.get(0));
-				a3.add(a2.get(0));
-			}else{
-				a3.add(a2.get(0));
-				a3.add(a1.get(0));
+	public void sortThose(){
+		if((a.size()==1 && b.size()==0)){
+			if(a3.indexOf(a.get(0))==-1){
+				a3.add(a.get(0));
+			}
+		}else if(a.size()==0 && b.size()==1){
+			if(a3.indexOf(b.get(0))==-1){
+				a3.add(b.get(0));
 			}
 		}else{
-			for(int w3=0;w3!=pi;){
-				if(a1.isEmpty()==false){
-					t1=a1.get(0);
-					for(c=0;c< a1.size();c++){
-						if (t1>a1.get(c)){
-							t1 = a1.get(c);
-						}
+			if(a.isEmpty()==false){
+				t1=a.get(0);
+				for(c=0;c< a.size();c++){
+					if (t1>a.get(c)){
+						t1 = a.get(c);
 					}
 				}
-					
-				if(a2.isEmpty()==false){
-					t2 = a2.get(0);
-					for(d=0;d<a2.size();d++){
-						if (t2>a2.get(d)){
-							t2 = a2.get(d);
-						}
+			}
+			
+			if(b.isEmpty()==false){
+				t2 = b.get(0);
+				for(d=0;d<b.size();d++){
+					if (t2>b.get(d)){
+						t2 = b.get(d);
 					}
 				}
-			if(t1==t2&&(a1.indexOf(t1)!=-1||a2.indexOf(t2)!=-1)){
-				if(a1.indexOf(t1)!=-1){
-					a1.remove(a1.indexOf(t1));
+			}
+			
+			if(t1==t2&&(a.indexOf(t1)!=-1||b.indexOf(t2)!=-1)){
+				if(a.indexOf(t1)!=-1){
+					a.remove(a.indexOf(t1));
 				}
-				if(a2.indexOf(t2)!=-1){
-					a2.remove(a2.indexOf(t2));
+				if(b.indexOf(t2)!=-1){
+					b.remove(b.indexOf(t2));
 				}
 				if(a3.indexOf(t1)==-1){
 					a3.add(t1);
 				}
-				}else if((t1<t2||a2.isEmpty())&&a1.indexOf(t1)!=-1){
+			}else if((t1<t2||b.isEmpty())&&a.indexOf(t1)!=-1){
 					if(a3.indexOf(t1)==-1){
 						a3.add(t1);
 					}
-					a1.remove(a1.indexOf(t1));
-				}else if ((t2<t1||a1.isEmpty())&&a2.indexOf(t2)!=-1){
+					a.remove(a.indexOf(t1));
+			}else if ((t2<t1||a.isEmpty())&&b.indexOf(t2)!=-1){
 					if(a3.indexOf(t2)==-1){
 						a3.add(t2);
 					}
-					a2.remove(a2.indexOf(t2));
-				}else w3=pi;
+					b.remove(b.indexOf(t2));
 			}
+			sortThose();
 		}
-		
-		return a3;
 	}
 
 	public void godostuff(){
 		String output = '\r'+"";
-		ArrayList<Integer> a5 = sortThose();
-		for(int t=0;t < a5.size();t++){
-			output += a5.get(t) + " ";
+		for(int t=0;t < a3.size();t++){
+			output += a3.get(t) + " ";
 		}
 		arr3.setText(output);
-		output += '\r';
-		for(int t=0;t < a.size();t++){
-			output += a.get(t) + " ";
-		}
-		output += '\r';
-		for(int t=0;t < b.size();t++){
-			output += b.get(t) + " ";
-		}
-		System.out.println(output);
-		
 	}
 	
+
 	public static void main(String[] a){
-		MergeGUI g1 = new MergeGUI("Science");
-		g1.setBounds(390,325,500,150);
-		g1.setVisible(true);
+		@SuppressWarnings("unused")
+		MergeGUI g1 = new MergeGUI("Array Merge");
 	}
 }

@@ -81,15 +81,9 @@ public class MergeGUI extends JFrame implements ActionListener{
 	}
 
 	public void sortThose(){
-		if((a.size()==1 && b.size()==0)){
-			if(a3.indexOf(a.get(0))==-1){
-				a3.add(a.get(0));
-			}
-		}else if(a.size()==0 && b.size()==1){
-			if(a3.indexOf(b.get(0))==-1){
-				a3.add(b.get(0));
-			}
-		}else{
+		//System.out.println(a + " and "+ b);
+		if(a.isEmpty()==true&&b.isEmpty()==true)
+		{}else{
 			if(a.isEmpty()==false){
 				t1=a.get(0);
 				for(c=0;c< a.size();c++){
@@ -138,6 +132,7 @@ public class MergeGUI extends JFrame implements ActionListener{
 		for(int t=0;t < a3.size();t++){
 			output += a3.get(t) + " ";
 		}
+		a3.clear();
 		arr3.setText(output);
 	}
 	

@@ -3,8 +3,8 @@ public class merge {
 	
 	public merge(){}
 	Scanner s1 = new Scanner(System.in);
-	ArrayList<Integer> a = new ArrayList<Integer>();
 	ArrayList<Integer> b = new ArrayList<Integer>();
+	ArrayList<Integer> a = new ArrayList<Integer>();
 	
 	public void array1In(){
 		int x=0;

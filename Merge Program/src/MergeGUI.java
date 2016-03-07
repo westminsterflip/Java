@@ -11,7 +11,7 @@ public class MergeGUI extends JFrame implements ActionListener{
 	JTextField arr1 = new JTextField(10);
 	JTextField arr2 = new JTextField(10);
 	JTextField arr3 = new JTextField(35);
-	JButton go = new JButton("Initiate Scienceing.");
+	JButton go = new JButton("Merge");
 	JButton clear = new JButton("Clear");
 	
 	public MergeGUI(String title){
@@ -141,7 +141,7 @@ public class MergeGUI extends JFrame implements ActionListener{
 	
 	public static void main(String[] a){
 		MergeGUI g1 = new MergeGUI("Science");
-		g1.setBounds(390,150,500,500);
+		g1.setBounds(390,338,500,125);
 		g1.setVisible(true);
 	}
 }

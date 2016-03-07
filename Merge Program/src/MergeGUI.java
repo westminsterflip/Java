@@ -13,18 +13,27 @@ public class MergeGUI extends JFrame implements ActionListener{
 	JTextField arr3 = new JTextField(35);
 	JButton go = new JButton("Merge");
 	JButton clear = new JButton("Clear");
+	JPanel arra1 = new JPanel();
+	JPanel arra2 = new JPanel();
+	JPanel arra3 = new JPanel();
+	JPanel buttons = new JPanel();
 	
 	public MergeGUI(String title){
 		super(title);
+		setResizable(false);
 		setLayout(new FlowLayout());
-		add(ar1);
-		add(arr1);
-		add(ar2);
-		add(arr2);
-		add(go);
-		add(ar3);
-		add(arr3);
-		add(clear);
+		arra1.add(ar1);
+		arra1.add(arr1);
+		arra2.add(ar2);
+		arra2.add(arr2);
+		arra3.add(ar3);
+		arra3.add(arr3);
+		buttons.add(go);
+		buttons.add(clear);
+		add(arra1);
+		add(arra2);
+		add(arra3);
+		add(buttons);
 		arr3.setEditable(false);
 		go.setActionCommand("go");
 		clear.setActionCommand("clear");
@@ -71,6 +80,8 @@ public class MergeGUI extends JFrame implements ActionListener{
 
 	public ArrayList<Integer> sortThose(){
 		ArrayList<Integer> a1 = a, a2 = b, a3 = new ArrayList<Integer>();
+		System.out.println(a);
+		System.out.println(b);
 		int t1 = 0, t2 = 0,pi=(int)(Math.PI*1000000);
 		int c,d;
 		if(a1.size()==1 && a2.size()==1){
@@ -80,47 +91,45 @@ public class MergeGUI extends JFrame implements ActionListener{
 			}else{
 				a3.add(a2.get(0));
 				a3.add(a1.get(0));
-			}}else{
-				for(int w3=0;w3!=pi;){
-					if(a1.isEmpty()==false){
-						t1=a1.get(0);
-						for(c=0;c< a1.size();c++){
-							if (t1>a1.get(c)){
-								t1 = a1.get(c);
-							}
+			}
+		}else{
+			for(int w3=0;w3!=pi;){
+				if(a1.isEmpty()==false){
+					t1=a1.get(0);
+					for(c=0;c< a1.size();c++){
+						if (t1>a1.get(c)){
+							t1 = a1.get(c);
 						}
 					}
+				}
 					
-					if(a2.isEmpty()==false){
-						t2 = a2.get(0);
-						for(d=0;d<a2.size();d++){
-							if (t2>a2.get(d)){
-								t2 = a2.get(d);
-							}
+				if(a2.isEmpty()==false){
+					t2 = a2.get(0);
+					for(d=0;d<a2.size();d++){
+						if (t2>a2.get(d)){
+							t2 = a2.get(d);
 						}
 					}
-				if(t1==t2&&(a1.indexOf(t1)!=-1||a2.indexOf(t2)!=-1)){
-					if(a1.indexOf(t1)!=-1){
-						a1.remove(a1.indexOf(t1));
-					}
-					if(a2.indexOf(t2)!=-1){
-						a2.remove(a2.indexOf(t2));
-					}
-					if(a3.indexOf(t1)==-1){
-						a3.add(t1);
-					}
-					w3+=2;
+				}
+			if(t1==t2&&(a1.indexOf(t1)!=-1||a2.indexOf(t2)!=-1)){
+				if(a1.indexOf(t1)!=-1){
+					a1.remove(a1.indexOf(t1));
+				}
+				if(a2.indexOf(t2)!=-1){
+					a2.remove(a2.indexOf(t2));
+				}
+				if(a3.indexOf(t1)==-1){
+					a3.add(t1);
+				}
 				}else if((t1<t2||a2.isEmpty())&&a1.indexOf(t1)!=-1){
 					if(a3.indexOf(t1)==-1){
 						a3.add(t1);
 					}
 					a1.remove(a1.indexOf(t1));
-					w3++;
 				}else if ((t2<t1||a1.isEmpty())&&a2.indexOf(t2)!=-1){
 					if(a3.indexOf(t2)==-1){
 						a3.add(t2);
 					}
-					w3++;
 					a2.remove(a2.indexOf(t2));
 				}else w3=pi;
 			}
@@ -136,12 +145,21 @@ public class MergeGUI extends JFrame implements ActionListener{
 			output += a5.get(t) + " ";
 		}
 		arr3.setText(output);
+		output += '\r';
+		for(int t=0;t < a.size();t++){
+			output += a.get(t) + " ";
+		}
+		output += '\r';
+		for(int t=0;t < b.size();t++){
+			output += b.get(t) + " ";
+		}
 		System.out.println(output);
+		
 	}
 	
 	public static void main(String[] a){
 		MergeGUI g1 = new MergeGUI("Science");
-		g1.setBounds(390,338,500,125);
+		g1.setBounds(390,325,500,150);
 		g1.setVisible(true);
 	}
 }

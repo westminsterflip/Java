@@ -7,13 +7,14 @@ public class MergeGUI extends JFrame implements ActionListener{
 	JLabel ar1 = new JLabel("Array 1: ");
 	JLabel ar2 = new JLabel("Array 2: ");
 	JLabel ar3 = new JLabel("Result: ");
-	JTextField arr1 = new JTextField(10);
-	JTextField arr2 = new JTextField(10);
-	JTextField arr3 = new JTextField(35);
+	JTextField arr1 = new JTextField(15);
+	JTextField arr2 = new JTextField(15);
+	JTextField arr3 = new JTextField(37);
 	JButton go = new JButton("Merge");
 	JButton clear = new JButton("Clear");
 	JPanel arra = new JPanel();
 	JPanel arrb = new JPanel();
+	JPanel arrs = new JPanel();
 	JPanel arra3 = new JPanel();
 	JPanel buttons = new JPanel();
 	Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
@@ -23,15 +24,17 @@ public class MergeGUI extends JFrame implements ActionListener{
 	int c,d,t1 = 0,t2 = 0;
 	
 	
-	public MergeGUI(String title){
-		super(title);
+	public MergeGUI(){
+		super("Array Merger");
 		setResizable(false);
-		setLayout(new FlowLayout());
+		setLayout(new BorderLayout());
 		arra.add(ar1); arra.add(arr1);
 		arrb.add(ar2); arrb.add(arr2);
 		arra3.add(ar3); arra3.add(arr3);
 		buttons.add(go); buttons.add(clear);
-		add(arra); add(arrb); add(arra3); add(buttons);
+		arrs.add(arra); arrs.add(arrb);
+		add(arrs,BorderLayout.NORTH); 
+		add(arra3,BorderLayout.CENTER); add(buttons,BorderLayout.SOUTH);
 		arr3.setEditable(false);
 		go.setActionCommand("go");
 		clear.setActionCommand("clear");
@@ -39,7 +42,9 @@ public class MergeGUI extends JFrame implements ActionListener{
 		clear.addActionListener(this);
 		int wid = (int)Math.round((scr.getWidth()-500)/2);
 		int hig = (int)Math.round((scr.getHeight()-150)/2);
-		setBounds(wid,hig,500,150); setVisible(true);
+		//setBounds(wid,hig,500,150); 
+		setVisible(true);
+		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
@@ -47,7 +52,6 @@ public class MergeGUI extends JFrame implements ActionListener{
 		if(evt.getActionCommand().equals("go")){
 			arrayIn();
 			sortThose();
-			godostuff();
 		}else{
 			arr1.setText(null);
 			arr2.setText(null);
@@ -83,7 +87,9 @@ public class MergeGUI extends JFrame implements ActionListener{
 	public void sortThose(){
 		//System.out.println(a + " and "+ b);
 		if(a.isEmpty()==true&&b.isEmpty()==true)
-		{}else{
+		{
+			godostuff();
+		}else{
 			if(a.isEmpty()==false){
 				t1=a.get(0);
 				for(c=0;c< a.size();c++){
@@ -139,6 +145,6 @@ public class MergeGUI extends JFrame implements ActionListener{
 
 	public static void main(String[] a){
 		@SuppressWarnings("unused")
-		MergeGUI g1 = new MergeGUI("Array Merge");
+		MergeGUI g1 = new MergeGUI();
 	}
 }

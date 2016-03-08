@@ -147,7 +147,7 @@ public class guip extends JFrame implements ActionListener,ChangeListener{
 	public void actionPerformed(ActionEvent evt){
 		if(evt.getActionCommand().equals("go")){
 			arrayIn();
-			sortThose();
+			handler();
 		}else{
 			arr1.setText(null);
 			arr2.setText(null);
@@ -180,6 +180,13 @@ public class guip extends JFrame implements ActionListener,ChangeListener{
 		s2.close();
 	}
 
+	public void handler(){
+		sortThose();
+		for(int x=0;){
+			
+		}
+	}
+	
 	public void sortThose(){
 		//System.out.println(a1 + " and "+ a2);
 		if(a1.isEmpty()==true&&a2.isEmpty()==true)

@@ -16,6 +16,7 @@ public class guip extends JFrame implements ActionListener,ChangeListener{
 	JPanel top = new JPanel();
 	JPanel odd = new JPanel();
 	JPanel even = new JPanel();
+	JPanel output = new JPanel();
 	Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 	ArrayList<Integer> a1 = new ArrayList<Integer>();
 	ArrayList<Integer> a2 = new ArrayList<Integer>();
@@ -28,6 +29,7 @@ public class guip extends JFrame implements ActionListener,ChangeListener{
 	
 	public guip(){
 		super("Array Merger");
+		
 		for(int x=1;x<3;x++){
 			JPanel c = new JPanel();
 			c.setLayout(new FlowLayout());
@@ -41,24 +43,20 @@ public class guip extends JFrame implements ActionListener,ChangeListener{
 		}
 		JLabel fin = new JLabel("Result: ");
 		JLabel sli = new JLabel("Number of Arrays: ");
-		setResizable(false);
-		setLayout(new BorderLayout());
+		JScrollBar scroll = new JScrollBar(JScrollBar.HORIZONTAL);
+		
+		BoundedRangeModel brm = arrfin.getHorizontalVisibility();
+	    scroll.setModel(brm);
+		
+		output.setLayout(new BorderLayout());
 		slider.setLayout(new BorderLayout());
-		slider.add(sli,BorderLayout.NORTH);
-		slider.add(sl,BorderLayout.SOUTH);
-		arrafin.add(fin); arrafin.add(arrfin);
-		buttons.add(go); buttons.add(clear);
 		arras.setLayout(new BorderLayout());
 		top.setLayout(new BorderLayout());
 		odd.setLayout(new BoxLayout(odd,BoxLayout.Y_AXIS));
 		even.setLayout(new BoxLayout(even,BoxLayout.Y_AXIS));
-		odd.add(panels.get(0)); even.add(panels.get(1));
-		arras.add(odd,BorderLayout.WEST);
-		arras.add(even,BorderLayout.EAST);
-		top.add(slider,BorderLayout.NORTH);
-		top.add(arras,BorderLayout.SOUTH);
-		add(arrafin,BorderLayout.CENTER); 
-		add(buttons,BorderLayout.SOUTH);
+		
+		setResizable(false);
+		setLayout(new BorderLayout());
 		sl.setPaintLabels(true);
 		sl.setMajorTickSpacing(4);
 		sl.setMinorTickSpacing(1);
@@ -68,11 +66,30 @@ public class guip extends JFrame implements ActionListener,ChangeListener{
 		go.setActionCommand("go");
 		clear.setActionCommand("clear");
 		go.addActionListener(this);
-		clear.addActionListener(this);	
-		setVisible(true);
+		clear.addActionListener(this);
 		sl.addChangeListener(this);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+		
+		
+		
+		slider.add(sli,BorderLayout.NORTH);
+		slider.add(sl,BorderLayout.SOUTH);
+		arrafin.add(fin); arrafin.add(arrfin);
+		buttons.add(go); buttons.add(clear);
+		odd.add(panels.get(0));
+		even.add(panels.get(1));
+		arras.add(odd,BorderLayout.WEST);
+		arras.add(even,BorderLayout.EAST);
+		top.add(slider,BorderLayout.NORTH);
+		top.add(arras,BorderLayout.SOUTH);
+		add(output,BorderLayout.CENTER); 
+		add(buttons,BorderLayout.SOUTH);
 		add(top,BorderLayout.NORTH); 
+		
+		
+		
+	    
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		int wid = (int)Math.round((scr.getWidth()-getWidth())/2);
 		int hig = (int)Math.round((scr.getHeight()-getHeight())/2);
@@ -83,7 +100,6 @@ public class guip extends JFrame implements ActionListener,ChangeListener{
 	public void stateChanged(ChangeEvent e) {
 		JSlider source = (JSlider)e.getSource();
 		int num = source.getValue();
-		System.out.println(numact + " and " + num);
 		Integer x;
 		if(num>panels.size()){
 			for(x=panels.size()+1;x<=num;x++){
@@ -106,8 +122,18 @@ public class guip extends JFrame implements ActionListener,ChangeListener{
 				pack();
 				numact = panels.size()-1;
 			}
+		}else if(panels.get(num-1).isVisible()==true){
+			for(x=panels.size()-1;x>=num;x--){
+				panels.get(x).setVisible(false);
+				pack();
+			}
+			numact=num-1;
 		}else{
-			
+			for(x=numact;x<num;x++){
+				panels.get(x).setVisible(true);
+				pack();
+			}
+			numact=num-1;
 		}
 	}
 	

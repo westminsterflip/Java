@@ -2,8 +2,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.event.*;
 @SuppressWarnings("serial")
-public class guip extends JFrame implements ActionListener{
+public class guip extends JFrame implements ActionListener,ChangeListener{
 	JSlider sl = new JSlider(JSlider.HORIZONTAL,2,10,2);
 	JTextField arr1 = new JTextField(15);
 	JTextField arr2 = new JTextField(15);
@@ -31,11 +32,16 @@ public class guip extends JFrame implements ActionListener{
 	JPanel arras = new JPanel();
 	JPanel arrafin = new JPanel();
 	JPanel buttons = new JPanel();
+	JPanel slider = new JPanel();
+	JPanel top = new JPanel();
+	JPanel odd = new JPanel();
+	JPanel even = new JPanel();
 	Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
-	ArrayList<Integer> a = new ArrayList<Integer>();
+	ArrayList<Integer> a1 = new ArrayList<Integer>();
+	ArrayList<Integer> a2 = new ArrayList<Integer>();
 	ArrayList<Integer> a3 = new ArrayList<Integer>();
-	ArrayList<Integer> b = new ArrayList<Integer>();
-	int c,d,t1 = 0,t2 = 0;
+	ArrayList<JPanel> panels = new ArrayList<JPanel>();
+	int c,d,t1 = 0,t2 = 0,numact = 2;
 	
 	
 	public guip(){
@@ -51,8 +57,12 @@ public class guip extends JFrame implements ActionListener{
 		JLabel ar9 = new JLabel("Array 9: ");
 		JLabel ar10 = new JLabel("Array 10: ");
 		JLabel fin = new JLabel("Result: ");
+		JLabel sli = new JLabel("Number of Arrays: ");
 		setResizable(false);
 		setLayout(new BorderLayout());
+		slider.setLayout(new BorderLayout());
+		slider.add(sli,BorderLayout.NORTH);
+		slider.add(sl,BorderLayout.SOUTH);
 		arra1.add(ar1); arra1.add(arr1);
 		arra2.add(ar2); arra2.add(arr2);
 		arra3.add(ar3); arra3.add(arr3);
@@ -65,12 +75,20 @@ public class guip extends JFrame implements ActionListener{
 		arra10.add(ar10); arra10.add(arr10);
 		arrafin.add(fin); arrafin.add(arrfin);
 		buttons.add(go); buttons.add(clear);
-		arras.add(arra1); arras.add(arra2);
-		arras.add(arra3); arras.add(arra4);
-		arras.add(arra5); arras.add(arra6);
-		arras.add(arra7); arras.add(arra8);
-		arras.add(arra9); arras.add(arra10);
+		arras.setLayout(new BorderLayout());
+		top.setLayout(new BorderLayout());
+		odd.setLayout(new BoxLayout(odd,BoxLayout.Y_AXIS));
+		even.setLayout(new BoxLayout(even,BoxLayout.Y_AXIS));
+		odd.add(arra1); even.add(arra2);
+		odd.add(arra3); even.add(arra4);
+		odd.add(arra5); even.add(arra6);
+		odd.add(arra7); even.add(arra8);
+		odd.add(arra9); even.add(arra10);
+		arras.add(odd,BorderLayout.WEST);
+		arras.add(even,BorderLayout.EAST);
 		arra3.setVisible(false);
+		top.add(slider,BorderLayout.NORTH);
+		top.add(arras,BorderLayout.SOUTH);
 		arra4.setVisible(false);
 		arra5.setVisible(false);
 		arra6.setVisible(false);
@@ -78,21 +96,52 @@ public class guip extends JFrame implements ActionListener{
 		arra8.setVisible(false);
 		arra9.setVisible(false);
 		arra10.setVisible(false);
-		add(arra3,BorderLayout.CENTER); add(buttons,BorderLayout.SOUTH);
-		arr3.setEditable(false);
+		add(arrafin,BorderLayout.CENTER); 
+		add(buttons,BorderLayout.SOUTH);
+		sl.setPaintLabels(true);
+		sl.setMajorTickSpacing(1);
+		sl.setPaintTicks(true);
+		sl.setSnapToTicks(true);
+		arrfin.setEditable(false);
 		go.setActionCommand("go");
 		clear.setActionCommand("clear");
 		go.addActionListener(this);
 		clear.addActionListener(this);	
 		setVisible(true);
+		sl.addChangeListener(this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		add(sl);
-		add(arras,BorderLayout.NORTH); 
+		add(top,BorderLayout.NORTH); 
 		pack();
 		int wid = (int)Math.round((scr.getWidth()-getWidth())/2);
 		int hig = (int)Math.round((scr.getHeight()-getHeight())/2);
 		setLocation(wid,hig);
 		
+	}
+	
+	public void stateChanged(ChangeEvent e) {
+		panels.addAll(Arrays.asList(arra3,arra4,arra5,arra6,arra7,arra8,arra9,arra10));
+		JSlider source = (JSlider)e.getSource();
+		int num = source.getValue()-3;
+		System.out.println(num);
+		if(num == -1){
+			for(int x=0;x<8;x++){
+				panels.get(x).setVisible(false);
+				pack();
+			}
+		}else if(panels.get(num).isVisible()==true){
+			for(int x=7;x>num;x--){
+				panels.get(x).setVisible(false);
+				pack();
+			}
+			System.out.println("no");
+		}else{
+			for(int x=0;x<=num;x++){
+				panels.get(x).setVisible(true);
+				pack();
+			}
+			System.out.println("yes");
+		}
+		numact=num+2;
 	}
 	
 	public void actionPerformed(ActionEvent evt){
@@ -110,7 +159,7 @@ public class guip extends JFrame implements ActionListener{
 		Scanner s1 = new Scanner(arr1.getText());
 		for(;s1.hasNext()==true;){
 			for(;s1.hasNextInt()==true;){
-				a.add(s1.nextInt());
+				a1.add(s1.nextInt());
 			}
 			if(s1.hasNext()==true){
 				s1.next();
@@ -122,7 +171,7 @@ public class guip extends JFrame implements ActionListener{
 		Scanner s2 = new Scanner(arr2.getText());
 		for(;s2.hasNext()==true;){
 			for(;s2.hasNextInt()==true;){
-				b.add(s2.nextInt());
+				a2.add(s2.nextInt());
 			}
 			if(s2.hasNext()==true){
 				s2.next();
@@ -132,49 +181,49 @@ public class guip extends JFrame implements ActionListener{
 	}
 
 	public void sortThose(){
-		System.out.println(a + " and "+ b);
-		if(a.isEmpty()==true&&b.isEmpty()==true)
+		//System.out.println(a1 + " and "+ a2);
+		if(a1.isEmpty()==true&&a2.isEmpty()==true)
 		{
 			godostuff();
 		}else{
-			if(a.isEmpty()==false){
-				t1=a.get(0);
-				for(c=0;c< a.size();c++){
-					if (t1>a.get(c)){
-						t1 = a.get(c);
+			if(a1.isEmpty()==false){
+				t1=a1.get(0);
+				for(c=0;c< a1.size();c++){
+					if (t1>a1.get(c)){
+						t1 = a1.get(c);
 					}
 				}
 			}
 			
-			if(b.isEmpty()==false){
-				t2 = b.get(0);
-				for(d=0;d<b.size();d++){
-					if (t2>b.get(d)){
-						t2 = b.get(d);
+			if(a2.isEmpty()==false){
+				t2 = a2.get(0);
+				for(d=0;d<a2.size();d++){
+					if (t2>a2.get(d)){
+						t2 = a2.get(d);
 					}
 				}
 			}
 			
-			if(t1==t2&&(a.indexOf(t1)!=-1||b.indexOf(t2)!=-1)){
-				if(a.indexOf(t1)!=-1){
-					a.remove(a.indexOf(t1));
+			if(t1==t2&&(a1.indexOf(t1)!=-1||a2.indexOf(t2)!=-1)){
+				if(a1.indexOf(t1)!=-1){
+					a1.remove(a1.indexOf(t1));
 				}
-				if(b.indexOf(t2)!=-1){
-					b.remove(b.indexOf(t2));
+				if(a2.indexOf(t2)!=-1){
+					a2.remove(a2.indexOf(t2));
 				}
 				if(a3.indexOf(t1)==-1){
 					a3.add(t1);
 				}
-			}else if((t1<t2||b.isEmpty())&&a.indexOf(t1)!=-1){
+			}else if((t1<t2||a2.isEmpty())&&a1.indexOf(t1)!=-1){
 					if(a3.indexOf(t1)==-1){
 						a3.add(t1);
 					}
-					a.remove(a.indexOf(t1));
-			}else if ((t2<t1||a.isEmpty())&&b.indexOf(t2)!=-1){
+					a1.remove(a1.indexOf(t1));
+			}else if ((t2<t1||a1.isEmpty())&&a2.indexOf(t2)!=-1){
 					if(a3.indexOf(t2)==-1){
 						a3.add(t2);
 					}
-					b.remove(b.indexOf(t2));
+					a2.remove(a2.indexOf(t2));
 			}
 			sortThose();
 		}
@@ -186,13 +235,14 @@ public class guip extends JFrame implements ActionListener{
 			output += a3.get(t) + " ";
 		}
 		a3.clear();
-		arr3.setText(output);
+		arrfin.setText(output);
 	}
 	
 
 	public static void main(String[] a){
 		@SuppressWarnings("unused")
-		MergeGUI g1 = new MergeGUI();
+		guip g1 = new guip();
 	}
+
 }
 

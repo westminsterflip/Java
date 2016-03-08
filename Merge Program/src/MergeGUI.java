@@ -25,7 +25,7 @@ public class MergeGUI extends JFrame implements ActionListener{
 	
 	
 	public MergeGUI(){
-		super("Array Merger");
+		super("Array Merffger");
 		setResizable(false);
 		setLayout(new BorderLayout());
 		arra.add(ar1); arra.add(arr1);

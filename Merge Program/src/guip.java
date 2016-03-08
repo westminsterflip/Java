@@ -119,7 +119,6 @@ public class guip extends JFrame implements ActionListener,ChangeListener{
 	}
 	
 	public void stateChanged(ChangeEvent e) {
-		panels.addAll(Arrays.asList(arra3,arra4,arra5,arra6,arra7,arra8,arra9,arra10));
 		JSlider source = (JSlider)e.getSource();
 		int num = source.getValue()-3;
 		System.out.println(num);
@@ -155,7 +154,7 @@ public class guip extends JFrame implements ActionListener,ChangeListener{
 		}
 	}
 
-	public void arrayIn(){
+	public ArrayList<Integer> arrayIn(){
 		Scanner s1 = new Scanner(arr1.getText());
 		for(;s1.hasNext()==true;){
 			for(;s1.hasNextInt()==true;){
@@ -167,27 +166,17 @@ public class guip extends JFrame implements ActionListener,ChangeListener{
 		}
 		
 		s1.close();
-		
-		Scanner s2 = new Scanner(arr2.getText());
-		for(;s2.hasNext()==true;){
-			for(;s2.hasNextInt()==true;){
-				a2.add(s2.nextInt());
-			}
-			if(s2.hasNext()==true){
-				s2.next();
-			}
-		}
-		s2.close();
 	}
 
 	public void handler(){
-		sortThose();
-		for(int x=0;){
+		for(int x=0;x<numact-3;x++){
 			
 		}
 	}
 	
-	public void sortThose(){
+	public void sortThose(ArrayList<Integer> that, ArrayList<Integer> yay){
+		a1=that;
+		a2=yay;
 		//System.out.println(a1 + " and "+ a2);
 		if(a1.isEmpty()==true&&a2.isEmpty()==true)
 		{
@@ -232,7 +221,7 @@ public class guip extends JFrame implements ActionListener,ChangeListener{
 					}
 					a2.remove(a2.indexOf(t2));
 			}
-			sortThose();
+			sortThose(a1,a2);
 		}
 	}
 

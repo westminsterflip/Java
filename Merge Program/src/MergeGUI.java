@@ -39,12 +39,12 @@ public class MergeGUI extends JFrame implements ActionListener{
 		go.setActionCommand("go");
 		clear.setActionCommand("clear");
 		go.addActionListener(this);
-		clear.addActionListener(this);
-		int wid = (int)Math.round((scr.getWidth()-500)/2);
-		int hig = (int)Math.round((scr.getHeight()-150)/2);
-		//setBounds(wid,hig,500,150); 
+		clear.addActionListener(this);	
 		setVisible(true);
 		pack();
+		int wid = (int)Math.round((scr.getWidth()-getWidth())/2);
+		int hig = (int)Math.round((scr.getHeight()-getHeight())/2);
+		setLocation(wid,hig);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	

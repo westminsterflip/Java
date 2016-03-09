@@ -5,8 +5,9 @@ import javax.swing.*;
 import javax.swing.event.*;
 @SuppressWarnings("serial")
 public class guip extends JFrame implements ActionListener,ChangeListener{
-	JSlider sl = new JSlider(JSlider.HORIZONTAL,2,30,2);
-	JTextField arrfin = new JTextField(37);
+	JSlider sl = new JSlider(JSlider.HORIZONTAL,2,55,2);
+	JLabel fin = new JLabel("Result: ");
+	JTextField arrfin = new JTextField();
 	JButton go = new JButton("Merge");
 	JButton clear = new JButton("Clear");
 	JPanel arras = new JPanel();
@@ -14,8 +15,13 @@ public class guip extends JFrame implements ActionListener,ChangeListener{
 	JPanel buttons = new JPanel();
 	JPanel slider = new JPanel();
 	JPanel top = new JPanel();
-	JPanel odd = new JPanel();
-	JPanel even = new JPanel();
+	JPanel seventeen = new JPanel();
+	JPanel thirty4 = new JPanel();
+	JPanel fifty1 = new JPanel();
+	JPanel sixty8 = new JPanel();
+	JPanel eighty5 = new JPanel();
+	JPanel left = new JPanel();
+	JPanel right = new JPanel();
 	JPanel output = new JPanel();
 	Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 	ArrayList<Integer> a1 = new ArrayList<Integer>();
@@ -24,41 +30,43 @@ public class guip extends JFrame implements ActionListener,ChangeListener{
 	ArrayList<JLabel> labels = new ArrayList<JLabel>();
 	ArrayList<JTextField> text = new ArrayList<JTextField>();
 	ArrayList<JPanel> panels = new ArrayList<JPanel>();
-	int c,d,t1 = 0,t2 = 0,numact = 1;
+	ArrayList<JPanel> arraypanels = new ArrayList<JPanel>();
+	int c,d,t1 = 0,t2 = 0,numact = 1,arrayp=0,arrayc=2;
 	
 	
 	public guip(){
 		super("Array Merger");
 		
+		for(int x=0;x<11;x++){
+			JPanel t = new JPanel();
+			arraypanels.add(t);
+			//System.out.println("Stuffs being made here");
+		}
 		for(int x=1;x<3;x++){
 			JPanel c = new JPanel();
 			c.setLayout(new FlowLayout());
 			JLabel a = new JLabel("Array " + x + ": ");
 			labels.add(a);
-			JTextField b = new JTextField(15);
+			JTextField b = new JTextField(10);
 			text.add(b);
 			c.add(a);
 			c.add(b);
 			panels.add(c);
 		}
-		JLabel fin = new JLabel("Result: ");
+		
 		JLabel sli = new JLabel("Number of Arrays: ");
 		JScrollBar scroll = new JScrollBar(JScrollBar.HORIZONTAL);
 		
 		BoundedRangeModel brm = arrfin.getHorizontalVisibility();
 	    scroll.setModel(brm);
-		
 		output.setLayout(new BorderLayout());
 		slider.setLayout(new BorderLayout());
-		arras.setLayout(new BorderLayout());
+		arras.setLayout(new BoxLayout(arras,BoxLayout.Y_AXIS));
 		top.setLayout(new BorderLayout());
-		odd.setLayout(new BoxLayout(odd,BoxLayout.Y_AXIS));
-		even.setLayout(new BoxLayout(even,BoxLayout.Y_AXIS));
-		
-		setResizable(false);
+		//setResizable(false);
 		setLayout(new BorderLayout());
 		sl.setPaintLabels(true);
-		sl.setMajorTickSpacing(4);
+		sl.setMajorTickSpacing(53);
 		sl.setMinorTickSpacing(1);
 		sl.setPaintTicks(true);
 		sl.setSnapToTicks(true);
@@ -70,33 +78,29 @@ public class guip extends JFrame implements ActionListener,ChangeListener{
 		sl.addChangeListener(this);
 		setVisible(true);
 		
-		
-		
+		arraypanels.get(0).add(panels.get(0));
+		arraypanels.get(0).add(panels.get(1));
+		for(int x=0;x<11;x++){
+			arras.add(arraypanels.get(x));
+			//System.out.println("adding here");
+		}
 		slider.add(sli,BorderLayout.NORTH);
 		slider.add(sl,BorderLayout.SOUTH);
 		arrafin.add(fin); arrafin.add(arrfin);
 		buttons.add(go); buttons.add(clear);
-		odd.add(panels.get(0));
-		even.add(panels.get(1));
-		arras.add(odd,BorderLayout.WEST);
-		arras.add(even,BorderLayout.EAST);
 		top.add(slider,BorderLayout.NORTH);
 		top.add(arras,BorderLayout.SOUTH);
 		output.add(arrafin,BorderLayout.NORTH);
 		output.add(scroll, BorderLayout.SOUTH);
 		add(output,BorderLayout.CENTER); 
 		add(buttons,BorderLayout.SOUTH);
-		add(top,BorderLayout.NORTH); 
-		
-		
-		
-	    
+		add(top,BorderLayout.NORTH);
+		System.out.println(arrafin.getSize());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		int wid = (int)Math.round((scr.getWidth()-getWidth())/2);
 		int hig = (int)Math.round((scr.getHeight()-getHeight())/2);
 		setLocation(wid,hig);
-		
 	}
 	
 	public void stateChanged(ChangeEvent e) {
@@ -105,21 +109,38 @@ public class guip extends JFrame implements ActionListener,ChangeListener{
 		Integer x;
 		if(num>panels.size()){
 			for(x=panels.size()+1;x<=num;x++){
+				//System.out.println(x);
 				JPanel c = new JPanel();
 				c.setLayout(new FlowLayout());
 				JLabel a = new JLabel("Array " + x + ": ");
 				labels.add(a);
-				JTextField b = new JTextField(15);
+				JTextField b = new JTextField(10);
 				text.add(b);
 				c.add(a);
 				c.add(b);
+				//System.out.println(arrayp);
 				panels.add(c);
-				if(Integer.numberOfTrailingZeros(x)==0){
-					System.out.println("odd");
-					odd.add(panels.get(x-1));
+				arraypanels.get(arrayp).add(panels.get(panels.size()-1));
+				arrayc++;
+				/*if(x<31){
+					//System.out.println("odd");
+					.add(panels.get(x-1));
+				}else if(x<61){
+					//System.out.println("even");
+					sixty.add(panels.get(x-1));
+				}else if(x<91){
+					//System.out.println("odd");
+					ninety.add(panels.get(x-1));
+				}else if(x<121){
+					//System.out.println("even");
+					one20.add(panels.get(x-1));
 				}else{
-					System.out.println("even");
-					even.add(panels.get(x-1));
+					one50.add(panels.get(x-1));
+				}*/
+				if(arrayc==5){
+					//System.out.println("nextline");
+					arrayp++;
+					arrayc=0;
 				}
 				pack();
 				int wid = (int)Math.round((scr.getWidth()-getWidth())/2);
@@ -129,23 +150,36 @@ public class guip extends JFrame implements ActionListener,ChangeListener{
 			}
 		}else if(panels.get(num-1).isVisible()==true){
 			for(x=panels.size()-1;x>=num;x--){
+				arrayc--;
 				panels.get(x).setVisible(false);
 				pack();
 				int wid = (int)Math.round((scr.getWidth()-getWidth())/2);
 				int hig = (int)Math.round((scr.getHeight()-getHeight())/2);
 				setLocation(wid,hig);
+				if(arrayc==1){
+					arrayp--;
+					arrayc=5;
+				}
 			}
 			numact=num-1;
 		}else{
 			for(x=numact;x<num;x++){
+				System.out.println("isworking");
+				arrayc++;
+				if(arrayc==5){
+					arrayp++;
+					arrayc=0;
+				}
 				panels.get(x).setVisible(true);
 				pack();
 				int wid = (int)Math.round((scr.getWidth()-getWidth())/2);
 				int hig = (int)Math.round((scr.getHeight()-getHeight())/2);
 				setLocation(wid,hig);
 			}
+			
 			numact=num-1;
 		}
+		
 	}
 	
 	public void actionPerformed(ActionEvent evt){
@@ -248,6 +282,7 @@ public class guip extends JFrame implements ActionListener,ChangeListener{
 		}
 		a3.clear();
 		arrfin.setText(output);
+		System.out.println(arrfin.getWidth());
 	}
 	
 

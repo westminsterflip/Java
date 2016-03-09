@@ -82,6 +82,8 @@ public class guip extends JFrame implements ActionListener,ChangeListener{
 		arras.add(even,BorderLayout.EAST);
 		top.add(slider,BorderLayout.NORTH);
 		top.add(arras,BorderLayout.SOUTH);
+		output.add(arrafin,BorderLayout.NORTH);
+		output.add(scroll, BorderLayout.SOUTH);
 		add(output,BorderLayout.CENTER); 
 		add(buttons,BorderLayout.SOUTH);
 		add(top,BorderLayout.NORTH); 

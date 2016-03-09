@@ -122,18 +122,27 @@ public class guip extends JFrame implements ActionListener,ChangeListener{
 					even.add(panels.get(x-1));
 				}
 				pack();
+				int wid = (int)Math.round((scr.getWidth()-getWidth())/2);
+				int hig = (int)Math.round((scr.getHeight()-getHeight())/2);
+				setLocation(wid,hig);
 				numact = panels.size()-1;
 			}
 		}else if(panels.get(num-1).isVisible()==true){
 			for(x=panels.size()-1;x>=num;x--){
 				panels.get(x).setVisible(false);
 				pack();
+				int wid = (int)Math.round((scr.getWidth()-getWidth())/2);
+				int hig = (int)Math.round((scr.getHeight()-getHeight())/2);
+				setLocation(wid,hig);
 			}
 			numact=num-1;
 		}else{
 			for(x=numact;x<num;x++){
 				panels.get(x).setVisible(true);
 				pack();
+				int wid = (int)Math.round((scr.getWidth()-getWidth())/2);
+				int hig = (int)Math.round((scr.getHeight()-getHeight())/2);
+				setLocation(wid,hig);
 			}
 			numact=num-1;
 		}

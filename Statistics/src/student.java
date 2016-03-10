@@ -18,8 +18,11 @@ public class student {
 		try{
 			int grd = Integer.parseInt(grade);
 			String letter;
-			
-			if(grd>89)
+			if(grd<0||grd>100){
+				letter = "Invalid grade";
+				studen[1]=null;
+			}
+			else if(grd>89)
 				letter = "A";
 			else if(grd>79)
 				letter = "B";

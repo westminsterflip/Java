@@ -46,4 +46,9 @@ public class student {
 		studen[3] = names[Arrays.asList(code).indexOf(major.toUpperCase())];
 	}
 	
+	public String getStuff(){
+		String output = studen[0] + " " + studen[1] + " " + studen[2] + " " + studen[3];
+		return output;
+	}
+	
 }

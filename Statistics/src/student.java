@@ -13,14 +13,22 @@ public class student {
 		studen[0] = id;
 	}
 	
+	public String getOne(){
+		return studen[1];
+	}
+	
+	public int getGrade(){
+		return Integer.parseInt(studen[1].substring(0,studen[1].indexOf("%")));
+	}
+	
 	public void setGrade(String grade){
-		studen[1] = grade;
 		try{
+			studen[1] = grade + "%";
 			int grd = Integer.parseInt(grade);
 			String letter;
 			if(grd<0||grd>100){
-				letter = "Invalid grade";
-				studen[1]=null;
+				letter = "Grade";
+				studen[1]="Invalid";
 			}
 			else if(grd>89)
 				letter = "A";
@@ -36,18 +44,37 @@ public class student {
 			studen[2] = letter;
 		}
 		catch(Exception ex){
-			studen[2] = null;
+			studen[1] = "Invalid";
+			studen[2] = "Grade";
 		}
 	}
 	
 	public void setMajor(String major){
+		//System.out.println(major);
 		String[] code = {"C","E","M","B","N","A"};
 		String[] names = {"Computer Science","Education","Mathematics","Buisness","Engineering","Art"};
-		studen[3] = names[Arrays.asList(code).indexOf(major.toUpperCase())];
+		try{
+			studen[3] = names[Arrays.asList(code).indexOf(major.toUpperCase().trim())];
+		}
+		catch(Exception e){
+			studen[3] = "Invalid Course Code";
+		}
 	}
 	
 	public String getStuff(){
-		String output = studen[0] + " " + studen[1] + " " + studen[2] + " " + studen[3];
+		String output = studen[0].trim();
+		for(int x=studen[0].trim().length();x<5;x++){
+			output+=" ";
+		}
+		output += studen[1].trim();
+		for(int x=studen[1].trim().length();x<8;x++){
+			output+=" ";
+		}
+		output += studen[2].trim();
+		for(int x=studen[2].trim().length();x<15;x++){
+			output+=" ";
+		}
+		output += studen[3].trim();
 		return output;
 	}
 	

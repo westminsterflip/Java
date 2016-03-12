@@ -1,6 +1,7 @@
 import java.io.*;
 public class stats{
 	private student[] s1 = new student[30];
+	private int[] scr = new int[30];
 	private String file;
 	private String codes = "",in="";
 	int num=0,high=0,low=100,sum=0;
@@ -83,6 +84,7 @@ public class stats{
 					if(score<low){
 						low = score;
 					}
+					scr[(int)count] = score;
 					count++;
 					sum+=score;
 				}
@@ -113,6 +115,13 @@ public class stats{
 				s1[num] = failure;
 				//System.out.println(getStudent(num).getStuff());
 			}
+		}
+	}
+
+	public void sort(){
+		int tmp=0,temp = 0;
+		for(int x=0;;x++){
+			tmp = scr[x];
 		}
 	}
 	

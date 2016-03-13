@@ -4,8 +4,7 @@ public class stats{
 	private int[] scr = new int[30];
 	private String file;
 	private String codes = "",in="";
-	int num=0,high=0,low=100,sum=0;
-	double count = 0;
+	int num=0,high=0,low=100,sum=0,count = 0,cnt1=0;
 	
 	
 	public stats() throws IOException{
@@ -17,7 +16,7 @@ public class stats{
 	}
 	
 	public void setFile(String fl){
-		file = fl+".txt";
+		file = fl;
 	}
 	
 	public student getStudent(int pos){
@@ -37,10 +36,23 @@ public class stats{
 	}
 
 	public void inputter() throws IOException{
+		System.out.print("Filename: ");
 		InputStreamReader r = new InputStreamReader(System.in);
 		BufferedReader i = new BufferedReader(r);
 		setFile(i.readLine());
-		file();
+		try{
+			file();
+		}
+		catch(FileNotFoundException ei){
+			try{
+				file = file+".txt";
+				file();
+			}
+			catch(FileNotFoundException re){
+				System.out.println("Invalid Filename.");
+				inputter();
+			}
+		}
 	}
 	
 	public void file() throws IOException{
@@ -89,7 +101,7 @@ public class stats{
 					count++;
 					sum+=score;
 				}
-				catch(StringIndexOutOfBoundsException e1){System.out.println("faileure"+failure.getID());}
+				catch(StringIndexOutOfBoundsException e1){}
 				failure.setMajor(nice.substring(inds2).trim());
 				s1[num] = failure;
 				//System.out.println(getStudent(num).getStuff());
@@ -97,7 +109,7 @@ public class stats{
 				strt = index+3;
 			}
 			catch(StringIndexOutOfBoundsException e){
-				System.out.println("stopped trying");
+				//System.out.println("stopped trying");
 				last=true;
 				nice=in.substring(in.lastIndexOf("   ")).trim();
 				//System.out.println(in.lastIndexOf("   "));
@@ -137,18 +149,24 @@ public class stats{
 
 	public void sort(){
 		int tmp=0,temp = 0;
-		try{
-			for(int x=0;;x++){
-				tmp = scr[x];
-				try{
-					for(int y=x+1;;x++){
-						//if()
-					}
+		student tp = new student(),tep = new student();
+		for(int x=0;x<count-1;x++){
+			
+			System.out.println(scr[x]+"and");
+			System.out.println(x);
+			tmp = scr[x];	
+			temp = tmp;
+			int y;
+			for(y=x+1;y<count;y++){
+				System.out.print(scr[y] + ",  , ");
+				if(scr[y]<tmp){
+					//System.out.println("changed");
+					tmp=scr[y];
 				}
-				catch(ArrayIndexOutOfBoundsException ex){}
 			}
+			scr[x]=tmp;
+			scr[y]=temp;
 		}
-		catch(ArrayIndexOutOfBoundsException e){}
 		
 	}
 	
@@ -159,6 +177,7 @@ public class stats{
 	public void run() throws IOException{
 		inputter();
 		makeClass();
+		sort();
 		System.out.println("ID:  Grade:  Letter Grade:  Major:");
 		for(int x=0;s1[x]!=null;x++){
 			//System.out.println(x);
@@ -175,6 +194,13 @@ public class stats{
 			System.out.print(" ");
 		}
 		System.out.print(mean+"%");
+		for(int x = (mean+"").length();x<6;x++){
+			System.out.print(" ");
+		}
+		System.out.println((scr[count/2]+scr[count-1-count/2])/2.0);
+		for(int x=0;x<count;x++){
+			System.out.println(scr[x]+ ", ");
+		}
 	}
 	
 	public static void main(String[] schience) throws IOException{

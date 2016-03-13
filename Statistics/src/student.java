@@ -49,8 +49,8 @@ public class student {
 		}
 	}
 	
-	public String getID(){
-		return studen[0];
+	public int getID(){
+		return Integer.parseInt(studen[0]);
 	}
 	
 	public void setMajor(String major){

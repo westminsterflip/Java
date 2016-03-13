@@ -61,6 +61,7 @@ public class stats{
 		int inds1=0,inds2=0;
 		boolean last = false;
 		while(last==false){
+			//System.out.println(last);
 			try{
 				student failure = new student();
 				index=in.indexOf("   ",strt);
@@ -88,7 +89,7 @@ public class stats{
 					count++;
 					sum+=score;
 				}
-				catch(StringIndexOutOfBoundsException e){}
+				catch(StringIndexOutOfBoundsException e1){System.out.println("faileure"+failure.getID());}
 				failure.setMajor(nice.substring(inds2).trim());
 				s1[num] = failure;
 				//System.out.println(getStudent(num).getStuff());
@@ -96,7 +97,7 @@ public class stats{
 				strt = index+3;
 			}
 			catch(StringIndexOutOfBoundsException e){
-				//System.out.println("stopped trying");
+				System.out.println("stopped trying");
 				last=true;
 				nice=in.substring(in.lastIndexOf("   ")).trim();
 				//System.out.println(in.lastIndexOf("   "));
@@ -109,10 +110,26 @@ public class stats{
 				//System.out.println(nice.substring(0,inds1).trim());
 				//System.out.println(nice.substring(inds1,inds2).trim());
 				//System.out.println(nice.substring(inds2).trim());
-				failure.setID(nice.substring(0,inds1).trim());
-				failure.setGrade(nice.substring(inds1,inds2).trim());
-				failure.setMajor(nice.substring(inds2).trim());
-				s1[num] = failure;
+				try{
+					//System.out.println("checkpoint 2");
+					failure.setID(nice.substring(0,inds1).trim());
+					failure.setGrade(nice.substring(inds1,inds2).trim());
+					failure.setMajor(nice.substring(inds2).trim());
+					s1[num] = failure;
+				}
+				catch(StringIndexOutOfBoundsException i){}
+				try{
+					int score = failure.getGrade();
+					if(score>high)
+						high=score;
+					if(score<low){
+						low = score;
+					}
+					scr[(int)count] = score;
+					count++;
+					sum+=score;
+				}
+				catch(StringIndexOutOfBoundsException e2){}
 				//System.out.println(getStudent(num).getStuff());
 			}
 		}
@@ -120,9 +137,19 @@ public class stats{
 
 	public void sort(){
 		int tmp=0,temp = 0;
-		for(int x=0;;x++){
-			tmp = scr[x];
+		try{
+			for(int x=0;;x++){
+				tmp = scr[x];
+				try{
+					for(int y=x+1;;x++){
+						//if()
+					}
+				}
+				catch(ArrayIndexOutOfBoundsException ex){}
+			}
 		}
+		catch(ArrayIndexOutOfBoundsException e){}
+		
 	}
 	
 	public String toString(int ind){

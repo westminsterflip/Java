@@ -49,6 +49,10 @@ public class student {
 		}
 	}
 	
+	public String getID(){
+		return studen[0];
+	}
+	
 	public void setMajor(String major){
 		//System.out.println(major);
 		String[] code = {"C","E","M","B","N","A"};

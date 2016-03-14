@@ -1,10 +1,10 @@
 import java.io.*;
 import java.util.*;
-public class magic {
+public class maguic {
 	int[][] sqr;
 	int x;
 	
-	public magic() throws IOException{
+	public maguic() throws IOException{
 		in();
 		decider();
 		System.out.println(toString());
@@ -109,8 +109,7 @@ public class magic {
 	}
 	
 	public static void main(String[] a) throws IOException{
-		@SuppressWarnings("unused")
-		magic m1 = new magic();
+		maguic m1 = new maguic();
 	}
 	
 }

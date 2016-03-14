@@ -203,7 +203,7 @@ public class stats{
 		for(int x = (mean+"").length();x<6;x++){
 			System.out.print(" ");
 		}
-		System.out.println((scr[count/2]+scr[count-1-count/2])/2.0);
+		System.out.println((scr[count/2]+scr[count-1-count/2])/2.0 + "%");
 	}
 	
 	public static void main(String[] schience) throws IOException{

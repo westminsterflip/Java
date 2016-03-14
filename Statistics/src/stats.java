@@ -87,7 +87,7 @@ public class stats{
 				//System.out.println(strt + " and " + index);
 				//System.out.println(nice);
 				//System.out.println(nice.substring(0,inds1));
-			  	System.out.println(nice.substring(3,5));
+			  	//System.out.println(nice.substring(3,5));
 				//System.out.println(nice.substring(6));
 				failure.setID(nice.substring(0,inds1).trim());
 				failure.setGrade(nice.substring(inds1,inds2).trim());

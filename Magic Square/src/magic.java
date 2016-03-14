@@ -16,6 +16,9 @@ public class magic {
 		try{
 			System.out.print("Order: ");
 			x = Integer.parseInt(li.readLine());
+			if(x!=1&&!(x>2)){
+				throw(new NumberFormatException());
+			}
 		}
 		catch(NumberFormatException e){
 			System.out.println("Invalid Order.");

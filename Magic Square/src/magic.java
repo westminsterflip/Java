@@ -13,12 +13,18 @@ public class magic {
 	public void in() throws IOException{
 		InputStreamReader in = new InputStreamReader(System.in);
 		BufferedReader li = new BufferedReader(in);
-		System.out.print("Order: ");
-		x = Integer.parseInt(li.readLine());
-		sqr = new int[x][x];
+		try{
+			System.out.print("Order: ");
+			x = Integer.parseInt(li.readLine());
+		}
+		catch(NumberFormatException e){
+			System.out.println("Invalid Order.");
+			in();
+		}
 	}
 	
 	public void decider(){
+		sqr = new int[x][x];
 		if(Integer.numberOfTrailingZeros(x)>0)
 			even();
 		else
@@ -54,7 +60,35 @@ public class magic {
 	}
 	
 	public void odd(){
-		
+		sqr[0][x/2]=1;
+		int y = 0;
+		int x1 = x/2;
+		int tmp = 2;
+		int yold = 0;
+		int xold = 0;
+		while(tmp<=Math.pow(x, 2)){
+			xold = x1;
+			yold = y;
+			y--;
+			x1++;
+			if(y==-1){
+				y=x-1;
+			}
+			if(x1==x){
+				x1 = 0;
+			}
+			if(sqr[y][x1]==0){
+			}else{
+				yold++;
+				if(y==x){
+					y=0;
+				}
+				y = yold;
+				x1 = xold;
+			}
+			sqr[y][x1] = tmp;
+			tmp++;
+		}
 	}
 	
 	public String toString(){

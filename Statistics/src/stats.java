@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.Arrays;
 public class stats{
 	private student[] s1 = new student[30];
 	private int[] scr = new int[30];

@@ -13,6 +13,7 @@ public class maguic extends JFrame implements ActionListener{
 	public JPanel in = new JPanel();
 	public JTextField inp = new JTextField(35);
 	public JLabel i = new JLabel("Order:");
+	Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 	
 	public maguic() throws IOException{
 		super("hi");
@@ -138,8 +139,9 @@ public class maguic extends JFrame implements ActionListener{
 		tabl.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		tabl.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		tab.setShowGrid(false);
-		tabl.setPreferredSize(new Dimension(500,500));
-		tabl.setMinimumSize(new Dimension(500,500));
+		System.out.println(tab.getHeight());
+		tabl.setPreferredSize(new Dimension(tab.getPreferredScrollableViewportSize()));
+		tabl.setMinimumSize(new Dimension(tab.getPreferredScrollableViewportSize()));
 		add(tabl);
 		tabl.setVisible(true);
 		pack();

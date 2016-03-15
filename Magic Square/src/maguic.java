@@ -1,37 +1,65 @@
+import java.awt.*;
+import java.awt.event.*;
 import java.io.*;
 import java.util.*;
-public class maguic {
-	int[][] sqr;
-	int x;
+import javax.swing.*;
+import javax.swing.table.*;
+public class maguic extends JFrame implements ActionListener{
+	public int[][] sqr;
+	public int[] er;
+	public int x;
+	public JScrollPane tabl;
+	public JTable tab;
+	public JPanel in = new JPanel();
+	public JTextField inp = new JTextField(35);
+	public JLabel i = new JLabel("Order:");
 	
 	public maguic() throws IOException{
-		in();
-		decider();
-		System.out.println(toString());
+		super("hi");
+		setVisible(true);
+		in.setLayout(new BorderLayout());
+		in.add(i,BorderLayout.WEST);
+		in.add(inp, BorderLayout.EAST);
+		setLayout(new BorderLayout());
+		add(in,BorderLayout.NORTH);
+		inp.addActionListener(this);
+		pack();
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
-	public void in() throws IOException{
-		InputStreamReader in = new InputStreamReader(System.in);
-		BufferedReader li = new BufferedReader(in);
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		in();
+		decider();
+		tabler();
+	}
+
+	public void in(){
 		try{
-			System.out.print("Order: ");
-			x = Integer.parseInt(li.readLine());
+			x = Integer.parseInt(inp.getText());
 			if(x!=1&&!(x>2)){
 				throw(new NumberFormatException());
 			}
 		}
 		catch(NumberFormatException e){
-			System.out.println("Invalid Order.");
-			in();
+			inp.setText("Invaild Order");
 		}
 	}
 	
 	public void decider(){
 		sqr = new int[x][x];
-		if(Integer.numberOfTrailingZeros(x)>0)
+		//System.out.println(toString());
+		er = new int[x];
+		if(Integer.numberOfTrailingZeros(x)>0){
 			even();
-		else
+		}
+		else{
 			odd();
+		}
+	}
+	
+	public int getS(int e, int t){
+		return sqr[e][t];
 	}
 	
 	public void even(){
@@ -51,7 +79,7 @@ public class maguic {
 		tmp = (int) (Math.pow(x, 2)-1);
 		for(int y = 0;y<x;y++){
 			for(int n = 0;n<x;){
-				while(sqr[y][n] == 0){
+				while(getS(y,n)== 0){
 					if(in.indexOf(tmp)==-1){
 						sqr[y][n] = tmp;
 					}
@@ -92,6 +120,31 @@ public class maguic {
 			sqr[y][x1] = tmp;
 			tmp++;
 		}
+	}
+	
+	public void tabler(){
+		Integer[][]hi = new Integer[x][x];
+		for(int y = 0;y<x;y++){
+			for(int n = 0;n<x;n++){
+				hi[y][n] = getS(y,n);	
+			}
+		}
+		TableModel t = new DefaultTableModel(hi,new String[x]);
+		tab = new JTable(t);
+		tab.setTableHeader(null);
+		tab.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		tabl = new JScrollPane(tab);
+		tabl.createHorizontalScrollBar();
+		tabl.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		tabl.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		tab.setShowGrid(false);
+		tabl.setPreferredSize(new Dimension(500,500));
+		tabl.setMinimumSize(new Dimension(500,500));
+		add(tabl);
+		tabl.setVisible(true);
+		pack();
+		inp.removeActionListener(this);
+		inp.setEditable(false);
 	}
 	
 	public String toString(){

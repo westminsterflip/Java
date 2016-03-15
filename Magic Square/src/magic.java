@@ -28,7 +28,7 @@ public class magic {
 	
 	public void decider(){
 		sqr = new int[x][x];
-		System.out.println(toString());
+		//System.out.println(toString());
 		if(Integer.numberOfTrailingZeros(x)>0)
 			even();
 		else

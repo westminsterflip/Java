@@ -5,6 +5,10 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.table.*;
 public class maguic extends JFrame implements ActionListener{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6667347255736594456L;
 	public int[][] sqr;
 	public int[] er;
 	public int x;

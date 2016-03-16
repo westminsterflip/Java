@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Arrays;
 public class stats{
 	private student[] s1 = new student[30];
 	private int[] scr = new int[30];
@@ -142,7 +143,7 @@ public class stats{
 	public void sort(){
 		int tmp=0,temp = 0,low;
 		student tp = new student(),tep = new student();
-		for(int x=0;x<count;x++){
+		/*for(int x=0;x<count;x++){
 			low=x;
 			tmp = scr[x];	
 			temp = tmp;
@@ -155,7 +156,8 @@ public class stats{
 			}
 			scr[x]=tmp;
 			scr[low]=temp;
-		}
+		}*/
+		Arrays.sort(scr);
 		for(int x=0;x<num;x++){
 			low=x;
 			tp = s1[x];	

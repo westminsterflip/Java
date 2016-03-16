@@ -38,11 +38,10 @@ public class elstudent implements student{
 	}
 	
 	public String toString(){
-		String output = la + ", " + fi + "  " + gr;
+		String output = la + ", " + fi + "  " + grd[gr];
 		return output;
 	}
 
-	@Override
 	public void setFName(String a) {
 		fi = a;
 	}

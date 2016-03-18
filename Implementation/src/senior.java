@@ -3,6 +3,8 @@ public class senior extends hsstu{
 	private double fine;
 	private boolean podone;
 	
+	public senior(){}
+	
 	public double getFine() {
 		return fine;
 	}

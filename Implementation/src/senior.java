@@ -18,35 +18,11 @@ public class senior extends hsstu{
 	public void setPodone(boolean podone) {
 		this.podone = podone;
 	}
-
-	public void setFName(String a) {
-		
-	}
-
-	public void setLName(String a) {
-		
-	}
-
-	public void setGLevel(int a) {
-		
-	}
-
-	public String getFName() {
-		return null;
-	}
-
-	public String getLName() {
-		return null;
-	}
-
-	public int getGLevel() {
-		return 0;
-	}
-
-	public int compareTo(String o) {
-		return 500;
-	}
-
 	
+	public String toString(){
+		String output = super.toString();
+		output += " $" + fine + " Portfolio Done: " + podone;
+		return output;
+	}
 
 }

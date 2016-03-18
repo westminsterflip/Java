@@ -2,11 +2,8 @@
 public class senior extends hsstu{
 	private double fine;
 	private boolean podone;
-	hsstu h;
 	
-	public senior(){
-		h = new hsstu();
-	}
+	public senior(){}
 	
 	public double getFine() {
 		return fine;
@@ -26,7 +23,7 @@ public class senior extends hsstu{
 	
 	public String toString(){
 		String output = super.toString();
-		output += " $" + fine + " Portfolio Done: " + podone;
+		output += "Fine: $" + fine + " Portfolio Done: " + podone;
 		return output;
 	}
 

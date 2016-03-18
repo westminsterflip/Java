@@ -6,24 +6,6 @@ public class hsstu implements student,Comparable<hsstu>{
 	
 	public hsstu(){}
 	
-	public String toString(){
-		String output;
-		output = la + ", " + fi + "  " + grd[gr] + " " + qpa;
-		return output;
-	}
-	
-	public int compareTo(hsstu o) {
-		if(getGLevel()>o.getGLevel()){
-			return -1;
-		}else if(getGLevel()<o.getGLevel()){
-			return 1;
-		}else if(!getFName().equals(o.getFName())){
-			return getFName().compareTo(o.getFName());
-		}else{
-			return getLName().compareTo(o.getLName());
-		}
-	}
-	
 	public void setFName(String a) {
 		fi = a;
 	}
@@ -34,6 +16,10 @@ public class hsstu implements student,Comparable<hsstu>{
 
 	public void setGLevel(int a) {
 		gr = a;
+	}
+
+	public void setQPA(int a){
+		qpa = a;
 	}
 
 	public String getFName() {
@@ -51,9 +37,23 @@ public class hsstu implements student,Comparable<hsstu>{
 	public int getQPA(){
 		return qpa;
 	}
-	
-	public void setQPA(int a){
-		qpa = a;
+
+	public int compareTo(hsstu o) {
+		if(getGLevel()>o.getGLevel()){
+			return -1;
+		}else if(getGLevel()<o.getGLevel()){
+			return 1;
+		}else if(!getFName().equals(o.getFName())){
+			return getFName().compareTo(o.getFName());
+		}else{
+			return getLName().compareTo(o.getLName());
+		}
+	}
+
+	public String toString(){
+		String output;
+		output = grd[gr] + " " + la + ", " + fi + "  " + qpa;
+		return output;
 	}
 	
 }

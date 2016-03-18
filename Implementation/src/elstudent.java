@@ -1,5 +1,5 @@
 
-public class elstudent implements student{
+public class elstudent implements student,Comparable<elstudent>{
 	
 	private String fi;
 	private String la;
@@ -9,39 +9,12 @@ public class elstudent implements student{
 	public elstudent(){
 	}
 	
-	public elstudent(String a){
-		in = a;
-		fi = in.substring(0, in.indexOf(' '));
-		la = in.substring(in.indexOf(' ',in.indexOf(' ')+1)).trim();
-		gr = Integer.parseInt(in.substring(in.indexOf(' ',in.indexOf(' ')+1)).trim());
-		System.out.println(toString());
-	}
+	public elstudent(String a){}
 	
 	public void setIn(String a){
 		in = a;
 	}
 	
-	public String getIn(){
-		return in;
-	}
-	
-	public void setGLevel(int a) {
-		gr = a;
-	}
-
-	public String getFName() {
-		return fi;
-	}
-
-	public String getLName() {
-		return la;
-	}
-	
-	public String toString(){
-		String output = la + ", " + fi + "  " + grd[gr];
-		return output;
-	}
-
 	public void setFName(String a) {
 		fi = a;
 	}
@@ -50,7 +23,40 @@ public class elstudent implements student{
 		la = a;
 	}
 
+	public void setGLevel(int a) {
+		gr = a;
+	}
+
+	public String getIn(){
+		return in;
+	}
+	
+	public String getFName() {
+		return fi;
+	}
+
+	public String getLName() {
+		return la;
+	}
+	
 	public int getGLevel() {
 		return gr;
+	}
+
+	public int compareTo(elstudent o) {
+		if(getGLevel()>o.getGLevel()){
+			return -1;
+		}else if(getGLevel()<o.getGLevel()){
+			return 1;
+		}else if(!getFName().equals(o.getFName())){
+			return getFName().compareTo(o.getFName());
+		}else{
+			return getLName().compareTo(o.getLName());
+		}
+	}
+
+	public String toString(){
+		String output = grd[gr] + " " + la + ", " + fi;
+		return output;
 	}
 }

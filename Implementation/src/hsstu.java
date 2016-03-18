@@ -1,4 +1,3 @@
-
 public abstract class hsstu implements student,Comparable<hsstu>{
 	private String fi;
 	private String la;
@@ -30,12 +29,10 @@ public abstract class hsstu implements student,Comparable<hsstu>{
 	}
 	
 	public void setLName(String a) {
-		// TODO Auto-generated method stub
 		la = a;
 	}
 
 	public void setGLevel(int a) {
-		// TODO Auto-generated method stub
 		gr = a;
 	}
 
@@ -44,12 +41,10 @@ public abstract class hsstu implements student,Comparable<hsstu>{
 	}
 	
 	public String getLName() {
-		// TODO Auto-generated method stub
 		return la;
 	}
 
 	public int getGLevel() {
-		// TODO Auto-generated method stub
 		return gr;
 	}
 	

@@ -9,8 +9,6 @@ public class elstudent implements student,Comparable<elstudent>{
 	public elstudent(){
 	}
 	
-	public elstudent(String a){}
-	
 	public void setIn(String a){
 		in = a;
 	}

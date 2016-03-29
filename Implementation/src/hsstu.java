@@ -2,7 +2,7 @@ public class hsstu implements student,Comparable<hsstu>{
 	private String fi;
 	private String la;
 	private int gr;
-	private int qpa;
+	private double qpa;
 	
 	public hsstu(){}
 	
@@ -18,7 +18,7 @@ public class hsstu implements student,Comparable<hsstu>{
 		gr = a;
 	}
 
-	public void setQPA(int a){
+	public void setQPA(double a){
 		qpa = a;
 	}
 
@@ -34,7 +34,7 @@ public class hsstu implements student,Comparable<hsstu>{
 		return gr;
 	}
 	
-	public int getQPA(){
+	public double getQPA(){
 		return qpa;
 	}
 

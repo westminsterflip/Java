@@ -4,8 +4,8 @@ public class junior extends hsstu{
 	
 	public junior(){}
 	
-	public int getKeys() {
-		return keys;
+	public String getKeys() {
+		return key[keys];
 	}
 
 	public void setKeys(int keys) {

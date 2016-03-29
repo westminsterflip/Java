@@ -1,14 +1,14 @@
 
 public class sophmore extends hsstu{
-	private int math;
+	private double math;
 	
 	public sophmore(){}
 
-	public int getMath() {
+	public double getMath() {
 		return math;
 	}
 
-	public void setMath(int math) {
+	public void setMath(double math) {
 		this.math = math;
 	}
 

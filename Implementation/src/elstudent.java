@@ -4,13 +4,8 @@ public class elstudent implements student,Comparable<elstudent>{
 	private String fi;
 	private String la;
 	private int gr;
-	private String in;
 	
 	public elstudent(){
-	}
-	
-	public void setIn(String a){
-		in = a;
 	}
 	
 	public void setFName(String a) {
@@ -23,10 +18,6 @@ public class elstudent implements student,Comparable<elstudent>{
 
 	public void setGLevel(int a) {
 		gr = a;
-	}
-
-	public String getIn(){
-		return in;
 	}
 	
 	public String getFName() {

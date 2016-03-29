@@ -120,7 +120,13 @@ public class run {
 		InputStreamReader i = new InputStreamReader(System.in);
 		BufferedReader b = new BufferedReader(i);
 		System.out.print("Filename: ");
-		b.readLine();
+		setFname(b.readLine());
+		try{
+			getIn();
+		}
+		catch(FileNotFoundException e){
+			
+		}
 	}
 	
 }

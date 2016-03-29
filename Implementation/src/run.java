@@ -98,9 +98,29 @@ public class run {
 					}
 					ind--;
 					hs.add(ind,h1);
+				}else if(h==9){
+					freshman h1 = new freshman();
+					h1.setFName(fn);
+					h1.setLName(ls);
+					h1.setGLevel(h);
+					h1.setQPA(Double.parseDouble(stu.substring(stu.indexOf(" ",stu.indexOf(gr)),stu.indexOf(" ",stu.indexOf(" ",stu.indexOf(gr)))).trim()));
+					h1.setDisRef(Integer.parseInt(stu.substring(stu.lastIndexOf(" "))));
+					int ind = 0;
+					while(hs.get(ind).compareTo(h1)<0){
+						ind++;
+					}
+					ind--;
+					hs.add(ind,h1);
 				}
 			}
 		}
+	}
+	
+	public void walk() throws IOException{
+		InputStreamReader i = new InputStreamReader(System.in);
+		BufferedReader b = new BufferedReader(i);
+		System.out.print("Filename: ");
+		b.readLine();
 	}
 	
 }

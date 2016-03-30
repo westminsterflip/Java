@@ -4,6 +4,11 @@ public class freshman extends hsstu{
 	
 	public freshman(){}
 	
+	public freshman(String fi, String la, int gr, double qpa,int disRef){
+		super(fi,la,gr,qpa);
+		this.disRef = disRef;
+	}
+	
 	public int getDisRef() {
 		return disRef;
 	}

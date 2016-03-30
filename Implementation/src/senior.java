@@ -5,6 +5,12 @@ public class senior extends hsstu{
 	
 	public senior(){}
 	
+	public senior(String fi, String la, int gr, double qpa,double fine,boolean podone){
+		super(fi,la,gr,qpa);
+		this.fine = fine;
+		this.podone=podone;
+	}
+	
 	public double getFine() {
 		return fine;
 	}

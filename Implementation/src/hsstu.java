@@ -6,6 +6,13 @@ public abstract class hsstu implements student,Comparable<hsstu>{
 	
 	public hsstu(){}
 	
+	public hsstu(String fi, String la, int gr, double qpa){
+		this.fi=fi;
+		this.la=la;
+		this.gr=gr;
+		this.qpa=qpa;
+	}
+	
 	public void setFName(String a) {
 		fi = a;
 	}

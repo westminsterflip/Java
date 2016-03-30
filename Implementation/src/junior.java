@@ -4,6 +4,11 @@ public class junior extends hsstu{
 	
 	public junior(){}
 	
+	public junior(String fi, String la, int gr, double qpa, int keys){
+		super(fi,la,gr,qpa);
+		this.keys = keys;
+	}
+	
 	public String getKeys() {
 		return key[keys];
 	}

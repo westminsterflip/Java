@@ -14,7 +14,7 @@ public class sophmore extends hsstu{
 
 	public String toString(){
 		String output = super.toString();
-		output += "9th Grade Math Score: " + math + "%";
+		output += " 9th Grade Math Score: " + math + "%";
 		return output;
 	}
 	

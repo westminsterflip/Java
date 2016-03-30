@@ -40,9 +40,9 @@ public class hsstu implements student,Comparable<hsstu>{
 
 	public int compareTo(hsstu o) {
 		if(getGLevel()>o.getGLevel()){
-			return -1;
-		}else if(getGLevel()<o.getGLevel()){
 			return 1;
+		}else if(getGLevel()<o.getGLevel()){
+			return -1;
 		}else if(!getFName().equals(o.getFName())){
 			return getFName().compareTo(o.getFName());
 		}else{
@@ -52,7 +52,7 @@ public class hsstu implements student,Comparable<hsstu>{
 
 	public String toString(){
 		String output;
-		output = grd[gr] + " " + la + ", " + fi + "  " + qpa;
+		output = grd[gr] + " " + fi + " " + la + "  " + qpa;
 		return output;
 	}
 	

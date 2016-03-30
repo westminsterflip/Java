@@ -34,9 +34,9 @@ public class elstudent implements student,Comparable<elstudent>{
 
 	public int compareTo(elstudent o) {
 		if(getGLevel()>o.getGLevel()){
-			return -1;
-		}else if(getGLevel()<o.getGLevel()){
 			return 1;
+		}else if(getGLevel()<o.getGLevel()){
+			return -1;
 		}else if(!getFName().equals(o.getFName())){
 			return getFName().compareTo(o.getFName());
 		}else{
@@ -45,7 +45,7 @@ public class elstudent implements student,Comparable<elstudent>{
 	}
 
 	public String toString(){
-		String output = grd[gr] + " " + la + ", " + fi;
+		String output = grd[gr] + " " + fi + " " + la;
 		return output;
 	}
 }

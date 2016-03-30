@@ -14,7 +14,7 @@ public class freshman extends hsstu{
 	
 	public String toString(){
 		String output = super.toString();
-		output += "Discipline Referrals: " + disRef;
+		output += " Discipline Referrals: " + disRef;
 		return output;
 	}
 	

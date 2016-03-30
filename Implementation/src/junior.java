@@ -14,7 +14,7 @@ public class junior extends hsstu{
 
 	public String toString(){
 		String output = super.toString();
-		output += "Keystone: " + key[keys];
+		output += " Keystone: " + key[keys];
 		return output;
 	}
 

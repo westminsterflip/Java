@@ -23,7 +23,7 @@ public class senior extends hsstu{
 	
 	public String toString(){
 		String output = super.toString();
-		output += "Fine: $" + fine + " Portfolio Done: " + podone;
+		output += " Fine: $" + fine + " Portfolio Done: " + podone;
 		return output;
 	}
 

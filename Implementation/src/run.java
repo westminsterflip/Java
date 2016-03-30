@@ -38,9 +38,9 @@ public class run {
 		int u = 0, ts = in.indexOf("$break$");
 		String fn="",ls="",gr="";
 		int h;
-		System.out.println(in);
+		//System.out.println(in);
 		while(u!=-1&&ts!=-1){
-			System.out.println(u +" & " + ts);
+			//System.out.println(u +" & " + ts);
 			setStu(u,ts);
 			int s1=stu.indexOf(" ");
 			int s2=stu.indexOf(" ",s1+1);
@@ -49,8 +49,8 @@ public class run {
 			ts = in.indexOf("$break$",u);
 			fn = stu.substring(0,s1).trim();
 			ls = stu.substring(s1,s2).trim();
-			System.out.println(fn);
-			System.out.println(ls);
+			//System.out.println(fn);
+			//System.out.println(ls);
 			if(s3==-1){
 				gr = stu.substring(stu.lastIndexOf(" ")).trim();
 				h = Integer.parseInt(gr);
@@ -65,7 +65,7 @@ public class run {
 				}else{
 					ind=0;
 					while(ind<el.size()&&el.get(ind).compareTo(e)<0){
-						System.out.println(ind);
+						//System.out.println(ind);
 						ind++;
 					}
 					el.add(ind,e);
@@ -79,7 +79,7 @@ public class run {
 				int s5 = stu.indexOf(" ",s4+1);
 				gr = stu.substring(s2,s3).trim();
 				h = Integer.parseInt(gr);
-				System.out.println(s1 +", " + s2 +", " + s3 + ", " + s4 +", " +s5);
+				//System.out.println(s1 +", " + s2 +", " + s3 + ", " + s4 +", " +s5);
 				double qp = Double.parseDouble(stu.substring(s3,s4).trim());
 				if(h==12){
 					senior h1 = new senior();
@@ -89,14 +89,14 @@ public class run {
 					h1.setQPA(qp);
 					h1.setFine(Double.parseDouble(stu.substring(s4,s5).trim()));
 					h1.setPodone(Boolean.parseBoolean(stu.substring(stu.lastIndexOf(" ")).trim()));
-					System.out.println(stu.substring(s3,s4) + " " + stu.substring(s4,s5));
+					//System.out.println(stu.substring(s3,s4) + " " + stu.substring(s4,s5));
 					int ind = 0;
 					if(hs.isEmpty()){
 						hs.add(h1);	
 					}else{
 						ind=0;
 						while(ind<hs.size()&&hs.get(ind).compareTo(h1)<0){
-							System.out.println(ind);
+							//System.out.println(ind);
 							ind++;
 						}
 						hs.add(ind,h1);
@@ -114,7 +114,7 @@ public class run {
 					}else{
 						ind=0;
 						while(ind<hs.size()&&hs.get(ind).compareTo(h1)<0){
-							System.out.println(ind);
+							//System.out.println(ind);
 							ind++;
 						}
 						hs.add(ind,h1);
@@ -132,7 +132,7 @@ public class run {
 					}else{
 						ind=0;
 						while(ind<hs.size()&&hs.get(ind).compareTo(h1)<0){
-							System.out.println(ind);
+							//System.out.println(ind);
 							ind++;
 						}
 						hs.add(ind,h1);
@@ -150,7 +150,7 @@ public class run {
 					}else{
 						ind=0;
 						while(ind<hs.size()&&hs.get(ind).compareTo(h1)<0){
-							System.out.println(ind);
+							//System.out.println(ind);
 							ind++;
 						}
 						hs.add(ind,h1);

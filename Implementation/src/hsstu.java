@@ -1,4 +1,4 @@
-public class hsstu implements student,Comparable<hsstu>{
+public abstract class hsstu implements student,Comparable<hsstu>{
 	private String fi;
 	private String la;
 	private int gr;

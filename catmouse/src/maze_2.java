@@ -21,7 +21,7 @@ public class maze_2 {
 		int wid = line.length();
 		String tmp ="";
 		while(line!=null){
-			System.out.println(line);
+			//System.out.println(line);
 			tmp+=line;
 			line=b1.readLine();
 		}
@@ -95,8 +95,36 @@ public class maze_2 {
 	}
 	
 	public int canTowards(int z, int y){
-		int i;
-		
+		int hor=mouse[0]-z;
+		int ver=mouse[1]-y;
+		if(Math.abs(hor)<Math.abs(ver)){
+			if(ver<0){
+				if(canUp(z,y))
+					return 1;
+				else
+					return 0;
+			}else if(ver>0){
+				if(canDown(z,y))
+					return 2;
+				else
+					return 0;
+			}else{
+				return 0;
+			}
+		}else{
+			if(hor<0){
+				if(canLeft(z,y))
+					return 3;
+				else 
+					return 0;
+			}else if(hor>0){
+				if(canRight(z,y))
+					return 4;
+				else 
+					return 0;
+			}else
+				return 0;
+		}
 	}
 	
 	public void filler(){
@@ -115,22 +143,83 @@ public class maze_2 {
 				}
 			}	
 		}
+		for(int y=row-1;y>=0;y--){
+			for(int c=x-1;c>=0;c--){
+				boolean d = canDown(c,y),u=canUp(c,y),l=canLeft(c,y),r=canRight(c,y);
+				if(maze[c][y]==' '){
+					boolean d1=c+1==cat[0]&&y==cat[1]||c-1==cat[0]&&y==cat[1]||c+1==mouse[0]&&y==mouse[1]||c-1==mouse[0]&&y==mouse[1];
+					boolean d2=y+1==cat[1]&&c==cat[0]||y-1==cat[1]&&c==cat[0]||y+1==mouse[1]&&c==mouse[0]||y-1==mouse[1]&&c==mouse[0];
+					if(d1||d2){}
+					else
+					if(!d&&!u&&!l||!d&&!u&&!r||!u&&!l&&!r||!d&&!l&&!r){
+						maze[c][y]='f';
+						dead.add(new Integer[]{c,y});
+					}
+				}
+			}	
+		}
+		for(int y=row-1;y>=0;y--){
+			for(int c=0;c<x;c++){
+				boolean d = canDown(c,y),u=canUp(c,y),l=canLeft(c,y),r=canRight(c,y);
+				if(maze[c][y]==' '){
+					boolean d1=c+1==cat[0]&&y==cat[1]||c-1==cat[0]&&y==cat[1]||c+1==mouse[0]&&y==mouse[1]||c-1==mouse[0]&&y==mouse[1];
+					boolean d2=y+1==cat[1]&&c==cat[0]||y-1==cat[1]&&c==cat[0]||y+1==mouse[1]&&c==mouse[0]||y-1==mouse[1]&&c==mouse[0];
+					boolean d3=maze[c+1][y]=='f'||maze[c-1][y]=='f'||maze[c][y+1]=='f'||maze[c][y-1]=='f';
+					if(d1||d2){}
+					else
+					if(!d&&!u&&!l||!d&&!u&&!r||!u&&!l&&!r||!d&&!l&&!r){
+						maze[c][y]='f';
+						dead.add(new Integer[]{c,y});
+					}
+				}
+			}	
+		}
+		for(int y=0;y<row;y++){
+			for(int c=x-1;c>=0;c--){
+				boolean d = canDown(c,y),u=canUp(c,y),l=canLeft(c,y),r=canRight(c,y);
+				if(maze[c][y]==' '){
+					boolean d1=c+1==cat[0]&&y==cat[1]||c-1==cat[0]&&y==cat[1]||c+1==mouse[0]&&y==mouse[1]||c-1==mouse[0]&&y==mouse[1];
+					boolean d2=y+1==cat[1]&&c==cat[0]||y-1==cat[1]&&c==cat[0]||y+1==mouse[1]&&c==mouse[0]||y-1==mouse[1]&&c==mouse[0];
+					if(d1||d2){}
+					else
+					if(!d&&!u&&!l||!d&&!u&&!r||!u&&!l&&!r||!d&&!l&&!r){
+						maze[c][y]='f';
+						dead.add(new Integer[]{c,y});
+					}
+				}
+			}	
+		}
 	}
 	
 	public void tracer(int z,int y){
 		boolean d = canDown(z,y),u=canUp(z,y),l=canLeft(z,y),r=canRight(z,y);
-		if(z+1==mouse[0]&&y==mouse[1]||z-1==mouse[0]&&y==mouse[1]||y+1==mouse[1]&&z==mouse[0]||y-1==mouse[1]&&z==mouse[0]){	
+		if(z+1==mouse[0]&&y==mouse[1]||z-1==mouse[0]&&y==mouse[1]||y+1==mouse[1]&&z==mouse[0]||y-1==mouse[1]&&z==mouse[0]){
+		}else if(canTowards(z,y)!=0){
+			switch (canTowards(z,y)){
+				case 1: maze[z][y-1] = '+';
+						tracer(z,y-1);
+						break;
+				case 2: maze[z][y+1] = '+';
+						tracer(z,y+1);
+						break;
+				case 3: maze[z-1][y] = '+';
+						tracer(z-1,y);
+						break;
+				case 4: maze[z+1][y] = '+';
+						tracer(z+1,y);
+						break;
+			}
 		}else if(d){
-			maze[z][y+1] = 'O';
+			maze[z][y+1] = '+';
 			tracer(z,y+1);
 		}else if(u){
-			maze[z][y-1] = 'O';
+			maze[z][y-1] = '+';
 			tracer(z,y-1);
 		}else if(l){
-			maze[z-1][y] = 'O';
+			maze[z-1][y] = '+';
 			tracer(z-1,y);
 		}else if(r){
-			maze[z+1][y] = 'O';
+			maze[z+1][y] = '+';
 			tracer(z+1,y);
 		}
 	}
@@ -156,6 +245,7 @@ public class maze_2 {
 	public void run() throws IOException{
 		getMaze();
 		System.out.println(toString());
+		filler();
 		filler();
 		System.out.println(toString());
 		tracer(cat[0],cat[1]);

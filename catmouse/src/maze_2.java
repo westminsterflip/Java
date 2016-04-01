@@ -332,11 +332,11 @@ public class maze_2 {
 		}else{
 			maze[z][y] = 'f';
 			dead.add(new Integer[]{z,y});
-			System.out.println(toString());
+			//System.out.println(toString());
 			altclean();
 			filler();
-			System.out.println("filled");
-			System.out.println(toString());
+			//System.out.println("filled");
+			//System.out.println(toString());
 			mazerize();
 		}
 	}
@@ -364,51 +364,59 @@ public class maze_2 {
 			if(maze[i[0]][i[1]]!='f')
 				maze[i[0]][i[1]] = ' ';
 		}
+		path.clear();
 	}
 	
 	public void mazerize(){
 		tracer(cat[0],cat[1]);
 	}
 	
-	public void polisher(){
-		boolean d1;
+	/*public void polisher(){
+		boolean d1=false;
 		for(Integer[] i:path){
 			int z = i[0],y = i[1];
 			try{
-				d1=maze[z][y-1]=='#'&&maze[z+1][y-1]=='#';
+				d1=maze[z][y-1]=='+'&&maze[z+1][y-1]=='+'&&maze[z+1][y]=='+';
 			}catch(ArrayIndexOutOfBoundsException r1){}
 			try{
-				d3=d3||maze[c-1][y]=='f';
+				d1=d1||maze[z+1][y]=='+'&&maze[z+1][y-1]=='+'&&maze[z][y-1]=='+';
 			}catch(ArrayIndexOutOfBoundsException r1){}
 			try{
-				d3=d3||maze[c][y+1]=='f';
+				d1=d1||maze[z+1][y]=='+'&&maze[z+1][y+1]=='+'&&maze[z][y+1]=='+';
 			}catch(ArrayIndexOutOfBoundsException r1){}
 			try{
-				d3=d3||maze[c][y-1]=='f';
+				d1=d1||maze[z][y+1]=='+'&&maze[z+1][y+1]=='+'&&maze[z+1][y]=='+';
 			}catch(ArrayIndexOutOfBoundsException r1){}
 			try{
-				d3=maze[c+1][y]=='f';
+				d1=d1||maze[z][y+1]=='+'&&maze[z-1][y+1]=='+'&&maze[z-1][y]=='+';
 			}catch(ArrayIndexOutOfBoundsException r1){}
 			try{
-				d3=d3||maze[c-1][y]=='f';
+				d1=d1||maze[z-1][y]=='+'&&maze[z-1][y+1]=='+'&&maze[z][y+1]=='+';
 			}catch(ArrayIndexOutOfBoundsException r1){}
 			try{
-				d3=d3||maze[c][y+1]=='f';
+				d1=d1||maze[z-1][y]=='+'&&maze[z-1][y-1]=='+'&&maze[z][y-1]=='+';
 			}catch(ArrayIndexOutOfBoundsException r1){}
 			try{
-				d3=d3||maze[c][y-1]=='f';
+				d1=d1||maze[z][y-1]=='+'&&maze[z-1][y-1]=='+'&&maze[z-1][y]=='+';
 			}catch(ArrayIndexOutOfBoundsException r1){}
+			if(d1){
+				dead.add(i);
+			}
+			cleaner();
 		}
-	}
+	}*/
 	
 	public void run() throws IOException{
 		getMaze();
 		System.out.println(toString());
 		filler();
 		filler();
+		//System.out.println(toString());
 		mazerize();
 		//System.out.println(toString());
 		cleaner();
+		//System.out.println(toString());
+		//polisher();
 		System.out.println(toString());
 	}
 	

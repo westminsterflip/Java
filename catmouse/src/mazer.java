@@ -6,65 +6,135 @@ import javax.swing.*;
 
 public class mazer extends JFrame implements ActionListener,MouseListener{
 	JPanel maz = new JPanel();
-	JPanel[][] blocs;
-	JLabel[][] name;
+	ArrayList<JPanel> blocs = new ArrayList<JPanel>(); 
+	String in;
+	ArrayList<JLabel> name = new ArrayList<JLabel>();
 	JPanel kat = new JPanel();
 	JLabel ca=new JLabel("C");
 	int len = 3, wid = 3;
-	int row,x;
-	int[] cat = {0,0},mouse = {0,0};
-	ArrayList<Integer[]> dead = new ArrayList<Integer[]>();
-	ArrayList<Integer[]> path = new ArrayList<Integer[]>();
+	JTextField le = new JTextField(3);
+	JTextField wi = new JTextField(3);
+	JLabel by = new JLabel("X");
+	JPanel neu = new JPanel();
+	JButton nw = new JButton("New");
+	JButton go = new JButton("GO");
 	
 	public mazer(){
 		super("Cats, and Mouses, and Mazes! Oh my!");
 		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 		maz.setPreferredSize(new Dimension(66,66));
 		maz.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-		blocs = new JPanel[3][3];
-		name = new JLabel[3][3];
-		cat[0] = 0;
-		cat[1]= 0;
-		mouse[0] = 2;
-		mouse[1] = 2;
 		int y = 0;
 		int z = 1;
-		blocs[0][0]=kat;
-		name[0][0]=ca;
+		blocs.add(kat);
+		name.add(ca);
 		kat.add(ca);
 		kat.setPreferredSize(new Dimension(20,20));
 		kat.setBackground(Color.gray);
 		kat.setOpaque(true);
 		kat.addMouseListener(this);
-		kat.setBorder(BorderFactory.createLineBorder(Color.black,1));
+		//kat.setBorder(BorderFactory.createLineBorder(Color.black,1));
 		maz.add(kat);
-		for(int x = 0;x<8;x++){
+		neu.setLayout(new BoxLayout(neu,BoxLayout.X_AXIS));
+		neu.add(wi);
+		neu.add(by);
+		neu.add(le);
+		neu.add(nw);
+		for(int x = 1;x<9;x++){
 			JPanel j = new JPanel();
 			JLabel f = new JLabel("");
 			j.setPreferredSize(new Dimension(20,20));
 			j.setOpaque(true);
 			j.setBackground(Color.red);
 			j.add(f);
-			j.setBorder(BorderFactory.createLineBorder(Color.black,1));
+			//j.setBorder(BorderFactory.createLineBorder(Color.black,1));
 			maz.add(j);
 			if(z==3){
 				z=0;
 				y++;
 			}
-			blocs[z][y]=j;
-			name[z][y]=f;
-			blocs[z][y].addMouseListener(this);
+			blocs.add(j);
+			name.add(f);
+			blocs.get(x).addMouseListener(this);
 			z++;
 		}
-		blocs[2][2].setBackground(Color.green);
+		blocs.get(8).setBackground(Color.cyan);
+		name.get(8).setText("M");
+		neu.setLayout(new BoxLayout(neu,BoxLayout.X_AXIS));
+		neu.add(wi);
+		neu.add(by);
+		neu.add(le);
+		neu.add(nw);
 		add(maz);
+		add(go);
+		add(neu);
+		go.addActionListener(this);
+		nw.addActionListener(this);
 		//setPreferredSize(new Dimension(50,50));
 		pack();
 		setVisible(true);
-		System.out.println(maz.getHeight() + " " + blocs[0][0].getHeight() + " " + getWidth());
+		//System.out.println(maz.getHeight() + " " + blocs.get(0).getHeight() + " " + getWidth());
+	}
+	
+	public mazer(int w, int l){
+		super("Cats, and Mouses, and Mazes! Oh my!");
+		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		maz.setPreferredSize(new Dimension(w*20,l*20));
+		maz.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		int y = 0;
+		int z = 1;
+		blocs.add(kat);
+		name.add(ca);
+		kat.add(ca);
+		kat.setPreferredSize(new Dimension(20,20));
+		kat.setBackground(Color.gray);
+		kat.setOpaque(true);
+		kat.addMouseListener(this);
+		//kat.setBorder(BorderFactory.createLineBorder(Color.black,1));
+		maz.add(kat);
+		for(int x = 1;x<w*l;x++){
+			JPanel j = new JPanel();
+			JLabel f = new JLabel("");
+			j.setPreferredSize(new Dimension(20,20));
+			j.setOpaque(true);
+			j.setBackground(Color.red);
+			j.add(f);
+			//j.setBorder(BorderFactory.createLineBorder(Color.black,1));
+			maz.add(j);
+			if(z==3){
+				z=0;
+				y++;
+			}
+			blocs.add(j);
+			name.add(f);
+			blocs.get(x).addMouseListener(this);
+			z++;
+		}
+		blocs.get(8).setBackground(Color.cyan);
+		name.get(8).setText("M");
+		add(maz);
+		add(go);
+		add(neu);
+		go.addActionListener(this);
+		nw.addActionListener(this);
+		//setPreferredSize(new Dimension(50,50));
+		pack();
+		setVisible(true);
+		//System.out.println(maz.getHeight() + " " + blocs[0][0].getHeight() + " " + getWidth());
+		len=l;
+		wid=w;
 	}
 
 	public void actionPerformed(ActionEvent g) {
+		if(g.getSource().equals(go)){
+			try {
+				test();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else{
+			mazer n = new mazer(Integer.parseInt(wi.getText()),Integer.parseInt(le.getText()));
+		}
 	}
 	
 	public static void main(String[] yay){
@@ -75,10 +145,12 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		JPanel k = (JPanel) e.getComponent();
 		if(e.getComponent().getBackground().equals(Color.green)){
 			e.getComponent().setBackground(Color.gray);
+			//setCat(k);
 			setName(k,"C");
 		}else if(e.getComponent().getBackground().equals(Color.gray)){
 			e.getComponent().setBackground(Color.cyan);
-			setName(k,"m");
+			//setMouse(k);
+			setName(k,"M");
 		}else if(e.getComponent().getBackground().equals(Color.cyan)){
 			e.getComponent().setBackground(Color.red);
 			setName(k,"");
@@ -89,307 +161,54 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		
 	}
 	
+	public void test() throws IOException{
+		in="";
+		//System.out.println(wid + " " + len);
+		for(int d=0;d<blocs.size();d++){
+			if(blocs.get(d).getBackground().equals(Color.red)){
+				in+="#";
+			}else if(blocs.get(d).getBackground().equals(Color.gray)){
+				in+="C";
+			}else if(blocs.get(d).getBackground().equals(Color.green)){
+				in+=" ";
+			}else if(blocs.get(d).getBackground().equals(Color.cyan)){
+				in+="M";
+			}
+		}
+		//System.out.println(in);
+		maze_2 m2 = new maze_2(in,wid,len);
+		translate(m2.gitDun());
+	}
+	
 	public void setName(JPanel h, String u){
-		for(int y=0;y<len;y++){
-			for(int x=0;x<wid;x++){
-				if(h==blocs[x][y])
-					name[x][y].setText(u);
+		name.get(blocs.indexOf(h)).setText(u);
+	}
+	
+	public void translate(char[][] ma){
+		int us = 0;
+		for(int f=0;f<len;f++){
+			for(int s=0;s<wid;s++){
+				switch(ma[s][f]){
+				case 'C': blocs.get(us).setBackground(Color.gray);
+						name.get(us).setText("C");
+						break;
+				case ' ': blocs.get(us).setBackground(Color.green);
+				name.get(us).setText("");
+						break;
+				case 'M': blocs.get(us).setBackground(Color.cyan);
+				name.get(us).setText("M");
+						break;
+				case '#': blocs.get(us).setBackground(Color.red);
+				name.get(us).setText("");
+						break;
+				case '+': blocs.get(us).setBackground(Color.gray);
+				name.get(us).setText("");
+						break;
+				}
+				us++;
 			}
 		}
-	}
-
-	
-	public boolean canDown(int z, int y){
-		boolean cand;
-		try{
-			cand = blocs[z][y+1].getBackground().equals(Color.green);
-		}
-		catch(ArrayIndexOutOfBoundsException h){
-			cand = false;
-		}
-		return cand;
-	}
-	
-	public boolean canUp(int z, int y){
-		boolean cand;
-		try{
-			cand = blocs[z][y-1].getBackground().equals(Color.green);
-		}
-		catch(ArrayIndexOutOfBoundsException h){
-			cand = false;
-		}
-		return cand;
-	}
-	
-	public boolean canLeft(int z, int y){
-		boolean cand;
-		try{
-			cand = blocs[z-1][y].getBackground().equals(Color.green);
-		}
-		catch(ArrayIndexOutOfBoundsException h){
-			cand = false;
-		}
-		return cand;
-	}
-	
-	public boolean canRight(int z, int y){
-		boolean cand;
-		try{
-			cand = blocs[z+1][y].getBackground().equals(Color.green);
-		}
-		catch(ArrayIndexOutOfBoundsException h){
-			cand = false;
-		}
-		return cand;
-	}
-	
-	public int canTowards(int z, int y){
-		int hor=mouse[0]-z;
-		int ver=mouse[1]-y;
-		if(Math.abs(hor)<Math.abs(ver)){
-			if(ver<0){
-				if(canUp(z,y))
-					return 1;
-				else
-					return 0;
-			}else if(ver>0){
-				if(canDown(z,y))
-					return 2;
-				else
-					return 0;
-			}else{
-				return 0;
-			}
-		}else{
-			if(hor<0){
-				if(canLeft(z,y))
-					return 3;
-				else 
-					return 0;
-			}else if(hor>0){
-				if(canRight(z,y))
-					return 4;
-				else 
-					return 0;
-			}else
-				return 0;
-		}
-	}
-	
-	public void filler(){
-		for(int y=0;y<row;y++){
-			for(int c=0;c<x;c++){
-				boolean d = canDown(c,y),u=canUp(c,y),l=canLeft(c,y),r=canRight(c,y);
-				if(blocs[c][y].getBackground().equals(Color.green)){
-					boolean d1=c+1==cat[0]&&y==cat[1]||c-1==cat[0]&&y==cat[1]||y+1==cat[1]&&c==cat[0]||y-1==cat[1]&&c==cat[0];
-					boolean d2=c+1==mouse[0]&&y==mouse[1]||c-1==mouse[0]&&y==mouse[1]||y+1==mouse[1]&&c==mouse[0]||y-1==mouse[1]&&c==mouse[0];
-					boolean d3=true;
-					try{
-						d3=blocs[c+1][y].getBackground().equals(Color.blue);
-					}catch(ArrayIndexOutOfBoundsException r1){}
-					try{
-						d3=d3||blocs[c-1][y].getBackground().equals(Color.blue);
-					}catch(ArrayIndexOutOfBoundsException r1){}
-					try{
-						d3=d3||blocs[c][y+1].getBackground().equals(Color.blue);
-					}catch(ArrayIndexOutOfBoundsException r1){}
-					try{
-						d3=d3||blocs[c][y-1].getBackground().equals(Color.blue);
-					}catch(ArrayIndexOutOfBoundsException r1){}
-					
-					if(d1||d2){
-						//System.out.println(d1 + " " + d2);
-						if(d1&&d2){}//System.out.println("ff");}
-						else{
-						if(d3&&!(d||u||l||r)){
-							//System.out.println(toString());
-							blocs[c][y].getBackground().equals(Color.blue);
-							dead.add(new Integer[]{c,y});
-						}
-						}
-					}
-					else
-					if(!d&&!u&&!l||!d&&!u&&!r||!u&&!l&&!r||!d&&!l&&!r){
-						//System.out.println(toString());
-						blocs[c][y].getBackground().equals(Color.blue);
-						dead.add(new Integer[]{c,y});
-					}
-				}
-			}	
-		}
-		for(int y=row-1;y>=0;y--){
-			for(int c=x-1;c>=0;c--){
-				boolean d = canDown(c,y),u=canUp(c,y),l=canLeft(c,y),r=canRight(c,y);
-				if(blocs[c][y].getBackground().equals(Color.green)){
-					boolean d1=c+1==cat[0]&&y==cat[1]||c-1==cat[0]&&y==cat[1]||y+1==cat[1]&&c==cat[0]||y-1==cat[1]&&c==cat[0];
-					boolean d2=c+1==mouse[0]&&y==mouse[1]||c-1==mouse[0]&&y==mouse[1]||y+1==mouse[1]&&c==mouse[0]||y-1==mouse[1]&&c==mouse[0];
-					boolean d3=true;
-					try{
-						d3=blocs[c+1][y].getBackground().equals(Color.blue);
-					}catch(ArrayIndexOutOfBoundsException r1){}
-					try{
-						d3=d3||blocs[c-1][y].getBackground().equals(Color.blue);
-					}catch(ArrayIndexOutOfBoundsException r1){}
-					try{
-						d3=d3||blocs[c][y+1].getBackground().equals(Color.blue);
-					}catch(ArrayIndexOutOfBoundsException r1){}
-					try{
-						d3=d3||blocs[c][y-1].getBackground().equals(Color.blue);
-					}catch(ArrayIndexOutOfBoundsException r1){}
-					
-					if(d1||d2){
-						//System.out.println(d1 + " " + d2);
-						if(d1&&d2){}//System.out.println("ff");}
-						else{
-						if(d3&&!(d||u||l||r)){
-							//System.out.println(toString());
-							blocs[c][y].getBackground().equals(Color.blue);
-							dead.add(new Integer[]{c,y});
-						}
-						}
-					}
-					else
-					if(!d&&!u&&!l||!d&&!u&&!r||!u&&!l&&!r||!d&&!l&&!r){
-						//System.out.println(toString());
-						blocs[c][y].getBackground().equals(Color.blue);
-						dead.add(new Integer[]{c,y});
-					}
-				}
-			}	
-		}
-		for(int y=row-1;y>=0;y--){
-			for(int c=0;c<x;c++){
-				//System.out.println(toString());
-				boolean d = canDown(c,y),u=canUp(c,y),l=canLeft(c,y),r=canRight(c,y);
-				if(maze[c][y]==' '){
-					boolean d1=c+1==cat[0]&&y==cat[1]||c-1==cat[0]&&y==cat[1]||y+1==cat[1]&&c==cat[0]||y-1==cat[1]&&c==cat[0];
-					boolean d2=c+1==mouse[0]&&y==mouse[1]||c-1==mouse[0]&&y==mouse[1]||y+1==mouse[1]&&c==mouse[0]||y-1==mouse[1]&&c==mouse[0];
-					boolean d3=true;
-					try{
-						d3=maze[c+1][y]=='f';
-					}catch(ArrayIndexOutOfBoundsException r1){}
-					try{
-						d3=d3||maze[c-1][y]=='f';
-					}catch(ArrayIndexOutOfBoundsException r1){}
-					try{
-						d3=d3||maze[c][y+1]=='f';
-					}catch(ArrayIndexOutOfBoundsException r1){}
-					try{
-						d3=d3||maze[c][y-1]=='f';
-					}catch(ArrayIndexOutOfBoundsException r1){}
-					
-					if(d1||d2){
-						//System.out.println(d1 + " " + d2);
-						if(d1&&d2){}//System.out.println("ff");}
-						else{
-						if(d3&&!(d||u||l||r)){
-							//System.out.println(toString());
-							maze[c][y]='f';
-							dead.add(new Integer[]{c,y});
-						}
-						}
-					}
-					else
-					if(!d&&!u&&!l||!d&&!u&&!r||!u&&!l&&!r||!d&&!l&&!r){
-						//System.out.println(toString());
-						maze[c][y]='f';
-						dead.add(new Integer[]{c,y});
-					}
-				}
-			}	
-		}
-		for(int y=0;y<row;y++){
-			for(int c=x-1;c>=0;c--){
-				boolean d = canDown(c,y),u=canUp(c,y),l=canLeft(c,y),r=canRight(c,y);
-				if(maze[c][y]==' '){
-					boolean d1=c+1==cat[0]&&y==cat[1]||c-1==cat[0]&&y==cat[1]||y+1==cat[1]&&c==cat[0]||y-1==cat[1]&&c==cat[0];
-					boolean d2=c+1==mouse[0]&&y==mouse[1]||c-1==mouse[0]&&y==mouse[1]||y+1==mouse[1]&&c==mouse[0]||y-1==mouse[1]&&c==mouse[0];
-					boolean d3=true;
-					try{
-						d3=maze[c+1][y]=='f';
-					}catch(ArrayIndexOutOfBoundsException r1){}
-					try{
-						d3=d3||maze[c-1][y]=='f';
-					}catch(ArrayIndexOutOfBoundsException r1){}
-					try{
-						d3=d3||maze[c][y+1]=='f';
-					}catch(ArrayIndexOutOfBoundsException r1){}
-					try{
-						d3=d3||maze[c][y-1]=='f';
-					}catch(ArrayIndexOutOfBoundsException r1){}
-					
-					if(d1||d2){
-						//System.out.println(d1 + " " + d2);
-						if(d1&&d2){}//System.out.println("ff");}
-						else{
-						if(d3&&!(d||u||l||r)){
-							//System.out.println(toString());
-							maze[c][y]='f';
-							dead.add(new Integer[]{c,y});
-						}
-						}
-					}
-					else
-					if(!d&&!u&&!l||!d&&!u&&!r||!u&&!l&&!r||!d&&!l&&!r){
-						maze[c][y]='f';
-						dead.add(new Integer[]{c,y});
-					}
-				}
-			}	
-		}
-	}
-	
-	public void tracer(int z,int y){
-		boolean d = canDown(z,y),u=canUp(z,y),l=canLeft(z,y),r=canRight(z,y);
-		if(z+1==mouse[0]&&y==mouse[1]||z-1==mouse[0]&&y==mouse[1]||y+1==mouse[1]&&z==mouse[0]||y-1==mouse[1]&&z==mouse[0]){
-			System.out.println('\r');
-		}else if(canTowards(z,y)!=0){
-			switch (canTowards(z,y)){
-				case 1: maze[z][y-1] = '+';
-						path.add(new Integer[]{z,y-1});
-						tracer(z,y-1);
-						break;
-				case 2: maze[z][y+1] = '+';
-						path.add(new Integer[]{z,y+1});
-						tracer(z,y+1);
-						break;
-				case 3: maze[z-1][y] = '+';
-						path.add(new Integer[]{z-1,y});
-						tracer(z-1,y);
-						break;
-				case 4: maze[z+1][y] = '+';
-						path.add(new Integer[]{z+1,y});
-						tracer(z+1,y);
-						break;
-			}
-		}else if(d){
-			maze[z][y+1] = '+';
-			path.add(new Integer[]{z,y+1});
-			tracer(z,y+1);
-		}else if(u){
-			maze[z][y-1] = '+';
-			path.add(new Integer[]{z,y-1});
-			tracer(z,y-1);
-		}else if(l){
-			maze[z-1][y] = '+';
-			path.add(new Integer[]{z-1,y});
-			tracer(z-1,y);
-		}else if(r){
-			maze[z+1][y] = '+';
-			path.add(new Integer[]{z+1,y});
-			tracer(z+1,y);
-		}else if(!path.isEmpty()){
-			maze[z][y] = 'f';
-			dead.add(new Integer[]{z,y});
-			//System.out.println(toString());
-			altclean();
-			filler();
-			//System.out.println("filled");
-			//System.out.println(toString());
-			mazerize();
-		}else{
-			System.out.println('\r' + "No Path");
-		}
+		
 	}
 	
 	@Override

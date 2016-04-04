@@ -7,8 +7,23 @@ public class maze_2 {
 	int[] cat = {0,0},mouse = {0,0};
 	ArrayList<Integer[]> dead = new ArrayList<Integer[]>();
 	ArrayList<Integer[]> path = new ArrayList<Integer[]>();
+	String dun;
 	
 	public maze_2(){}
+	
+	public maze_2(String in,int z, int y) throws IOException{
+		getMaz(in,z,y);
+		//System.out.println(toString());
+		filler();
+		filler();
+		//System.out.println(toString());
+		mazerize();
+		//System.out.println(toString());
+		cleaner();
+		//System.out.println(toString());
+		//polisher();
+		//System.out.println(toString());
+	}
 	
 	public void getMaze()throws IOException{
 		String fle;
@@ -46,6 +61,33 @@ public class maze_2 {
 				}else if(maze[c][y]=='M'){
 					mouse[0]=c;
 					mouse[1]=y;
+				}
+			}
+		}
+	}
+	
+	public void getMaz(String h,int z,int y)throws IOException{
+		String tmp=h;
+		int wid=y;
+		int lng = y;
+		maze = new char[wid][lng];
+		row = lng;
+		x=wid;
+		int num=0;
+		for(int e=0;e<lng;e++){
+			for(int g=0;g<wid;g++){
+				maze[g][e]=tmp.charAt(num);
+				num++;
+			}
+		}
+		for(int f=0;f<row;f++){
+			for(int c=0;c<x;c++){
+				if(maze[c][f]=='C'){
+					cat[0]=c;
+					cat[1]=f;
+				}else if(maze[c][f]=='M'){
+					mouse[0]=c;
+					mouse[1]=f;
 				}
 			}
 		}
@@ -354,6 +396,10 @@ public class maze_2 {
 			out+='\r';
 		}
 		return out;
+	}
+	
+	public char[][] gitDun(){
+		return maze;
 	}
 	
 	public void cleaner(){

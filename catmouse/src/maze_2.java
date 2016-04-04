@@ -294,6 +294,7 @@ public class maze_2 {
 	public void tracer(int z,int y){
 		boolean d = canDown(z,y),u=canUp(z,y),l=canLeft(z,y),r=canRight(z,y);
 		if(z+1==mouse[0]&&y==mouse[1]||z-1==mouse[0]&&y==mouse[1]||y+1==mouse[1]&&z==mouse[0]||y-1==mouse[1]&&z==mouse[0]){
+			System.out.println('\r');
 		}else if(canTowards(z,y)!=0){
 			switch (canTowards(z,y)){
 				case 1: maze[z][y-1] = '+';
@@ -329,7 +330,7 @@ public class maze_2 {
 			maze[z+1][y] = '+';
 			path.add(new Integer[]{z+1,y});
 			tracer(z+1,y);
-		}else{
+		}else if(!path.isEmpty()){
 			maze[z][y] = 'f';
 			dead.add(new Integer[]{z,y});
 			//System.out.println(toString());
@@ -338,12 +339,14 @@ public class maze_2 {
 			//System.out.println("filled");
 			//System.out.println(toString());
 			mazerize();
+		}else{
+			System.out.println('\r' + "No Path");
 		}
 	}
 	
 	public String toString(){
 		String out="";
-		out+='\r';
+		//out+='\r';
 		for(int y=0;y<row;y++){
 			for(int c=0;c<x;c++){
 				out+=maze[c][y];

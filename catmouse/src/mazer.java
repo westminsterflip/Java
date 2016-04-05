@@ -11,26 +11,26 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 	ArrayList<JLabel> name = new ArrayList<JLabel>();
 	JPanel kat = new JPanel();
 	JLabel ca=new JLabel("C");
-	int len = 3, wid = 3;
+	int len = 3, wid = 3,mice=0,cats=0;
 	JTextField le = new JTextField(3);
 	JTextField wi = new JTextField(3);
 	JLabel by = new JLabel("X");
 	JPanel neu = new JPanel();
 	JButton nw = new JButton("New");
 	JButton go = new JButton("GO");
+	public static boolean cango=false;
+	Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 	
 	public mazer(){
 		super("Cats, and Mouses, and Mazes! Oh my!");
 		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 		maz.setPreferredSize(new Dimension(66,66));
 		maz.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-		int y = 0;
-		int z = 1;
 		blocs.add(kat);
 		name.add(ca);
 		kat.add(ca);
 		kat.setPreferredSize(new Dimension(20,20));
-		kat.setBackground(Color.gray);
+		kat.setBackground(Color.yellow);
 		kat.setOpaque(true);
 		kat.addMouseListener(this);
 		//kat.setBorder(BorderFactory.createLineBorder(Color.black,1));
@@ -45,26 +45,16 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 			JLabel f = new JLabel("");
 			j.setPreferredSize(new Dimension(20,20));
 			j.setOpaque(true);
-			j.setBackground(Color.red);
+			j.setBackground(Color.black);
 			j.add(f);
 			//j.setBorder(BorderFactory.createLineBorder(Color.black,1));
 			maz.add(j);
-			if(z==3){
-				z=0;
-				y++;
-			}
 			blocs.add(j);
 			name.add(f);
 			blocs.get(x).addMouseListener(this);
-			z++;
 		}
 		blocs.get(8).setBackground(Color.cyan);
 		name.get(8).setText("M");
-		neu.setLayout(new BoxLayout(neu,BoxLayout.X_AXIS));
-		neu.add(wi);
-		neu.add(by);
-		neu.add(le);
-		neu.add(nw);
 		add(maz);
 		add(go);
 		add(neu);
@@ -73,6 +63,9 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		//setPreferredSize(new Dimension(50,50));
 		pack();
 		setVisible(true);
+		int wifd = (int)Math.round((scr.getWidth()-getWidth())/2);
+		int hig = (int)Math.round((scr.getHeight()-getHeight())/2);
+		setLocation(wifd,hig);
 		//System.out.println(maz.getHeight() + " " + blocs.get(0).getHeight() + " " + getWidth());
 	}
 	
@@ -81,13 +74,11 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 		maz.setPreferredSize(new Dimension(w*20,l*20));
 		maz.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-		int y = 0;
-		int z = 1;
 		blocs.add(kat);
 		name.add(ca);
 		kat.add(ca);
 		kat.setPreferredSize(new Dimension(20,20));
-		kat.setBackground(Color.gray);
+		kat.setBackground(Color.yellow);
 		kat.setOpaque(true);
 		kat.addMouseListener(this);
 		//kat.setBorder(BorderFactory.createLineBorder(Color.black,1));
@@ -97,21 +88,21 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 			JLabel f = new JLabel("");
 			j.setPreferredSize(new Dimension(20,20));
 			j.setOpaque(true);
-			j.setBackground(Color.red);
+			j.setBackground(Color.black);
 			j.add(f);
 			//j.setBorder(BorderFactory.createLineBorder(Color.black,1));
 			maz.add(j);
-			if(z==3){
-				z=0;
-				y++;
-			}
 			blocs.add(j);
 			name.add(f);
 			blocs.get(x).addMouseListener(this);
-			z++;
 		}
-		blocs.get(8).setBackground(Color.cyan);
-		name.get(8).setText("M");
+		neu.setLayout(new BoxLayout(neu,BoxLayout.X_AXIS));
+		neu.add(wi);
+		neu.add(by);
+		neu.add(le);
+		neu.add(nw);
+		blocs.get(blocs.size()-1).setBackground(Color.cyan);
+		name.get(blocs.size()-1).setText("M");
 		add(maz);
 		add(go);
 		add(neu);
@@ -123,16 +114,34 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		//System.out.println(maz.getHeight() + " " + blocs[0][0].getHeight() + " " + getWidth());
 		len=l;
 		wid=w;
+		int wifd = (int)Math.round((scr.getWidth()-getWidth())/2);
+		int hig = (int)Math.round((scr.getHeight()-getHeight())/2);
+		setLocation(wifd,hig);
 	}
 
+	public void counter(){
+		for(int z = 0;z<name.size();z++){
+			if(name.get(z).equals("C"))
+				cats++;
+			else if(name.get(z).equals("M"))
+				mice++;
+		}
+	}
+	
 	public void actionPerformed(ActionEvent g) {
 		if(g.getSource().equals(go)){
+			counter();
+			if(cats==1&&mice==1)
+				cango=true;
+			else if(cats!=1)
+				error r = new error("cats");
 			try {
 				test();
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
+			}	
 		}else{
+			dispose();
 			mazer n = new mazer(Integer.parseInt(wi.getText()),Integer.parseInt(le.getText()));
 		}
 	}
@@ -143,8 +152,8 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 
 	public void mouseClicked(MouseEvent e) {
 		JPanel k = (JPanel) e.getComponent();
-		if(e.getComponent().getBackground().equals(Color.green)){
-			e.getComponent().setBackground(Color.gray);
+		if(e.getComponent().getBackground().equals(Color.white)){
+			e.getComponent().setBackground(Color.blue);
 			//setCat(k);
 			setName(k,"C");
 		}else if(e.getComponent().getBackground().equals(Color.gray)){

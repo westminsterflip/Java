@@ -15,7 +15,7 @@ public class error extends JFrame implements ActionListener{
 	Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 
 	public error(String g){
-		super("Error: Too Many Mice");
+		super("Error: Too Many " + g);
 		setLayout(new BorderLayout());
 		err.setText("Although the program will run with multiple " + g + ", it is likely that only one will be on the given path.");
 		add(err,BorderLayout.CENTER);

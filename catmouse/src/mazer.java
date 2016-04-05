@@ -23,10 +23,22 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 	Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 	JPanel but = new JPanel();
 	JPanel bot = new JPanel();
+	JMenuBar menu = new JMenuBar();
+	JMenu fle = new JMenu("File");
+	JMenu niw = new JMenu("New Maze");
+	JMenuItem nwe = new JMenuItem("New Default");
+	JMenuItem nwi = new JMenuItem("New Custom");
+	
 	
 	public mazer(){
 		super("Cats, and Mouses, and Mazes! Oh my!");
-		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		fle.add(niw);
+		niw.add(nwe);
+		niw.add(nwi);
+		menu.add(fle);
+		//setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		setLayout(new FlowLayout(FlowLayout.LEADING, 0, 0));
+		add(menu);
 		maz.setPreferredSize(new Dimension(60,60));
 		//maz.setSize(new Dimension(60,60));
 		maz.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
@@ -68,18 +80,21 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		add(bot);
 		go.addActionListener(this);
 		nw.addActionListener(this);
-		//setPreferredSize(new Dimension(50,50));
+		//setPreferredSize(new Dimension(50,50))
+		//setMaximumSize(new Dimension(wid+5,len+5));
+		//setSize(new Dimension(wid+5,len+20));
 		pack();
 		setVisible(true);
 		int wifd = (int)Math.round((scr.getWidth()-getWidth())/2);
 		int hig = (int)Math.round((scr.getHeight()-getHeight())/2);
 		setLocation(wifd,hig);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		//System.out.println(maz.getHeight() + " " + blocs.get(0).getHeight() + " " + getWidth());
 	}
 	
 	public mazer(int w, int l){
 		super("Cats, and Mouses, and Mazes! Oh my!");
-		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		setLayout(new FlowLayout(FlowLayout.LEADING, 0, 0));
 		maz.setPreferredSize(new Dimension(w*20,l*20));
 		maz.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 		blocs.add(kat);
@@ -124,13 +139,14 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		pack();
 		setVisible(true);
 		//System.out.println(maz.getHeight() + " " + blocs[0][0].getHeight() + " " + getWidth());
-		System.out.println(w + " " + l);
+		//System.out.println(w + " " + l);
 		len=l;
 		wid=w;
-		System.out.println(wid + " " + len);
+		//System.out.println(wid + " " + len);
 		int wifd = (int)Math.round((scr.getWidth()-getWidth())/2);
 		int hig = (int)Math.round((scr.getHeight()-getHeight())/2);
 		setLocation(wifd,hig);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
 	public void counter(){
@@ -153,8 +169,11 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 				cango=true;
 			else if(cats>1){
 				error j = new error("cats");
+				if(mice>1){
+					error h = new error("mice");
+				}
 			}else if(mice>1){
-				error j = new error("mice");
+				error h = new error("mice");
 			}else{
 				mazer n = new mazer(wid,len);
 			}
@@ -214,7 +233,10 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		//System.out.println(in);
 		maze_2 m2 = new maze_2(in,wid,len);
 		//System.out.println(m2.toString());
+		maz.setVisible(false);
 		translate(m2.gitDun());
+		//translate(m2.gitDun());
+		maz.setVisible(true);
 	}
 	
 	public void setName(JPanel h, String u){

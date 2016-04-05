@@ -68,9 +68,10 @@ public class maze_2 {
 	
 	public void getMaz(String h,int z,int y)throws IOException{
 		String tmp=h;
-		int wid=y;
+		int wid=z;
 		int lng = y;
 		maze = new char[wid][lng];
+		//System.out.println("w" + wid + " l" + lng);
 		row = lng;
 		x=wid;
 		int num=0;

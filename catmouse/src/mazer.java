@@ -37,6 +37,7 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		niw.add(nwi);
 		menu.add(fle);
 		nwe.addActionListener(this);
+		nwi.addActionListener(this);
 		//setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 		setLayout(new FlowLayout(FlowLayout.LEADING, 0, 0));
 		add(menu);
@@ -187,6 +188,9 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		}else if(g.getSource()==nwe){
 			dispose();
 			mazer n = new mazer();
+		}else if(g.getSource()==nwi){
+			dispose();
+			newey n = new newey();
 		}else{
 			dispose();
 			mazer n = new mazer(Integer.parseInt(wi.getText()),Integer.parseInt(le.getText()));

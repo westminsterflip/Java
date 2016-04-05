@@ -1,4 +1,6 @@
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -12,6 +14,7 @@ public class newey extends JFrame implements ActionListener{
 	JTextField wi = new JTextField(3);
 	JLabel by = new JLabel("X");
 	JButton nw = new JButton("New");
+	Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 	
 	public newey(){
 		super("New Mazer");
@@ -21,8 +24,12 @@ public class newey extends JFrame implements ActionListener{
 		add(by);
 		add(le);
 		add(nw);
-		nw.addActionListener(thisd);
+		nw.addActionListener(this);
 		pack();
+		int wifd = (int)Math.round((scr.getWidth()-getWidth())/2);
+		int hig = (int)Math.round((scr.getHeight()-getHeight())/2);
+		setLocation(wifd,hig);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
 	@SuppressWarnings("unused")

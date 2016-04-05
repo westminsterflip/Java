@@ -6,7 +6,11 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class error extends JFrame implements ActionListener{
-	JLabel err;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5128708273727492302L;
+	JLabel err = new JLabel();
 	JButton ok = new JButton("OK");
 	Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -18,6 +22,7 @@ public class error extends JFrame implements ActionListener{
 		ok.addActionListener(this);
 		add(ok,BorderLayout.SOUTH);
 		setVisible(true);
+		pack();
 		int wifd = (int)Math.round((scr.getWidth()-getWidth())/2);
 		int hig = (int)Math.round((scr.getHeight()-getHeight())/2);
 		setLocation(wifd,hig);

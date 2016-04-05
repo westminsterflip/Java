@@ -1,6 +1,7 @@
 import java.awt.event.*;
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.awt.*;
 import javax.swing.*;
 
@@ -18,7 +19,7 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 	JPanel neu = new JPanel();
 	JButton nw = new JButton("New");
 	JButton go = new JButton("GO");
-	public static boolean cango=false;
+	public volatile static boolean cango=false;
 	Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 	
 	public mazer(){
@@ -121,9 +122,9 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 
 	public void counter(){
 		for(int z = 0;z<name.size();z++){
-			if(name.get(z).equals("C"))
+			if(name.get(z).getText().equals("C"))
 				cats++;
-			else if(name.get(z).equals("M"))
+			else if(name.get(z).getText().equals("M"))
 				mice++;
 		}
 	}
@@ -131,12 +132,26 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 	public void actionPerformed(ActionEvent g) {
 		if(g.getSource().equals(go)){
 			counter();
+			System.out.println(cats + " " + mice);
 			if(cats==1&&mice==1)
 				cango=true;
-			else if(cats!=1)
-				error r = new error("cats");
+			else if(cats>1){
+				error j = new error("cats");
+			}else if(mice>1){
+				error j = new error("mice");
+			}else{
+				mazer n = new mazer(wid,len);
+			}
+			while(!cango){
+				try {
+					TimeUnit.SECONDS.sleep(1);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 			try {
 				test();
+				//name.clear();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}	
@@ -153,18 +168,18 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		JPanel k = (JPanel) e.getComponent();
 		if(e.getComponent().getBackground().equals(Color.white)){
-			e.getComponent().setBackground(Color.blue);
+			e.getComponent().setBackground(Color.yellow);
 			//setCat(k);
 			setName(k,"C");
-		}else if(e.getComponent().getBackground().equals(Color.gray)){
+		}else if(e.getComponent().getBackground().equals(Color.yellow)){
 			e.getComponent().setBackground(Color.cyan);
 			//setMouse(k);
 			setName(k,"M");
 		}else if(e.getComponent().getBackground().equals(Color.cyan)){
-			e.getComponent().setBackground(Color.red);
+			e.getComponent().setBackground(Color.black);
 			setName(k,"");
-		}else if(e.getComponent().getBackground().equals(Color.red)){
-			e.getComponent().setBackground(Color.green);
+		}else if(e.getComponent().getBackground().equals(Color.black)){
+			e.getComponent().setBackground(Color.white);
 			setName(k,"");
 		}
 		
@@ -174,11 +189,13 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		in="";
 		//System.out.println(wid + " " + len);
 		for(int d=0;d<blocs.size();d++){
-			if(blocs.get(d).getBackground().equals(Color.red)){
+			if(blocs.get(d).getBackground().equals(Color.black)){
 				in+="#";
-			}else if(blocs.get(d).getBackground().equals(Color.gray)){
+			}else if(blocs.get(d).getBackground().equals(Color.yellow)&&name.get(d).getText().equals("C")){
 				in+="C";
-			}else if(blocs.get(d).getBackground().equals(Color.green)){
+			}else if(blocs.get(d).getBackground().equals(Color.yellow)){
+				in+=" ";
+			}else if(blocs.get(d).getBackground().equals(Color.white)){
 				in+=" ";
 			}else if(blocs.get(d).getBackground().equals(Color.cyan)){
 				in+="M";
@@ -198,19 +215,19 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		for(int f=0;f<len;f++){
 			for(int s=0;s<wid;s++){
 				switch(ma[s][f]){
-				case 'C': blocs.get(us).setBackground(Color.gray);
+				case 'C': blocs.get(us).setBackground(Color.yellow);
 						name.get(us).setText("C");
 						break;
-				case ' ': blocs.get(us).setBackground(Color.green);
+				case ' ': blocs.get(us).setBackground(Color.white);
 				name.get(us).setText("");
 						break;
 				case 'M': blocs.get(us).setBackground(Color.cyan);
 				name.get(us).setText("M");
 						break;
-				case '#': blocs.get(us).setBackground(Color.red);
+				case '#': blocs.get(us).setBackground(Color.black);
 				name.get(us).setText("");
 						break;
-				case '+': blocs.get(us).setBackground(Color.gray);
+				case '+': blocs.get(us).setBackground(Color.yellow);
 				name.get(us).setText("");
 						break;
 				}

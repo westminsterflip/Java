@@ -181,10 +181,9 @@ public class maze_2 {
 		}
 	}
 	
-	public void filler(int w){
+	public void filler(int w){//System.out.println("W        is            :       " + w);
 		for(int y=0;y<row;y++){
 			for(int c=0;c<x;c++){
-				System.out.println("W        is            :       " + w);
 				//System.out.println(c + " " + y);
 				//System.out.println(toString());
 				boolean d = canDown(c,y),u=canUp(c,y),l=canLeft(c,y),r=canRight(c,y);
@@ -427,10 +426,10 @@ public class maze_2 {
 			dead.add(new Integer[]{z,y});
 			//System.out.println(toString());
 			altclean();
-			filler(dssd);
 			//System.out.println("filled");
+			filler(dssd);
 			//System.out.println(toString());
-			mazerize();
+			tracer(z,y,dssd);
 		}else{
 			//System.out.println('\r' + "No Path");
 		}

@@ -172,11 +172,12 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 			blocs.get(x).addMouseListener(this);
 		}
 		blocs.get(blocs.size()-1).setBackground(Color.cyan);
+		name.remove(blocs.size()-1);
 		name.add("M");
 		//name.remove(8);
 		//name.add(new JLabel(new ImageIcon("mouse.png")));
 		blocs.get(blocs.size()-1).add(new JLabel(new ImageIcon("mouse.png")));
-		name.add("M");
+		//name.add("M");
 		mazens.add(maz);
 		nwe.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK));
 		nwi.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK + KeyEvent.SHIFT_DOWN_MASK));
@@ -197,12 +198,14 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		setLocation(wifd,hig);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		//System.out.println(maz.getHeight() + " " + blocs.get(0).getHeight() + " " + getWidth());
+		wid = w;
+		len = l;
 	}
 
 	public void counter(){
 		cats=0;
 		mice=0;
-		for(int z = 0;z<blocs.size();z++){
+		for(int z = 0;z<name.size();z++){
 			if(name.get(z)=="M"){
 				mice++;
 			}else if(name.get(z)=="C"){
@@ -300,12 +303,14 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		}
 		//System.out.println(in);
 		maze_2 m2 = new maze_2(in,wid,len);
-		System.out.println(m2.toString());
+		//System.out.println(m2.toString());
+		//System.out.println(name);
+		//System.out.println(blocs.size() + " " + name.size());
 		maz.setVisible(false);
 		translate(m2.gitDun());
 		//translate(m2.gitDun());
 		maz.setVisible(true);
-		name.clear();
+		//name.clear();
 	}
 	
 	//public void setName(JPanel h, String u){
@@ -316,7 +321,7 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		int us = 0;
 		for(int f=0;f<len;f++){
 			for(int s=0;s<wid;s++){
-				System.out.println(s + " " + f + " " + ma[s][f]);
+				//System.out.println(s + " " + f + " " + ma[s][f]);
 				switch(ma[s][f]){
 				case 'C': blocs.get(us).setBackground(Color.yellow);
 				blocs.get(us).removeAll();		
@@ -341,7 +346,7 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 				case '+': blocs.get(us).setBackground(Color.yellow);
 				blocs.get(us).removeAll();		
 				blocs.get(us).add(new JLabel(new ImageIcon("paws.png")));
-				System.out.println("blank");
+				//System.out.println("blank");
 				//blocs.get(us).removeAll();
 				//blocs.get(us).add(blnk);
 						break;

@@ -30,6 +30,7 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 	JMenu niw = new JMenu("New");
 	JMenu run = new JMenu("Run");
 	JMenu halp = new JMenu("Help");
+	JMenu color = new JMenu("Color");
 	JMenuItem hlp = new JMenuItem("Help");
 	JMenuItem gon = new JMenuItem("Go");
 	JMenuItem goc = new JMenuItem("Go/Debug");
@@ -37,22 +38,37 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 	JMenuItem nwi = new JMenuItem("New Custom");
 	JPanel mazens = new JPanel();
 	JPanel menubar = new JPanel();
-	int index;
+	int index,keypressed=0;
 	JToolBar tools = new JToolBar("Mazebox");
 	JToggleButton wooo = new JToggleButton(new ImageIcon("squares.png"));
 	public boolean isdragging = false;
+	JMenuItem white = new JMenuItem(" "),black = new JMenuItem(" "),cyan = new JMenuItem(" "),yellow = new JMenuItem(" ");
 	
 	public mazer(){
 		super("Cats, and Mouses, and Mazes! Oh my!");
-		wooo.setToolTipText("Drag mouse over squares while holding 'c' to change");
+		wooo.setToolTipText("Drag mouse over squares.  w for white, b for black, c for cat, m for mouse.  'n' to toggle");
+		wooo.setMnemonic('n');
 		wooo.addActionListener(this);
 		tools.add(wooo);
 		tools.setFloatable(false);
+		white.addActionListener(this);
+		black.addActionListener(this);
+		cyan.addActionListener(this);
+		yellow.addActionListener(this);
+		white.setAccelerator(KeyStroke.getKeyStroke('w'));
+		black.setAccelerator(KeyStroke.getKeyStroke('b'));
+		cyan.setAccelerator(KeyStroke.getKeyStroke('m'));
+		yellow.setAccelerator(KeyStroke.getKeyStroke('c'));
 		menu.add(niw);
 		niw.add(nwe);
 		niw.add(nwi);
 		menu.add(run);
 		menu.add(halp);
+		color.add(yellow);
+		color.add(cyan);
+		color.add(black);
+		color.add(white);
+		menu.add(color);
 		halp.add(hlp);
 		hlp.addActionListener(this);
 		run.add(gon);
@@ -108,10 +124,19 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 	
 	public mazer(int w, int l){
 		super("Cats, and Mouses, and Mazes! Oh my!");
-		wooo.setToolTipText("Drag mouse over squares while holding 'c' to change");
+		wooo.setToolTipText("Drag mouse over squares.  w for white, b for black, c for cat, m for mouse.  'n' to toggle");
+		wooo.setMnemonic('n');
 		wooo.addActionListener(this);
 		tools.add(wooo);
 		tools.setFloatable(false);
+		white.addActionListener(this);
+		black.addActionListener(this);
+		cyan.addActionListener(this);
+		yellow.addActionListener(this);
+		white.setAccelerator(KeyStroke.getKeyStroke('w'));
+		black.setAccelerator(KeyStroke.getKeyStroke('b'));
+		cyan.setAccelerator(KeyStroke.getKeyStroke('m'));
+		yellow.setAccelerator(KeyStroke.getKeyStroke('c'));
 		menu.add(niw);
 		niw.add(nwe);
 		niw.add(nwi);
@@ -119,6 +144,11 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		menu.add(run);
 		menu.add(halp);
 		halp.add(hlp);
+		color.add(yellow);
+		color.add(cyan);
+		color.add(black);
+		color.add(white);
+		menu.add(color);
 		hlp.addActionListener(this);
 		run.add(gon);
 		run.add(goc);
@@ -181,6 +211,7 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		hlp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		//mazens.add(bot);
 		add(mazens,BorderLayout.CENTER);
+		add(tools,BorderLayout.EAST);
 		//blocs.get(8).getComponent(1);
 		//go.addActionListener(this);
 		//nw.addActionListener(this);
@@ -255,6 +286,21 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 			newey n = new newey();
 		}else if(g.getSource()==hlp){
 			help h = new help();
+		}else if(g.getSource()==wooo){
+			if(isdragging){
+				isdragging=false;
+			}else{
+				keypressed=0;
+				isdragging=true;
+			}
+		}else if(g.getSource()==white){
+			keypressed=4;
+		}else if(g.getSource()==black){
+			keypressed=3;
+		}else if(g.getSource()==cyan){
+			keypressed=2;
+		}else if(g.getSource()==yellow){
+			keypressed=1;
 		}
 	}
 	
@@ -387,12 +433,46 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 	public void mouseReleased(MouseEvent e) {
 	}
 
-	@Override
 	public void mouseEntered(MouseEvent e) {
+		JPanel k = (JPanel) e.getComponent();
+		System.out.println(blocs.indexOf(k)+ " " +isdragging + " " + keypressed);
+		if(isdragging){
+			switch(keypressed){
+			case 1:
+				e.getComponent().setBackground(Color.yellow);
+				name.remove(blocs.indexOf(k));
+				name.add(blocs.indexOf(k), "C");
+				k.removeAll();
+				k.add(ca);
+				break;
+			case 2:
+				e.getComponent().setBackground(Color.cyan);
+				name.remove(blocs.indexOf(k));
+				name.add(blocs.indexOf(k), "M");
+				k.setVisible(false);
+				k.removeAll();
+				k.add(maus);
+				k.setVisible(true);
+				break;
+			case 3:
+				e.getComponent().setBackground(Color.black);
+				name.remove(blocs.indexOf(k));
+				name.add(blocs.indexOf(k), "");
+				k.removeAll();
+				k.add(blnk);
+				break;
+			case 4:
+				e.getComponent().setBackground(Color.white);
+				k.removeAll();
+				k.add(blnk);
+				name.remove(blocs.indexOf(k));
+				name.add(blocs.indexOf(k), "");
+				break;
+			}
+		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-	}
-	
+	}	
 }

@@ -98,10 +98,10 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		blocs.get(8).add(maus);
 		name.add("M");
 		mazens.add(maz);
-		nwe.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK));
-		nwi.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK + KeyEvent.SHIFT_DOWN_MASK));
-		gon.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, KeyEvent.CTRL_DOWN_MASK));
-		goc.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, KeyEvent.CTRL_DOWN_MASK + KeyEvent.SHIFT_DOWN_MASK));
+		nwe.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+		nwi.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() + KeyEvent.SHIFT_DOWN_MASK));
+		gon.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+		goc.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() + KeyEvent.SHIFT_DOWN_MASK));
 		//mazens.add(bot);
 		add(mazens,BorderLayout.CENTER);
 		//blocs.get(8).getComponent(1);
@@ -179,10 +179,10 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		blocs.get(blocs.size()-1).add(new JLabel(new ImageIcon("mouse.png")));
 		//name.add("M");
 		mazens.add(maz);
-		nwe.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK));
-		nwi.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK + KeyEvent.SHIFT_DOWN_MASK));
-		gon.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, KeyEvent.CTRL_DOWN_MASK));
-		goc.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, KeyEvent.CTRL_DOWN_MASK + KeyEvent.SHIFT_DOWN_MASK));
+		nwe.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+		nwi.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() + KeyEvent.SHIFT_DOWN_MASK));
+		gon.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+		goc.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() + KeyEvent.SHIFT_DOWN_MASK));
 		//mazens.add(bot);
 		add(mazens,BorderLayout.CENTER);
 		//blocs.get(8).getComponent(1);
@@ -269,6 +269,7 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 			name.add(blocs.indexOf(k), "M");
 			k.removeAll();
 			k.add(maus);
+			//k.add(new JLabel(new ImageIcon("mouse.png")));
 		}else if(e.getComponent().getBackground().equals(Color.cyan)){
 			e.getComponent().setBackground(Color.black);
 			name.remove(blocs.indexOf(k));
@@ -282,7 +283,7 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 			name.remove(blocs.indexOf(k));
 			name.add(blocs.indexOf(k), "");
 		}
-		
+		System.out.println(name);
 	}
 	
 	public void test() throws IOException{
@@ -304,7 +305,7 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		//System.out.println(in);
 		maze_2 m2 = new maze_2(in,wid,len);
 		//System.out.println(m2.toString());
-		//System.out.println(name);
+		System.out.println(name);
 		//System.out.println(blocs.size() + " " + name.size());
 		maz.setVisible(false);
 		translate(m2.gitDun());
@@ -337,7 +338,7 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 					blocs.get(us).removeAll();		
 					blocs.get(us).add(new JLabel(new ImageIcon("mouse.png")));
 					name.remove(us);
-					name.add(us, "C");
+					name.add(us, "M");
 						break;
 				//case '#': blocs.get(us).setBackground(Color.black);
 				//blocs.get(us).removeAll();

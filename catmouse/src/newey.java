@@ -25,6 +25,7 @@ public class newey extends JFrame implements ActionListener{
 		add(le);
 		add(nw);
 		nw.addActionListener(this);
+		le.addActionListener(this);
 		pack();
 		int wifd = (int)Math.round((scr.getWidth()-getWidth())/2);
 		int hig = (int)Math.round((scr.getHeight()-getHeight())/2);
@@ -34,8 +35,11 @@ public class newey extends JFrame implements ActionListener{
 
 	@SuppressWarnings("unused")
 	public void actionPerformed(ActionEvent e){
-		dispose();
-		mazer n = new mazer(Integer.parseInt(wi.getText()),Integer.parseInt(le.getText()));
+		try{
+			mazer n = new mazer(Integer.parseInt(wi.getText()),Integer.parseInt(le.getText()));
+			dispose();
+		}
+		catch(NumberFormatException t){}
 	}
 	
 }

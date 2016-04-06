@@ -5,6 +5,7 @@ public class maze_2 {
 	char[][] maze;
 	int row,x;
 	int[] cat = {0,0},mouse = {0,0};
+	ArrayList<int[]> cats = new ArrayList<int[]>();
 	ArrayList<Integer[]> dead = new ArrayList<Integer[]>();
 	ArrayList<Integer[]> path = new ArrayList<Integer[]>();
 	String dun;
@@ -13,16 +14,19 @@ public class maze_2 {
 	
 	public maze_2(String in,int z, int y) throws IOException{
 		getMaz(in,z,y);
-		//System.out.println(toString());
-		filler();
-		filler();
-		//System.out.println(toString());
+		if(mazer.debug)
+			System.out.println(toString());
+		//if(mazer.debug)
+			//System.out.println(toString());
 		mazerize();
-		//System.out.println(toString());
+		if(mazer.debug)
+			System.out.println(toString());
 		cleaner();
-		//System.out.println(toString());
+		if(mazer.debug)
+			System.out.println(toString());
 		//polisher();
 		//System.out.println(toString());
+		cats.clear();
 	}
 	
 	public void getMaze()throws IOException{
@@ -58,6 +62,7 @@ public class maze_2 {
 				if(maze[c][y]=='C'){
 					cat[0]=c;
 					cat[1]=y;
+					cats.add(new int[]{c,y});
 				}else if(maze[c][y]=='M'){
 					mouse[0]=c;
 					mouse[1]=y;
@@ -71,7 +76,8 @@ public class maze_2 {
 		int wid=z;
 		int lng = y;
 		maze = new char[wid][lng];
-		//System.out.println("w" + wid + " l" + lng);
+		if(mazer.debug)
+			System.out.println("w" + wid + " l" + lng);
 		row = lng;
 		x=wid;
 		int num=0;
@@ -86,18 +92,21 @@ public class maze_2 {
 				if(maze[c][f]=='C'){
 					cat[0]=c;
 					cat[1]=f;
+					cats.add(new int[]{c,f});
+					System.out.println(c + " " + f);
 				}else if(maze[c][f]=='M'){
 					mouse[0]=c;
 					mouse[1]=f;
 				}
 			}
 		}
+		System.out.println(toString());
 	}
 	
 	public boolean canDown(int z, int y){
 		boolean cand;
 		try{
-			cand = maze[z][y+1]==' ';
+			cand = maze[z][y+1]==' '||maze[z][y+1]=='O';
 		}
 		catch(ArrayIndexOutOfBoundsException h){
 			cand = false;
@@ -108,7 +117,7 @@ public class maze_2 {
 	public boolean canUp(int z, int y){
 		boolean cand;
 		try{
-			cand = maze[z][y-1]==' ';
+			cand = maze[z][y-1]==' '||maze[z][y-1]=='O';
 		}
 		catch(ArrayIndexOutOfBoundsException h){
 			cand = false;
@@ -119,7 +128,7 @@ public class maze_2 {
 	public boolean canLeft(int z, int y){
 		boolean cand;
 		try{
-			cand = maze[z-1][y]==' ';
+			cand = maze[z-1][y]==' '||maze[z-1][y]=='O';
 		}
 		catch(ArrayIndexOutOfBoundsException h){
 			cand = false;
@@ -130,7 +139,7 @@ public class maze_2 {
 	public boolean canRight(int z, int y){
 		boolean cand;
 		try{
-			cand = maze[z+1][y]==' ';
+			cand = maze[z+1][y]==' '||maze[z+1][y]=='O';
 		}
 		catch(ArrayIndexOutOfBoundsException h){
 			cand = false;
@@ -171,12 +180,17 @@ public class maze_2 {
 		}
 	}
 	
-	public void filler(){
+	public void filler(int w){
 		for(int y=0;y<row;y++){
 			for(int c=0;c<x;c++){
+				//System.out.println(x + " " + y);
+				System.out.println(toString());
 				boolean d = canDown(c,y),u=canUp(c,y),l=canLeft(c,y),r=canRight(c,y);
 				if(maze[c][y]==' '){
-					boolean d1=c+1==cat[0]&&y==cat[1]||c-1==cat[0]&&y==cat[1]||y+1==cat[1]&&c==cat[0]||y-1==cat[1]&&c==cat[0];
+					boolean d1;//=c+1==cats.get(0)[0]&&y==cat[1]||c-1==cats.get(0)[0]&&y==cats.get(0)[1]||y+1==cats.get(0)[1]&&c==cats.get(0)[0]||y-1==cats.get(0)[1]&&c==cats.get(0)[0];
+					//for(int w = 1;w<cats.size();w++){
+						d1=c+1==cats.get(w)[0]&&y==cats.get(w)[1]||c-1==cats.get(w)[0]&&y==cats.get(w)[1]||y+1==cats.get(w)[1]&&c==cats.get(w)[0]||y-1==cats.get(w)[1]&&c==cats.get(w)[0];
+					//}
 					boolean d2=c+1==mouse[0]&&y==mouse[1]||c-1==mouse[0]&&y==mouse[1]||y+1==mouse[1]&&c==mouse[0]||y-1==mouse[1]&&c==mouse[0];
 					boolean d3=true;
 					try{
@@ -193,21 +207,27 @@ public class maze_2 {
 					}catch(ArrayIndexOutOfBoundsException r1){}
 					
 					if(d1||d2){
-						//System.out.println(d1 + " " + d2);
-						if(d1&&d2){}//System.out.println("ff");}
+						if(mazer.debug)
+							System.out.println(d1 + " " + d2);
+						if(d1&&d2){if(mazer.debug)
+							System.out.println("ff");}
 						else{
 						if(d3&&!(d||u||l||r)){
-							//System.out.println(toString());
+							if(mazer.debug)
+								System.out.println(toString());
 							maze[c][y]='f';
 							dead.add(new Integer[]{c,y});
+							//System.out.println(toString());
 						}
 						}
 					}
 					else
 					if(!d&&!u&&!l||!d&&!u&&!r||!u&&!l&&!r||!d&&!l&&!r){
-						//System.out.println(toString());
+						//if(mazer.debug)
+							System.out.println("wontkd");
 						maze[c][y]='f';
 						dead.add(new Integer[]{c,y});
+						//System.out.println(toString());
 					}
 				}
 			}	
@@ -216,7 +236,10 @@ public class maze_2 {
 			for(int c=x-1;c>=0;c--){
 				boolean d = canDown(c,y),u=canUp(c,y),l=canLeft(c,y),r=canRight(c,y);
 				if(maze[c][y]==' '){
-					boolean d1=c+1==cat[0]&&y==cat[1]||c-1==cat[0]&&y==cat[1]||y+1==cat[1]&&c==cat[0]||y-1==cat[1]&&c==cat[0];
+					boolean d1;//=c+1==cats.get(0)[0]&&y==cat[1]||c-1==cats.get(0)[0]&&y==cats.get(0)[1]||y+1==cats.get(0)[1]&&c==cats.get(0)[0]||y-1==cats.get(0)[1]&&c==cats.get(0)[0];
+					//for(int w = 1;w<cats.size();w++){
+						d1=c+1==cats.get(w)[0]&&y==cats.get(w)[1]||c-1==cats.get(w)[0]&&y==cats.get(w)[1]||y+1==cats.get(w)[1]&&c==cats.get(w)[0]||y-1==cats.get(w)[1]&&c==cats.get(w)[0];
+					//}
 					boolean d2=c+1==mouse[0]&&y==mouse[1]||c-1==mouse[0]&&y==mouse[1]||y+1==mouse[1]&&c==mouse[0]||y-1==mouse[1]&&c==mouse[0];
 					boolean d3=true;
 					try{
@@ -233,11 +256,13 @@ public class maze_2 {
 					}catch(ArrayIndexOutOfBoundsException r1){}
 					
 					if(d1||d2){
-						//System.out.println(d1 + " " + d2);
+						if(mazer.debug)
+							System.out.println(d1 + " " + d2);
 						if(d1&&d2){}
 						else{
 						if(d3&&!(d||u||l||r)){
-							//System.out.println(toString());
+							if(mazer.debug)
+								System.out.println(toString());
 							maze[c][y]='f';
 							dead.add(new Integer[]{c,y});
 						}
@@ -245,7 +270,8 @@ public class maze_2 {
 					}
 					else
 					if(!d&&!u&&!l||!d&&!u&&!r||!u&&!l&&!r||!d&&!l&&!r){
-						//System.out.println(toString());
+						if(mazer.debug)
+							System.out.println(toString());
 						maze[c][y]='f';
 						dead.add(new Integer[]{c,y});
 					}
@@ -254,10 +280,14 @@ public class maze_2 {
 		}
 		for(int y=row-1;y>=0;y--){
 			for(int c=0;c<x;c++){
-				//System.out.println(toString());
+				if(mazer.debug)
+					System.out.println(toString());
 				boolean d = canDown(c,y),u=canUp(c,y),l=canLeft(c,y),r=canRight(c,y);
 				if(maze[c][y]==' '){
-					boolean d1=c+1==cat[0]&&y==cat[1]||c-1==cat[0]&&y==cat[1]||y+1==cat[1]&&c==cat[0]||y-1==cat[1]&&c==cat[0];
+					boolean d1;//=c+1==cats.get(0)[0]&&y==cat[1]||c-1==cats.get(0)[0]&&y==cats.get(0)[1]||y+1==cats.get(0)[1]&&c==cats.get(0)[0]||y-1==cats.get(0)[1]&&c==cats.get(0)[0];
+					//for(int w = 1;w<cats.size();w++){
+						d1=c+1==cats.get(w)[0]&&y==cats.get(w)[1]||c-1==cats.get(w)[0]&&y==cats.get(w)[1]||y+1==cats.get(w)[1]&&c==cats.get(w)[0]||y-1==cats.get(w)[1]&&c==cats.get(w)[0];
+					//}
 					boolean d2=c+1==mouse[0]&&y==mouse[1]||c-1==mouse[0]&&y==mouse[1]||y+1==mouse[1]&&c==mouse[0]||y-1==mouse[1]&&c==mouse[0];
 					boolean d3=true;
 					try{
@@ -274,11 +304,13 @@ public class maze_2 {
 					}catch(ArrayIndexOutOfBoundsException r1){}
 					
 					if(d1||d2){
-						//System.out.println(d1 + " " + d2);
+						if(mazer.debug)
+							System.out.println(d1 + " " + d2);
 						if(d1&&d2){}//System.out.println("ff");}
 						else{
 						if(d3&&!(d||u||l||r)){
-							//System.out.println(toString());
+							if(mazer.debug)
+								System.out.println(toString());
 							maze[c][y]='f';
 							dead.add(new Integer[]{c,y});
 						}
@@ -286,7 +318,8 @@ public class maze_2 {
 					}
 					else
 					if(!d&&!u&&!l||!d&&!u&&!r||!u&&!l&&!r||!d&&!l&&!r){
-						//System.out.println(toString());
+						if(mazer.debug)
+							System.out.println(toString());
 						maze[c][y]='f';
 						dead.add(new Integer[]{c,y});
 					}
@@ -297,7 +330,10 @@ public class maze_2 {
 			for(int c=x-1;c>=0;c--){
 				boolean d = canDown(c,y),u=canUp(c,y),l=canLeft(c,y),r=canRight(c,y);
 				if(maze[c][y]==' '){
-					boolean d1=c+1==cat[0]&&y==cat[1]||c-1==cat[0]&&y==cat[1]||y+1==cat[1]&&c==cat[0]||y-1==cat[1]&&c==cat[0];
+					boolean d1;//=c+1==cats.get(0)[0]&&y==cat[1]||c-1==cats.get(0)[0]&&y==cats.get(0)[1]||y+1==cats.get(0)[1]&&c==cats.get(0)[0]||y-1==cats.get(0)[1]&&c==cats.get(0)[0];
+					//for(int w = 1;w<cats.size();w++){
+						d1=c+1==cats.get(w)[0]&&y==cats.get(w)[1]||c-1==cats.get(w)[0]&&y==cats.get(w)[1]||y+1==cats.get(w)[1]&&c==cats.get(w)[0]||y-1==cats.get(w)[1]&&c==cats.get(w)[0];
+					//}
 					boolean d2=c+1==mouse[0]&&y==mouse[1]||c-1==mouse[0]&&y==mouse[1]||y+1==mouse[1]&&c==mouse[0]||y-1==mouse[1]&&c==mouse[0];
 					boolean d3=true;
 					try{
@@ -314,11 +350,13 @@ public class maze_2 {
 					}catch(ArrayIndexOutOfBoundsException r1){}
 					
 					if(d1||d2){
-						//System.out.println(d1 + " " + d2);
+						if(mazer.debug)
+							System.out.println(d1 + " " + d2);
 						if(d1&&d2){}//System.out.println("ff");}
 						else{
 						if(d3&&!(d||u||l||r)){
-							//System.out.println(toString());
+							if(mazer.debug)
+								System.out.println(toString());
 							maze[c][y]='f';
 							dead.add(new Integer[]{c,y});
 						}
@@ -335,42 +373,52 @@ public class maze_2 {
 	}
 	
 	public void tracer(int z,int y){
+		//System.out.println("started tracing");
+		int sdsd = cats.indexOf(new int[]{z,y});
 		boolean d = canDown(z,y),u=canUp(z,y),l=canLeft(z,y),r=canRight(z,y);
 		if(z+1==mouse[0]&&y==mouse[1]||z-1==mouse[0]&&y==mouse[1]||y+1==mouse[1]&&z==mouse[0]||y-1==mouse[1]&&z==mouse[0]){
 			System.out.println('\r');
 		}else if(canTowards(z,y)!=0){
 			switch (canTowards(z,y)){
 				case 1: maze[z][y-1] = '+';
+				//System.out.print("up t");
 						path.add(new Integer[]{z,y-1});
 						tracer(z,y-1);
 						break;
 				case 2: maze[z][y+1] = '+';
+				//System.out.print("down t");
 						path.add(new Integer[]{z,y+1});
 						tracer(z,y+1);
 						break;
 				case 3: maze[z-1][y] = '+';
+				//System.out.print("left t");
 						path.add(new Integer[]{z-1,y});
 						tracer(z-1,y);
 						break;
 				case 4: maze[z+1][y] = '+';
+				//System.out.println("right t");
 						path.add(new Integer[]{z+1,y});
 						tracer(z+1,y);
 						break;
 			}
 		}else if(d){
 			maze[z][y+1] = '+';
+			//System.out.print("down");
 			path.add(new Integer[]{z,y+1});
 			tracer(z,y+1);
 		}else if(u){
 			maze[z][y-1] = '+';
+			//System.out.print("up");
 			path.add(new Integer[]{z,y-1});
 			tracer(z,y-1);
 		}else if(l){
 			maze[z-1][y] = '+';
+			//System.out.print("left");
 			path.add(new Integer[]{z-1,y});
 			tracer(z-1,y);
 		}else if(r){
 			maze[z+1][y] = '+';
+			//System.out.print("right");
 			path.add(new Integer[]{z+1,y});
 			tracer(z+1,y);
 		}else if(!path.isEmpty()){
@@ -378,13 +426,14 @@ public class maze_2 {
 			dead.add(new Integer[]{z,y});
 			//System.out.println(toString());
 			altclean();
-			filler();
+			filler(sdsd);
 			//System.out.println("filled");
 			//System.out.println(toString());
 			mazerize();
 		}else{
-			System.out.println('\r' + "No Path");
+			//System.out.println('\r' + "No Path");
 		}
+		//System.out.println(toString());
 	}
 	
 	public String toString(){
@@ -407,6 +456,9 @@ public class maze_2 {
 		for(Integer[] i:dead){
 			maze[i[0]][i[1]] = ' ';
 		}
+		for(Integer[] i:path){
+			maze[i[0]][i[1]] = 'O';
+		}
 	}
 	
 	public void altclean(){
@@ -418,7 +470,15 @@ public class maze_2 {
 	}
 	
 	public void mazerize(){
-		tracer(cat[0],cat[1]);
+		for(int l=0;l<cats.size();l++){
+			System.out.println(cats.get(l)[0]+ " " + cats.get(l)[1]);
+			filler(l);
+			filler(l);
+			tracer(cats.get(l)[0],cats.get(l)[1]);
+			cleaner();
+			path.clear();
+			dead.clear();
+		}
 	}
 	
 	/*public void polisher(){
@@ -459,8 +519,6 @@ public class maze_2 {
 	public void run() throws IOException{
 		getMaze();
 		System.out.println(toString());
-		filler();
-		filler();
 		//System.out.println(toString());
 		mazerize();
 		//System.out.println(toString());
@@ -468,6 +526,7 @@ public class maze_2 {
 		//System.out.println(toString());
 		//polisher();
 		System.out.println(toString());
+		cats.clear();
 	}
 	
 	public static void main(String[] g) throws IOException{

@@ -38,14 +38,19 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 	JPanel mazens = new JPanel();
 	JPanel menubar = new JPanel();
 	int index;
-	
+	JToolBar tools = new JToolBar("Mazebox");
+	JToggleButton wooo = new JToggleButton(new ImageIcon("squares.png"));
+	public boolean isdragging = false;
 	
 	public mazer(){
 		super("Cats, and Mouses, and Mazes! Oh my!");
+		wooo.setToolTipText("Drag mouse over squares while holding 'c' to change");
+		wooo.addActionListener(this);
+		tools.add(wooo);
+		tools.setFloatable(false);
 		menu.add(niw);
 		niw.add(nwe);
 		niw.add(nwi);
-		//menu.add(fle);
 		menu.add(run);
 		menu.add(halp);
 		halp.add(hlp);
@@ -56,13 +61,10 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		nwi.addActionListener(this);
 		menubar.setLayout(new BoxLayout(menubar,BoxLayout.X_AXIS));
 		mazens.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-		//setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 		setLayout(new BorderLayout());
 		menubar.add(menu);
 		add(menu,BorderLayout.NORTH);
-		
 		maz.setPreferredSize(new Dimension(75,75));
-		//maz.setSize(new Dimension(60,60));
 		maz.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 		blocs.add(kat);
 		name.add("C");
@@ -71,28 +73,14 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		kat.setBackground(Color.yellow);
 		kat.setOpaque(true);
 		kat.addMouseListener(this);
-		//kat.setBorder(BorderFactory.createLineBorder(Color.black,1));
 		maz.add(kat);
 		gon.addActionListener(this);
 		goc.addActionListener(this);
-		//neu.setLayout(new BoxLayout(neu,BoxLayout.X_AXIS));
-		//neu.add(wi);
-		//neu.add(by);
-		//neu.add(le);
-		//but.setLayout(new BoxLayout(but,BoxLayout.X_AXIS));
-		//but.add(go);
-		//but.add(nw);
-		//bot.setLayout(new BorderLayout());
-		//bot.add(neu,BorderLayout.NORTH);
-		//bot.add(but, BorderLayout.SOUTH);
 		for(int x = 1;x<9;x++){
 			JPanel j = new JPanel();
-			//JLabel f = new JLabel("");
 			j.setPreferredSize(new Dimension(25,25));
 			j.setOpaque(true);
 			j.setBackground(Color.black);
-			//j.add(f);
-			//j.setBorder(BorderFactory.createLineBorder(Color.black,1));
 			maz.add(j);
 			blocs.add(j);
 			name.add("");
@@ -100,8 +88,6 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		}
 		blocs.get(8).setBackground(Color.cyan);
 		name.remove(8);
-		//name.add(new JLabel(new ImageIcon("mouse.png")));
-		//blocs.get(8).add(new JLabel(new ImageIcon("mouse.png")));
 		blocs.get(8).add(maus);
 		name.add("M");
 		mazens.add(maz);
@@ -110,25 +96,22 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		gon.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		goc.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() + KeyEvent.SHIFT_DOWN_MASK));
 		hlp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-		//mazens.add(bot);
 		add(mazens,BorderLayout.CENTER);
-		//blocs.get(8).getComponent(1);
-		//go.addActionListener(this);
-		//nw.addActionListener(this);
-		//setPreferredSize(new Dimension(50,50))
-		//setMaximumSize(new Dimension(wid+5,len+5));
-		//setSize(new Dimension(wid+5,len+20));
+		add(tools,BorderLayout.EAST);
 		pack();
 		setVisible(true);
 		int wifd = (int)Math.round((scr.getWidth()-getWidth())/2);
 		int hig = (int)Math.round((scr.getHeight()-getHeight())/2);
 		setLocation(wifd,hig);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		//System.out.println(maz.getHeight() + " " + blocs.get(0).getHeight() + " " + getWidth());
 	}
 	
 	public mazer(int w, int l){
 		super("Cats, and Mouses, and Mazes! Oh my!");
+		wooo.setToolTipText("Drag mouse over squares while holding 'c' to change");
+		wooo.addActionListener(this);
+		tools.add(wooo);
+		tools.setFloatable(false);
 		menu.add(niw);
 		niw.add(nwe);
 		niw.add(nwi);

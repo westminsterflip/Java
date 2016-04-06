@@ -94,7 +94,7 @@ public class maze_2 {
 					//cat[0]=c;
 					//cat[1]=f;
 					cats.add(new int[]{c,f});
-					System.out.println(c + " " + f);
+					//System.out.println(c + " " + f);
 				}else if(maze[c][f]=='M'){
 					mouse[0]=c;
 					mouse[1]=f;

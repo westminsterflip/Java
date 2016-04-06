@@ -334,7 +334,7 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 			}
 		}
 		
-			System.out.println(in);
+			//System.out.println(in);
 		maze_2 m2 = new maze_2(in,wid,len);
 		
 		if(debug){
@@ -342,7 +342,7 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		System.out.println(name);
 		System.out.println(blocs.size() + " " + name.size());
 		}
-		System.out.println(m2.toString());
+		//System.out.println(m2.toString());
 		maz.setVisible(false);
 		translate(m2.gitDun());
 		//translate(m2.gitDun());

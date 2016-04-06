@@ -4,7 +4,8 @@ import java.util.*;
 public class maze_2 {
 	char[][] maze;
 	int row,x;
-	int[] cat = {0,0},mouse = {0,0};
+	int[] cat = {0,0};
+	int[] mouse = {0,0};
 	ArrayList<int[]> cats = new ArrayList<int[]>();
 	ArrayList<Integer[]> dead = new ArrayList<Integer[]>();
 	ArrayList<Integer[]> path = new ArrayList<Integer[]>();
@@ -60,8 +61,8 @@ public class maze_2 {
 		for(int y=0;y<row;y++){
 			for(int c=0;c<x;c++){
 				if(maze[c][y]=='C'){
-					cat[0]=c;
-					cat[1]=y;
+					//cat[0]=c;
+					//cat[1]=y;
 					cats.add(new int[]{c,y});
 				}else if(maze[c][y]=='M'){
 					mouse[0]=c;
@@ -90,8 +91,8 @@ public class maze_2 {
 		for(int f=0;f<row;f++){
 			for(int c=0;c<x;c++){
 				if(maze[c][f]=='C'){
-					cat[0]=c;
-					cat[1]=f;
+					//cat[0]=c;
+					//cat[1]=f;
 					cats.add(new int[]{c,f});
 					System.out.println(c + " " + f);
 				}else if(maze[c][f]=='M'){
@@ -100,7 +101,7 @@ public class maze_2 {
 				}
 			}
 		}
-		System.out.println(toString());
+		//System.out.println(toString());
 	}
 	
 	public boolean canDown(int z, int y){
@@ -183,8 +184,9 @@ public class maze_2 {
 	public void filler(int w){
 		for(int y=0;y<row;y++){
 			for(int c=0;c<x;c++){
-				//System.out.println(x + " " + y);
-				System.out.println(toString());
+				System.out.println("W        is            :       " + w);
+				//System.out.println(c + " " + y);
+				//System.out.println(toString());
 				boolean d = canDown(c,y),u=canUp(c,y),l=canLeft(c,y),r=canRight(c,y);
 				if(maze[c][y]==' '){
 					boolean d1;//=c+1==cats.get(0)[0]&&y==cat[1]||c-1==cats.get(0)[0]&&y==cats.get(0)[1]||y+1==cats.get(0)[1]&&c==cats.get(0)[0]||y-1==cats.get(0)[1]&&c==cats.get(0)[0];
@@ -224,7 +226,7 @@ public class maze_2 {
 					else
 					if(!d&&!u&&!l||!d&&!u&&!r||!u&&!l&&!r||!d&&!l&&!r){
 						//if(mazer.debug)
-							System.out.println("wontkd");
+							//System.out.println("wontkd");
 						maze[c][y]='f';
 						dead.add(new Integer[]{c,y});
 						//System.out.println(toString());
@@ -372,9 +374,8 @@ public class maze_2 {
 		}
 	}
 	
-	public void tracer(int z,int y){
+	public void tracer(int z,int y, int dssd){
 		//System.out.println("started tracing");
-		int sdsd = cats.indexOf(new int[]{z,y});
 		boolean d = canDown(z,y),u=canUp(z,y),l=canLeft(z,y),r=canRight(z,y);
 		if(z+1==mouse[0]&&y==mouse[1]||z-1==mouse[0]&&y==mouse[1]||y+1==mouse[1]&&z==mouse[0]||y-1==mouse[1]&&z==mouse[0]){
 			System.out.println('\r');
@@ -383,50 +384,50 @@ public class maze_2 {
 				case 1: maze[z][y-1] = '+';
 				//System.out.print("up t");
 						path.add(new Integer[]{z,y-1});
-						tracer(z,y-1);
+						tracer(z,y-1,dssd);
 						break;
 				case 2: maze[z][y+1] = '+';
 				//System.out.print("down t");
 						path.add(new Integer[]{z,y+1});
-						tracer(z,y+1);
+						tracer(z,y+1,dssd);
 						break;
 				case 3: maze[z-1][y] = '+';
 				//System.out.print("left t");
 						path.add(new Integer[]{z-1,y});
-						tracer(z-1,y);
+						tracer(z-1,y,dssd);
 						break;
 				case 4: maze[z+1][y] = '+';
 				//System.out.println("right t");
 						path.add(new Integer[]{z+1,y});
-						tracer(z+1,y);
+						tracer(z+1,y,dssd);
 						break;
 			}
 		}else if(d){
 			maze[z][y+1] = '+';
 			//System.out.print("down");
 			path.add(new Integer[]{z,y+1});
-			tracer(z,y+1);
+			tracer(z,y+1,dssd);
 		}else if(u){
 			maze[z][y-1] = '+';
 			//System.out.print("up");
 			path.add(new Integer[]{z,y-1});
-			tracer(z,y-1);
+			tracer(z,y-1,dssd);
 		}else if(l){
 			maze[z-1][y] = '+';
 			//System.out.print("left");
 			path.add(new Integer[]{z-1,y});
-			tracer(z-1,y);
+			tracer(z-1,y,dssd);
 		}else if(r){
 			maze[z+1][y] = '+';
 			//System.out.print("right");
 			path.add(new Integer[]{z+1,y});
-			tracer(z+1,y);
+			tracer(z+1,y,dssd);
 		}else if(!path.isEmpty()){
 			maze[z][y] = 'f';
 			dead.add(new Integer[]{z,y});
 			//System.out.println(toString());
 			altclean();
-			filler(sdsd);
+			filler(dssd);
 			//System.out.println("filled");
 			//System.out.println(toString());
 			mazerize();
@@ -471,10 +472,10 @@ public class maze_2 {
 	
 	public void mazerize(){
 		for(int l=0;l<cats.size();l++){
-			System.out.println(cats.get(l)[0]+ " " + cats.get(l)[1]);
+			//System.out.println(cats.get(l)[0]+ " " + cats.get(l)[1]);
 			filler(l);
 			filler(l);
-			tracer(cats.get(l)[0],cats.get(l)[1]);
+			tracer(cats.get(l)[0],cats.get(l)[1],l);
 			cleaner();
 			path.clear();
 			dead.clear();

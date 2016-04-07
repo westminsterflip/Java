@@ -42,7 +42,7 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 	JToolBar tools = new JToolBar("Mazebox");
 	JToggleButton wooo = new JToggleButton(new ImageIcon("squares.png"));
 	public boolean isdragging = false;
-	JMenuItem white = new JMenuItem(" "),black = new JMenuItem(" "),cyan = new JMenuItem(" "),yellow = new JMenuItem(" ");
+	JMenuItem white = new JMenuItem("Empty"),black = new JMenuItem("Walls"),cyan = new JMenuItem("Mice"),yellow = new JMenuItem("Cats");
 	
 	public mazer(){
 		super("Cats, and Mouses, and Mazes! Oh my!");
@@ -120,6 +120,7 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		int hig = (int)Math.round((scr.getHeight()-getHeight())/2);
 		setLocation(wifd,hig);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		//color.setVisible(false);
 	}
 	
 	public mazer(int w, int l){
@@ -227,6 +228,7 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		//System.out.println(maz.getHeight() + " " + blocs.get(0).getHeight() + " " + getWidth());
 		wid = w;
 		len = l;
+		//color.setVisible(false);
 	}
 
 	public void counter(){

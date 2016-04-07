@@ -148,10 +148,10 @@ public class maze_2 {
 		return cand;
 	}
 	
-	public int canTowards(int z, int y){
+	public int canTowards(int z, int y, int f){
 		int hor=mouse[0]-z;
 		int ver=mouse[1]-y;
-		if(Math.abs(hor)<Math.abs(ver)){
+		if(f==0){
 			if(ver<0){
 				if(canUp(z,y))
 					return 1;
@@ -374,12 +374,17 @@ public class maze_2 {
 	}
 	
 	public void tracer(int z,int y, int dssd){
+		int hor=mouse[0]-z;
+		int ver=mouse[1]-y;
 		//System.out.println("started tracing");
+		System.out.println(toString());
 		boolean d = canDown(z,y),u=canUp(z,y),l=canLeft(z,y),r=canRight(z,y);
 		if(z+1==mouse[0]&&y==mouse[1]||z-1==mouse[0]&&y==mouse[1]||y+1==mouse[1]&&z==mouse[0]||y-1==mouse[1]&&z==mouse[0]){
-			System.out.println('\r');
-		}else if(canTowards(z,y)!=0){
-			switch (canTowards(z,y)){
+			//System.out.println("Done" + '\r');
+		}else if(canTowards(z,y,1)!=0||canTowards(z,y,0)!=0){
+			System.out.println(hor + " " + ver);
+			if(Math.abs(hor)<=Math.abs(ver)){
+				switch (canTowards(z,y,0)){
 				case 1: maze[z][y-1] = '+';
 				//System.out.print("up t");
 						path.add(new Integer[]{z,y-1});
@@ -400,6 +405,78 @@ public class maze_2 {
 						path.add(new Integer[]{z+1,y});
 						tracer(z+1,y,dssd);
 						break;
+				case 0:
+					switch (canTowards(z,y,1)){
+					case 1: maze[z][y-1] = '+';
+					//System.out.print("up t");
+							path.add(new Integer[]{z,y-1});
+							tracer(z,y-1,dssd);
+							break;
+					case 2: maze[z][y+1] = '+';
+					//System.out.print("down t");
+							path.add(new Integer[]{z,y+1});
+							tracer(z,y+1,dssd);
+							break;
+					case 3: maze[z-1][y] = '+';
+					//System.out.print("left t");
+							path.add(new Integer[]{z-1,y});
+							tracer(z-1,y,dssd);
+							break;
+					case 4: maze[z+1][y] = '+';
+					//System.out.println("right t");
+							path.add(new Integer[]{z+1,y});
+							tracer(z+1,y,dssd);
+							break;
+					}
+					break;
+				}
+			}else if(Math.abs(hor)>Math.abs(ver)){
+				switch (canTowards(z,y,1)){
+				case 1: maze[z][y-1] = '+';
+				//System.out.print("up t");
+						path.add(new Integer[]{z,y-1});
+						tracer(z,y-1,dssd);
+						break;
+				case 2: maze[z][y+1] = '+';
+				//System.out.print("down t");
+						path.add(new Integer[]{z,y+1});
+						tracer(z,y+1,dssd);
+						break;
+				case 3: maze[z-1][y] = '+';
+				//System.out.print("left t");
+						path.add(new Integer[]{z-1,y});
+						tracer(z-1,y,dssd);
+						break;
+				case 4: maze[z+1][y] = '+';
+				//System.out.println("right t");
+						path.add(new Integer[]{z+1,y});
+						tracer(z+1,y,dssd);
+						break;
+				case 0:
+					switch (canTowards(z,y,0)){
+					case 1: maze[z][y-1] = '+';
+					//System.out.print("up t");
+							path.add(new Integer[]{z,y-1});
+							tracer(z,y-1,dssd);
+							break;
+					case 2: maze[z][y+1] = '+';
+					//System.out.print("down t");
+							path.add(new Integer[]{z,y+1});
+							tracer(z,y+1,dssd);
+							break;
+					case 3: maze[z-1][y] = '+';
+					//System.out.print("left t");
+							path.add(new Integer[]{z-1,y});
+							tracer(z-1,y,dssd);
+							break;
+					case 4: maze[z+1][y] = '+';
+					//System.out.println("right t");
+							path.add(new Integer[]{z+1,y});
+							tracer(z+1,y,dssd);
+							break;
+					}
+					break;
+				}
 			}
 		}else if(d){
 			maze[z][y+1] = '+';
@@ -423,15 +500,16 @@ public class maze_2 {
 			tracer(z+1,y,dssd);
 		}else if(!path.isEmpty()){
 			maze[z][y] = 'f';
+			path.remove(path.size()-1);
 			dead.add(new Integer[]{z,y});
 			//System.out.println(toString());
 			altclean();
-			//System.out.println("filled");
+			System.out.println("filled");
 			filler(dssd);
 			//System.out.println(toString());
-			tracer(z,y,dssd);
+			tracer(cats.get(dssd)[0],cats.get(dssd)[1],dssd);
 		}else{
-			//System.out.println('\r' + "No Path");
+			System.out.println('\r' + "No Path");
 		}
 		//System.out.println(toString());
 	}
@@ -474,6 +552,7 @@ public class maze_2 {
 			//System.out.println(cats.get(l)[0]+ " " + cats.get(l)[1]);
 			filler(l);
 			filler(l);
+			System.out.println(toString());
 			tracer(cats.get(l)[0],cats.get(l)[1],l);
 			cleaner();
 			path.clear();

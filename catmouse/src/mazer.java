@@ -385,7 +385,7 @@ public class mazer extends JFrame implements ActionListener,MouseListener{
 		
 	//}
 	
-	public void translate(char[][] ma){
+	public void translate(Character[][] ma){
 		int us = 0;
 		for(int f=0;f<len;f++){
 			for(int s=0;s<wid;s++){

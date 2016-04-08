@@ -164,9 +164,9 @@ public class maze_2 {
 		return cand;
 	}
 	
-	public int canTowards(int z, int y, int f){
-		int hor=mouse[0]-z;
-		int ver=mouse[1]-y;
+	public int canTowards(int z, int y, int f, int mn){
+		int hor=mice.get(mn)[0]-z;
+		int ver=mice.get(mn)[1]-y;
 		if(f==0){
 			if(ver<0){
 				if(canUp(z,y))
@@ -552,13 +552,13 @@ public class maze_2 {
 		}
 	}
 	
-	public void tracer(int z,int y, int mx, int my, int dssd){
+	public void tracer(int z,int y, int mx, int my, int dssd, int mn){
 		int hor=mx-z;
 		int ver=my-y;
 		int hor1=z-cats.get(dssd)[0];
 		int ver1=y-cats.get(dssd)[1];
-		//System.out.println("started tracing");
-		//System.out.println(toString());
+		System.out.println(z + " " + y + " ... " + cats.get(dssd)[0] + " " + cats.get(dssd)[1] + " , " + mx + " " + my);
+		System.out.println(toString());
 		//System.out.println(hor + " " + ver);
 		//System.out.println(hor1 + " " + ver1);
 		boolean d = canDown(z,y),u=canUp(z,y),l=canLeft(z,y),r=canRight(z,y);
@@ -566,97 +566,97 @@ public class maze_2 {
 			System.out.println(toString());
 			System.out.println();
 			//System.out.println("Done" + '\r');
-		}else if(canTowards(z,y,1)!=0||canTowards(z,y,0)!=0){
+		}else if(canTowards(z,y,1,mn)!=0||canTowards(z,y,0,mn)!=0){
 			if(Math.abs(hor)<=Math.abs(ver)){
-				switch (canTowards(z,y,0)){
+				switch (canTowards(z,y,0,mn)){
 				case 1: maze[z][y-1] = '+';
 				//System.out.print("up t");
 						path.add(new Integer[]{z,y-1});
-						tracer(z,y-1,mx,my,dssd);
+						tracer(z,y-1,mx,my,dssd,mn);
 						break;
 				case 2: maze[z][y+1] = '+';
 				//System.out.print("down t");
 						path.add(new Integer[]{z,y+1});
-						tracer(z,y+1,mx,my,dssd);
+						tracer(z,y+1,mx,my,dssd,mn);
 						break;
 				case 3: maze[z-1][y] = '+';
 				//System.out.print("left t");
 						path.add(new Integer[]{z-1,y});
-						tracer(z-1,y,mx,my,dssd);
+						tracer(z-1,y,mx,my,dssd,mn);
 						break;
 				case 4: maze[z+1][y] = '+';
 				//System.out.println("right t");
 						path.add(new Integer[]{z+1,y});
-						tracer(z+1,y,mx,my,dssd);
+						tracer(z+1,y,mx,my,dssd,mn);
 						break;
 				case 0:
-					switch (canTowards(z,y,1)){
+					switch (canTowards(z,y,1,mn)){
 					case 1: maze[z][y-1] = '+';
 					//System.out.print("up t");
 							path.add(new Integer[]{z,y-1});
-							tracer(z,y-1,mx,my,dssd);
+							tracer(z,y-1,mx,my,dssd,mn);
 							break;
 					case 2: maze[z][y+1] = '+';
 					//System.out.print("down t");
 							path.add(new Integer[]{z,y+1});
-							tracer(z,y+1,mx,my,dssd);
+							tracer(z,y+1,mx,my,dssd,mn);
 							break;
 					case 3: maze[z-1][y] = '+';
 					//System.out.print("left t");
 							path.add(new Integer[]{z-1,y});
-							tracer(z-1,y,mx,my,dssd);
+							tracer(z-1,y,mx,my,dssd,mn);
 							break;
 					case 4: maze[z+1][y] = '+';
 					//System.out.println("right t");
 							path.add(new Integer[]{z+1,y});
-							tracer(z+1,y,mx,my,dssd);
+							tracer(z+1,y,mx,my,dssd,mn);
 							break;
 					}
 					break;
 				}
 			}else if(Math.abs(hor)>Math.abs(ver)){
-				switch (canTowards(z,y,1)){
+				switch (canTowards(z,y,1,mn)){
 				case 1: maze[z][y-1] = '+';
 				//System.out.print("up t");
 						path.add(new Integer[]{z,y-1});
-						tracer(z,y-1,mx,my,dssd);
+						tracer(z,y-1,mx,my,dssd,mn);
 						break;
 				case 2: maze[z][y+1] = '+';
 				//System.out.print("down t");
 						path.add(new Integer[]{z,y+1});
-						tracer(z,y+1,mx,my,dssd);
+						tracer(z,y+1,mx,my,dssd,mn);
 						break;
 				case 3: maze[z-1][y] = '+';
 				//System.out.print("left t");
 						path.add(new Integer[]{z-1,y});
-						tracer(z-1,y,mx,my,dssd);
+						tracer(z-1,y,mx,my,dssd,mn);
 						break;
 				case 4: maze[z+1][y] = '+';
 				//System.out.println("right t");
 						path.add(new Integer[]{z+1,y});
-						tracer(z+1,y,mx,my,dssd);
+						tracer(z+1,y,mx,my,dssd,mn);
 						break;
 				case 0:
-					switch (canTowards(z,y,0)){
+					switch (canTowards(z,y,0,mn)){
 					case 1: maze[z][y-1] = '+';
 					//System.out.print("up t");
 							path.add(new Integer[]{z,y-1});
-							tracer(z,y-1,mx,my,dssd);
+							tracer(z,y-1,mx,my,dssd,mn);
 							break;
 					case 2: maze[z][y+1] = '+';
 					//System.out.print("down t");
 							path.add(new Integer[]{z,y+1});
-							tracer(z,y+1,mx,my,dssd);
+							tracer(z,y+1,mx,my,dssd,mn);
 							break;
 					case 3: maze[z-1][y] = '+';
 					//System.out.print("left t");
 							path.add(new Integer[]{z-1,y});
-							tracer(z-1,y,mx,my,dssd);
+							tracer(z-1,y,mx,my,dssd,mn);
 							break;
 					case 4: maze[z+1][y] = '+';
 					//System.out.println("right t");
 							path.add(new Integer[]{z+1,y});
-							tracer(z+1,y,mx,my,dssd);
+							tracer(z+1,y,mx,my,dssd,mn);
 							break;
 					}
 					break;
@@ -668,44 +668,44 @@ public class maze_2 {
 				case 1: maze[z][y-1] = '+';
 				//System.out.print("up t");
 						path.add(new Integer[]{z,y-1});
-						tracer(z,y-1,mx,my,dssd);
+						tracer(z,y-1,mx,my,dssd,mn);
 						break;
 				case 2: maze[z][y+1] = '+';
 				//System.out.print("down t");
 						path.add(new Integer[]{z,y+1});
-						tracer(z,y+1,mx,my,dssd);
+						tracer(z,y+1,mx,my,dssd,mn);
 						break;
 				case 3: maze[z-1][y] = '+';
 				//System.out.print("left t");
 						path.add(new Integer[]{z-1,y});
-						tracer(z-1,y,mx,my,dssd);
+						tracer(z-1,y,mx,my,dssd,mn);
 						break;
 				case 4: maze[z+1][y] = '+';
 				//System.out.println("right t");
 						path.add(new Integer[]{z+1,y});
-						tracer(z+1,y,mx,my,dssd);
+						tracer(z+1,y,mx,my,dssd,mn);
 						break;
 				case 0:
 					switch (canAway(z,y,1,dssd)){
 					case 1: maze[z][y-1] = '+';
 					//System.out.print("up t");
 							path.add(new Integer[]{z,y-1});
-							tracer(z,y-1,mx,my,dssd);
+							tracer(z,y-1,mx,my,dssd,mn);
 							break;
 					case 2: maze[z][y+1] = '+';
 					//System.out.print("down t");
 							path.add(new Integer[]{z,y+1});
-							tracer(z,y+1,mx,my,dssd);
+							tracer(z,y+1,mx,my,dssd,mn);
 							break;
 					case 3: maze[z-1][y] = '+';
 					//System.out.print("left t");
 							path.add(new Integer[]{z-1,y});
-							tracer(z-1,y,mx,my,dssd);
+							tracer(z-1,y,mx,my,dssd,mn);
 							break;
 					case 4: maze[z+1][y] = '+';
 					//System.out.println("right t");
 							path.add(new Integer[]{z+1,y});
-							tracer(z+1,y,mx,my,dssd);
+							tracer(z+1,y,mx,my,dssd,mn);
 							break;
 					}
 					break;
@@ -715,44 +715,44 @@ public class maze_2 {
 			case 1: maze[z][y-1] = '+';
 			//System.out.print("up t");
 					path.add(new Integer[]{z,y-1});
-					tracer(z,y-1,mx,my,dssd);
+					tracer(z,y-1,mx,my,dssd,mn);
 					break;
 			case 2: maze[z][y+1] = '+';
 			//System.out.print("down t");
 					path.add(new Integer[]{z,y+1});
-					tracer(z,y+1,mx,my,dssd);
+					tracer(z,y+1,mx,my,dssd,mn);
 					break;
 			case 3: maze[z-1][y] = '+';
 			//System.out.print("left t");
 					path.add(new Integer[]{z-1,y});
-					tracer(z-1,y,mx,my,dssd);
+					tracer(z-1,y,mx,my,dssd,mn);
 					break;
 			case 4: maze[z+1][y] = '+';
 			//System.out.println("right t");
 					path.add(new Integer[]{z+1,y});
-					tracer(z+1,y,mx,my,dssd);
+					tracer(z+1,y,mx,my,dssd,mn);
 					break;
 			case 0:
 				switch (canAway(z,y,0,dssd)){
 				case 1: maze[z][y-1] = '+';
 				//System.out.print("up t");
 						path.add(new Integer[]{z,y-1});
-						tracer(z,y-1,mx,my,dssd);
+						tracer(z,y-1,mx,my,dssd,mn);
 						break;
 				case 2: maze[z][y+1] = '+';
 				//System.out.print("down t");
 						path.add(new Integer[]{z,y+1});
-						tracer(z,y+1,mx,my,dssd);
+						tracer(z,y+1,mx,my,dssd,mn);
 						break;
 				case 3: maze[z-1][y] = '+';
 				//System.out.print("left t");
 						path.add(new Integer[]{z-1,y});
-						tracer(z-1,y,mx,my,dssd);
+						tracer(z-1,y,mx,my,dssd,mn);
 						break;
 				case 4: maze[z+1][y] = '+';
 				//System.out.println("right t");
 						path.add(new Integer[]{z+1,y});
-						tracer(z+1,y,mx,my,dssd);
+						tracer(z+1,y,mx,my,dssd,mn);
 						break;
 				}
 				break;
@@ -762,22 +762,22 @@ public class maze_2 {
 			maze[z][y+1] = '+';
 			//System.out.print("down");
 			path.add(new Integer[]{z,y+1});
-			tracer(z,y+1,mx,my,dssd);
+			tracer(z,y+1,mx,my,dssd,mn);
 		}else if(u){
 			maze[z][y-1] = '+';
 			//System.out.print("up");
 			path.add(new Integer[]{z,y-1});
-			tracer(z,y-1,mx,my,dssd);
+			tracer(z,y-1,mx,my,dssd,mn);
 		}else if(l){
 			maze[z-1][y] = '+';
 			//System.out.print("left");
 			path.add(new Integer[]{z-1,y});
-			tracer(z-1,y,mx,my,dssd);
+			tracer(z-1,y,mx,my,dssd,mn);
 		}else if(r){
 			maze[z+1][y] = '+';
 			//System.out.print("right");
 			path.add(new Integer[]{z+1,y});
-			tracer(z+1,y,mx,my,dssd);
+			tracer(z+1,y,mx,my,dssd,mn);
 		}else if(!path.isEmpty()){
 			maze[z][y] = 'f';
 			path.remove(path.size()-1);
@@ -787,7 +787,7 @@ public class maze_2 {
 			//System.out.println("filled");
 			filler(dssd);
 			//System.out.println(toString());
-			tracer(cats.get(dssd)[0],cats.get(dssd)[1],mx,my,dssd);
+			tracer(cats.get(dssd)[0],cats.get(dssd)[1],mx,my,dssd,mn);
 		}else{
 			System.out.println('\r' + "No Path");
 		}
@@ -840,20 +840,22 @@ public class maze_2 {
 	}
 	
 	public void method(int l,int j){
-		try{
+		//try{
 			ded.clear();
-			for(Integer[] inty:empty){
-				//System.out.println(inty[0] + " " + inty[1]);
-				//System.out.println(maze[inty[0]][inty[1]]);
+			Integer[] temp;
+			Integer[] inty;
+			for(int tmp=0;tmp<empty.size();){
+				inty = empty.get(tmp);
+				temp=inty;
 				filler2(l,j,inty[0],inty[1]);
-				//System.out.println(toString());
-				//System.out.println(empty.size());
+				if(inty.equals(temp))
+					tmp++;
 			}
-		}
-		catch(ConcurrentModificationException dhd){
+		//}
+		//catch(ConcurrentModificationException dhd){
 			//System.out.println("Stop breaking things");
-			method(l,j);
-		}
+			//method(l,j);
+		///}
 	}
 	
 	public void mazerize(){
@@ -867,7 +869,7 @@ public class maze_2 {
 				while(!ded.isEmpty());
 				//System.out.println(toString());
 				if(!empty.isEmpty())
-					tracer(cats.get(l)[0],cats.get(l)[1],mice.get(l)[0],mice.get(l)[1],l);
+					tracer(cats.get(l)[0],cats.get(l)[1],mice.get(j)[0],mice.get(j)[1],l,j);
 				cleaner();
 				path.clear();
 				dead.clear();

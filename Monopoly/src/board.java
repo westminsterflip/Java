@@ -30,16 +30,30 @@ public class board extends JFrame implements ComponentListener{
 	public board(){
 		super("Monopoly");
 		setLayout(new FlowLayout());
-		board.setLayout(new FlowLayout());
+		board.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		//board.setLayout(new BorderLayout());
 		board.add(upper);
 		board.add(left);
 		board.add(center);
 		board.add(lower);
 		board.add(right);
 		add(board);
+		//left.setOpaque(true);
+		//left.setBackground(Color.RED);
+		left.add(new JLabel("left"));
+		upper.setBackground(Color.PINK);
+		center.setBackground(Color.orange);
+		left.setBackground(Color.red);
+		right.setBackground(Color.green);
+		lower.setBackground(Color.yellow);
 		board.setPreferredSize(new Dimension(230,230));
-		board.setOpaque(true);
-		board.setBackground(Color.BLUE);
+		//upper.setPreferredSize(new Dimension(board.getWidth(),(int)((double)board.getHeight()*1150.00/125.00)));
+		//lower.setPreferredSize(new Dimension(board.getWidth(),(int)((double)board.getHeight()*1150.00/125.00)));
+		//left.setPreferredSize(new Dimension(board.getWidth()*1150/125,board.getHeight()-board.getHeight()*1150/62));
+		System.out.println(left.getWidth()+" " +left.getHeight());
+		upper.add(new JLabel("upper"));
+		//board.setOpaque(true);
+		//board.setBackground(Color.BLUE);
 		//board.add(new JLabel("HI"));
 		setMinimumSize(new Dimension(136,170));
 		setVisible(true);
@@ -56,7 +70,26 @@ public class board extends JFrame implements ComponentListener{
 		if(getHeight()<getWidth())
 			multi = getHeight()-10;
 		System.out.println("x " + multi);
+		board.setVisible(false);
+		upper.setVisible(false);
+		left.setVisible(false);
+		lower.setVisible(false);
 		board.setPreferredSize(new Dimension(multi,multi));
+		upper.setPreferredSize(new Dimension(board.getWidth(),board.getHeight()*125/1150));
+		lower.setPreferredSize(new Dimension(board.getWidth(),board.getHeight()*125/1150));
+		left.setPreferredSize(new Dimension(board.getWidth()*125/1150,board.getHeight()-(board.getHeight()*250/1150)));
+		right.setPreferredSize(new Dimension(board.getWidth()*125/1150,board.getHeight()-(board.getHeight()*250/1150)));
+		center.setPreferredSize(new Dimension(board.getWidth()-board.getWidth()*250/1150,board.getHeight()-(board.getHeight()*250/1150)));
+		System.out.println(board.getWidth()+" b " +board.getHeight());
+		System.out.println(left.getWidth()+" l " +left.getHeight());
+		System.out.println(right.getWidth()+" r " +right.getHeight());
+		System.out.println(upper.getWidth()+" u " +upper.getHeight());
+		System.out.println(lower.getWidth()+" lo " +lower.getHeight());
+		System.out.println(center.getWidth()+" c " +center.getHeight());
+		board.setVisible(true);
+		upper.setVisible(true);
+		left.setVisible(true);
+		lower.setVisible(true);
 	}
 
 	@Override

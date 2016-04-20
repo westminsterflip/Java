@@ -45,8 +45,7 @@ public class board extends JFrame implements ComponentListener{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		BufferedImage bd = ImageIO.read(new File("monobd.jpg"));
 		Graphics pic = bd.getGraphics();
-		pic.drawImage(bd, 0, 0, 232,232,null);
-		paint(pic);
+		paintComponent(pic.drawImage(bd, 0, 0, 232,232,null));
 		pack();
 	}
 	

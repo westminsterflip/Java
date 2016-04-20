@@ -35,8 +35,8 @@ public class board extends JFrame implements ComponentListener{
 		board.add(upper);
 		board.add(left);
 		board.add(center);
-		board.add(lower);
 		board.add(right);
+		board.add(lower);
 		add(board);
 		//left.setOpaque(true);
 		//left.setBackground(Color.RED);
@@ -46,14 +46,14 @@ public class board extends JFrame implements ComponentListener{
 		left.setBackground(Color.red);
 		right.setBackground(Color.green);
 		lower.setBackground(Color.yellow);
-		board.setPreferredSize(new Dimension(230,230));
+		board.setPreferredSize(new Dimension(232,232));
 		//upper.setPreferredSize(new Dimension(board.getWidth(),(int)((double)board.getHeight()*1150.00/125.00)));
 		//lower.setPreferredSize(new Dimension(board.getWidth(),(int)((double)board.getHeight()*1150.00/125.00)));
 		//left.setPreferredSize(new Dimension(board.getWidth()*1150/125,board.getHeight()-board.getHeight()*1150/62));
 		System.out.println(left.getWidth()+" " +left.getHeight());
 		upper.add(new JLabel("upper"));
 		//board.setOpaque(true);
-		//board.setBackground(Color.BLUE);
+		board.setBackground(Color.BLUE);
 		//board.add(new JLabel("HI"));
 		setMinimumSize(new Dimension(136,170));
 		setVisible(true);
@@ -63,23 +63,40 @@ public class board extends JFrame implements ComponentListener{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
+	public void build(){
+		int n = upper.getHeight();
+		int j = left.getHeight()/9;
+		for(int y = 0;y<11;y++){
+			if(y==0||y==11){
+				JPanel u = new JPanel();
+				u.setPreferredSize(new Dimension(n,n));
+				u.setBackground(Color.BLACK);
+				upp.add(u);
+			}else{
+				JPanel u = new JPanel();
+				u.setPreferredSize(new Dimension());
+			}
+		}
+	}
+	
 	@Override
 	public void componentResized(ComponentEvent e) {
-		int multi = getWidth()-10;
+		int multi = getWidth()-30;
 		System.out.println(getWidth() + " " + getHeight());
 		if(getHeight()<getWidth())
-			multi = getHeight()-10;
+			multi = getHeight()-30;
 		System.out.println("x " + multi);
 		board.setVisible(false);
 		upper.setVisible(false);
 		left.setVisible(false);
 		lower.setVisible(false);
+		int small = multi*125/1150;
 		board.setPreferredSize(new Dimension(multi,multi));
-		upper.setPreferredSize(new Dimension(board.getWidth(),board.getHeight()*125/1150));
-		lower.setPreferredSize(new Dimension(board.getWidth(),board.getHeight()*125/1150));
-		left.setPreferredSize(new Dimension(board.getWidth()*125/1150,board.getHeight()-(board.getHeight()*250/1150)));
-		right.setPreferredSize(new Dimension(board.getWidth()*125/1150,board.getHeight()-(board.getHeight()*250/1150)));
-		center.setPreferredSize(new Dimension(board.getWidth()-board.getWidth()*250/1150,board.getHeight()-(board.getHeight()*250/1150)));
+		upper.setPreferredSize(new Dimension(multi,small));
+		lower.setPreferredSize(new Dimension(multi,small));
+		left.setPreferredSize(new Dimension(small,multi-2*small));
+		right.setPreferredSize(new Dimension(small,multi-2*small));
+		center.setPreferredSize(new Dimension(multi-2*small,multi-2*small));
 		System.out.println(board.getWidth()+" b " +board.getHeight());
 		System.out.println(left.getWidth()+" l " +left.getHeight());
 		System.out.println(right.getWidth()+" r " +right.getHeight());

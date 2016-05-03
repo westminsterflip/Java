@@ -25,6 +25,7 @@ public class wikidl {
 			for(int yu = 216;yu>=0;yu--){
 				if(let.get(yu).equals(256)){
 					if(yu==0){
+						System.out.println(let);
 						for(int i = 0;i<=til;i++){
 							let.set(i, 1);
 						}
@@ -39,8 +40,8 @@ public class wikidl {
 			//	System.out.print((char)(int)let.get(yu));
 			//}
 			//System.out.println();
-			System.out.println(let);
 		}
+		System.out.println(let);
 	}
 	
 	public static void main(String[] franny) throws IOException{

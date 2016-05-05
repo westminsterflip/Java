@@ -1,6 +1,11 @@
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 public class wikidl {
@@ -8,38 +13,84 @@ public class wikidl {
 	
 	public wikidl(){}
 	
-	public void trying() throws IOException{
-		for(int y = 0;y<217;y++){
+	public void trying() throws IOException, FileNotFoundException{
+		InputStreamReader o = new InputStreamReader(System.in);
+		BufferedReader b = new BufferedReader(o);
+		int sd = Integer.parseInt(b.readLine());
+		for(int y = 0;y<sd;y++){
 			let.add(0);
 		}
-		while(let.get(216)<126){
-			InputStreamReader o = new InputStreamReader(System.in);
-			BufferedReader b = new BufferedReader(o);
-			//b.readLine();
-			int til = 0;
-			for(int yu = 0;yu<217;yu++){
+		boolean go=true;
+		int til = 0;
+		while(go){
+			til = 0;
+			for(int yu = 0;yu<sd;yu++){
 				if(!let.get(yu).equals(0))
 					til = yu;
 			}
-			let.set(til, let.get(til)+1);
-			for(int yu = 216;yu>=0;yu--){
-				if(let.get(yu).equals(126)){
-					if(yu==0){
-						System.out.println(let);
-						for(int i = 0;i<=til;i++){
-							let.set(i, 33);
-						}
-						let.set(til+1, 33);
-					}else{
-						let.set(yu, 33);
-						let.set(yu-1, let.get(yu-1)+1);
+			if(let.get(til).equals(0)){
+				let.set(til, 40);
+			}else
+				let.set(til, let.get(til)+1);
+			for(int yu = sd-1;yu>=0;yu--){
+				if(let.get(yu).equals(91)&&yu==0){
+					for(int i = 0;i<=til;i++){
+						let.set(i, 40);
 					}
+					if(til!=sd-1)
+						let.set(til+1, 40);
+					else
+						go=false;
+				}else if(let.get(yu).equals(42)){
+					let.set(yu, 65);
+				}else if(let.get(yu).equals(91)){
+					let.set(yu, 95);
+				}else if(let.get(yu).equals(96)){
+					let.set(yu, 97);
+				}else if(let.get(yu).equals(123)){
+					let.set(yu, 40);
+					let.set(yu-1, let.get(yu-1)+1);
 				}
 			}
-			for(int yu = 0;yu<217;yu++){
-				System.out.print((char)(int)let.get(yu));
+			String nme="";
+			for(Integer n:let){
+				if(!n.equals(0)){
+					nme+=(char)(int)n;
+				}
 			}
-			System.out.println();
+			int tries = 0;
+			while(tries < 10){
+				URL url = new URL("https://en.wikipedia.org/wiki/" + nme);
+				System.out.println(url);
+		        URLConnection con = url.openConnection();
+		        try{
+		        	InputStream is =con.getInputStream();
+		        	BufferedReader br = new BufferedReader(new InputStreamReader(is));
+			        String page = "";
+			        String james = null;
+			        PrintWriter writer = new PrintWriter(nme + ".html");
+			        while ((james = br.readLine()) != null) {
+			        	//System.out.println("James:  " + james.length());
+			            page+=james;
+			        }
+			        //System.out.println(page.length());
+			        if(page.indexOf("Wikipedia does not have an article with this exact name.")==-1)
+			            writer.println(page);
+			        writer.close();
+			        tries = 10;
+		        }
+		        catch(FileNotFoundException y){
+		        	System.out.print("failed");
+		        	for(int c = 0; c<tries;c++){
+		        		System.out.print(".");
+		        	}
+		        	System.out.println(tries);
+		        	tries ++;
+		        }
+		        
+			}
+			
+			//System.out.println(nme);
 			//if(let.get(0).equals(73)&&let.get(1).equals(97)&&let.get(2).equals(110)){
 			//	let.set(216, 126);
 			//}

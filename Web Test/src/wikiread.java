@@ -4,11 +4,7 @@ import java.net.*;
 public class wikiread {
 	
 	 public static void main(String[] args) throws IOException {
-
-	        // Make a URL to the web page
 	        URL url = new URL("http://bulbapedia.bulbagarden.net/wiki/Skitty_(Pok%C3%A9mon)");
-
-	        // Get the input stream through URL Connection
 	        URLConnection con = url.openConnection();
 	        InputStream is =con.getInputStream();
 
@@ -24,11 +20,11 @@ public class wikiread {
 	        BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
 	        String line = null;
-	        FileWriter writer = new FileWriter("text.txt");
+	        PrintWriter writer = new PrintWriter("text1.txt");
 	        // read each line and write to System.out
-//	        while ((line = br.readLine()) != null) {
-//	            ((Object) writer).println(line);
-//	        }
+	        while ((line = br.readLine()) != null) {
+	            writer.println(line);
+	        }
 	        writer.close();
 	    }
 	

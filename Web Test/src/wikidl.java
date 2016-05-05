@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +17,9 @@ public class wikidl {
 	public void trying() throws IOException, FileNotFoundException{
 		InputStreamReader o = new InputStreamReader(System.in);
 		BufferedReader b = new BufferedReader(o);
+		System.out.print("Overwrite mode: ");
+		boolean no = Boolean.parseBoolean(b.readLine());
+		System.out.print("Letters: ");
 		int sd = Integer.parseInt(b.readLine());
 		for(int y = 0;y<sd;y++){
 			let.add(0);
@@ -58,8 +62,18 @@ public class wikidl {
 					nme+=(char)(int)n;
 				}
 			}
-			int tries = 0;
-			while(tries < 10){
+			File g = new File(nme + ".html");
+			String name = nme;
+			int mod = 1;
+			if(!no)
+				while(g.exists()){
+					name += mod;
+					System.out.println("This exists: " + mod);
+					mod++;
+					g = new File(name + ".html");
+				}
+			int tries = 1;
+			while(tries < 4){
 				URL url = new URL("https://en.wikipedia.org/wiki/" + nme);
 				System.out.println(url);
 		        URLConnection con = url.openConnection();
@@ -68,16 +82,18 @@ public class wikidl {
 		        	BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			        String page = "";
 			        String james = null;
-			        PrintWriter writer = new PrintWriter(nme + ".html");
+			        
 			        while ((james = br.readLine()) != null) {
 			        	//System.out.println("James:  " + james.length());
 			            page+=james;
 			        }
 			        //System.out.println(page.length());
-			        if(page.indexOf("Wikipedia does not have an article with this exact name.")==-1)
-			            writer.println(page);
-			        writer.close();
-			        tries = 10;
+			        if(page.indexOf("Wikipedia does not have an article with this exact name.")==-1&&page.indexOf("Redirected from")==-1){
+			        	PrintWriter writer = new PrintWriter(name + ".html");
+			        	writer.println(page);
+			        	writer.close();
+			        }
+			        tries = 4;
 		        }
 		        catch(FileNotFoundException y){
 		        	System.out.print("failed");

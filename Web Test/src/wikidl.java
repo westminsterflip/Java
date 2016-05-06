@@ -12,20 +12,27 @@ import java.util.ArrayList;
 public class wikidl {
 	public static ArrayList<Integer> let = new ArrayList<Integer>(217);
 	
-	public wikidl(){}
+	public wikidl() throws FileNotFoundException, IOException{
+		trying();
+	}
 	
 	public void trying() throws IOException, FileNotFoundException{
 		InputStreamReader o = new InputStreamReader(System.in);
 		BufferedReader b = new BufferedReader(o);
 		System.out.print("Overwrite mode: ");
 		boolean no = Boolean.parseBoolean(b.readLine());
-		System.out.print("Letters: ");
+		System.out.print("Start Letters: ");
+		int dd = Integer.parseInt(b.readLine());
+		System.out.print("End Letters: ");
 		int sd = Integer.parseInt(b.readLine());
 		for(int y = 0;y<sd;y++){
 			let.add(0);
 		}
 		boolean go=true;
 		int til = 0;
+		for(int as = 0; as < dd;as++){
+			let.set(as, 40);
+		}
 		while(go){
 			til = 0;
 			for(int yu = 0;yu<sd;yu++){
@@ -84,10 +91,8 @@ public class wikidl {
 			        String james = null;
 			        
 			        while ((james = br.readLine()) != null) {
-			        	//System.out.println("James:  " + james.length());
 			            page+=james;
 			        }
-			        //System.out.println(page.length());
 			        if(page.indexOf("Wikipedia does not have an article with this exact name.")==-1&&page.indexOf("Redirected from")==-1){
 			        	PrintWriter writer = new PrintWriter(name + ".html");
 			        	writer.println(page);
@@ -112,18 +117,12 @@ public class wikidl {
 		        	tries ++;
 		        }
 			}
-			
-			//System.out.println(nme);
-			//if(let.get(0).equals(73)&&let.get(1).equals(97)&&let.get(2).equals(110)){
-			//	let.set(216, 126);
-			//}
 		}
-		//System.out.println(let);
 	}
 	
+	@SuppressWarnings("unused")
 	public static void main(String[] franny) throws IOException{
 		wikidl w = new wikidl();
-		w.trying();
 	}
 	
 }

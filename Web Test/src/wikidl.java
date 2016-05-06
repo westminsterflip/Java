@@ -103,7 +103,14 @@ public class wikidl {
 		        	System.out.println(tries);
 		        	tries ++;
 		        }
-		        
+		        catch(IOException y){
+		        	System.out.print("failed");
+		        	for(int c = 0; c<tries;c++){
+		        		System.out.print(".");
+		        	}
+		        	System.out.println(tries);
+		        	tries ++;
+		        }
 			}
 			
 			//System.out.println(nme);

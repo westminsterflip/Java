@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class wikidl {
 	public static ArrayList<Integer> let = new ArrayList<Integer>(217);
+	public String j;
 	
 	public wikidl() throws FileNotFoundException, IOException{
 		trying();
@@ -22,20 +23,30 @@ public class wikidl {
 		System.out.print("Overwrite mode: ");
 		boolean no = Boolean.parseBoolean(b.readLine());
 		System.out.print("Start Letters: ");
-		int dd = Integer.parseInt(b.readLine());
+		String dd = b.readLine();
 		System.out.print("End Letters: ");
-		int sd = Integer.parseInt(b.readLine());
-		for(int y = 0;y<sd;y++){
+		String sd = b.readLine();
+		j=sd;
+		for(int y = 0;y<sd.length();y++){
 			let.add(0);
 		}
+		//for(int y = 0;y<sd.length();y++){
+			//let.set(y, (int)dd.charAt(y));
+		//}
+		for(int y = 0;y<dd.length();y++){
+			let.set(y, (int)dd.charAt(y));
+			//System.out.println((int)dd.charAt(y));
+		}
+		let.set(dd.length()-1, let.get(dd.length()-1)-1);
 		boolean go=true;
 		int til = 0;
-		for(int as = 0; as < dd;as++){
-			let.set(as, 40);
-		}
+		//for(int as = 0; as < dd.length();as++){
+			//let.set(as, 40);
+		//}
+		//System.out.println(let);
 		while(go){
 			til = 0;
-			for(int yu = 0;yu<sd;yu++){
+			for(int yu = 0;yu<sd.length();yu++){
 				if(!let.get(yu).equals(0))
 					til = yu;
 			}
@@ -43,15 +54,15 @@ public class wikidl {
 				let.set(til, 40);
 			}else
 				let.set(til, let.get(til)+1);
-			for(int yu = sd-1;yu>=0;yu--){
+			for(int yu = sd.length()-1;yu>=0;yu--){
 				if(let.get(yu).equals(91)&&yu==0){
 					for(int i = 0;i<=til;i++){
 						let.set(i, 40);
 					}
-					if(til!=sd-1)
-						let.set(til+1, 40);
-					else
-						go=false;
+//					if(til!=sd.length()-1)
+//						let.set(til+1, 40);
+//					else
+//						go=false;
 				}else if(let.get(yu).equals(42)){
 					let.set(yu, 65);
 				}else if(let.get(yu).equals(91)){
@@ -117,7 +128,19 @@ public class wikidl {
 		        	tries ++;
 		        }
 			}
+			//System.out.println(let);
+			if(stuff())
+				go=false;
 		}
+	}
+	
+	public boolean stuff(){
+		boolean g = true;
+		for(int y = 0;y<j.length();y++){
+			if((int)j.charAt(y)!=let.get(y))
+				g=false;
+		}
+		return g;
 	}
 	
 	@SuppressWarnings("unused")

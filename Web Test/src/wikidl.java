@@ -26,6 +26,10 @@ public class wikidl {
 		String dd = b.readLine();
 		System.out.print("End Letters: ");
 		String sd = b.readLine();
+		String temp = dd;
+		dd = Character.toUpperCase(temp.charAt(0))+temp.substring(1);
+		temp = sd;
+		sd = Character.toUpperCase(temp.charAt(0))+temp.substring(1);
 		j=sd;
 		for(int y = 0;y<sd.length();y++){
 			let.add(0);

@@ -133,8 +133,9 @@ public class wikidl {
 		        }
 			}
 			//System.out.println(let);
-			if(stuff())
-				go=false;
+//			if(stuff())
+//				go=false;
+			go=!stuff();
 		}
 	}
 	

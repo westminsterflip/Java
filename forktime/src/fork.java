@@ -22,7 +22,7 @@ public class fork extends JFrame{
 	
 	@SuppressWarnings("unused")
 	public static void main(String[] saltysaltysalty){
-		for(int y = 0;y<1;y++){
+		for(int y = 0;y<10;y++){
 			fork f = new fork();
 		}
 	}

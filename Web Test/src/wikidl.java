@@ -50,18 +50,24 @@ public class wikidl {
 		//System.out.println(let);
 		while(go){
 			til = 0;
+			//System.out.println(let);
 			for(int yu = 0;yu<sd.length();yu++){
 				if(!let.get(yu).equals(0))
 					til = yu;
 			}
 			if(let.get(til).equals(0)){
+				//System.out.println(til);
 				let.set(til, 40);
+				//System.out.println("THISISTIL: " + til);
 			}else
 				let.set(til, let.get(til)+1);
 			for(int yu = sd.length()-1;yu>=0;yu--){
 				if(let.get(yu).equals(91)&&yu==0){
-					for(int i = 0;i<=til;i++){
+					for(int i = 0;i<=til+1;i++){
+						//System.out.println("let before changes: "+let);
+						//System.out.println("til: " + til);
 						let.set(i, 40);
+						//System.out.println("THIS PRICK CHANGED EVERYTHING");
 					}
 //					if(til!=sd.length()-1)
 //						let.set(til+1, 40);
@@ -70,10 +76,13 @@ public class wikidl {
 				}else if(let.get(yu).equals(42)){
 					let.set(yu, 65);
 				}else if(let.get(yu).equals(91)){
+					//System.out.println(let);
 					let.set(yu, 95);
+					//System.out.println("Changed: " + let);
 				}else if(let.get(yu).equals(96)){
 					let.set(yu, 97);
 				}else if(let.get(yu).equals(123)){
+					//System.out.println("RESETRESETRESETRESETRESET");
 					let.set(yu, 40);
 					let.set(yu-1, let.get(yu-1)+1);
 				}
@@ -84,15 +93,20 @@ public class wikidl {
 					nme+=(char)(int)n;
 				}
 			}
+			if(nme.charAt(nme.length()-1)=='_')
+				nme=nme.substring(0, nme.length()-2);
 			File g = new File(nme + ".html");
 			String name = nme;
 			int mod = 1;
+			String name1;
 			if(!no)
 				while(g.exists()){
-					name += mod;
+					name1 = name + mod;
+					//name += mod;
 					System.out.println("This exists: " + mod);
 					mod++;
-					g = new File(name + ".html");
+					g = new File(name1 + ".html");
+					
 				}
 			int tries = 1;
 			while(tries < 4){

@@ -71,8 +71,10 @@ public class wikilist {
 								nme+=(char)(int)n;
 							}
 						}
-						if(nme.charAt(nme.length()-1)=='_')
+						if(nme.charAt(nme.length()-1)=='_'){
+							System.out.println("TRIGGERED");
 							nme=nme.substring(0, nme.length()-2);
+						}
 						int tries = 1;
 						boolean con = false;
 						while(tries < 2&&!con){
@@ -106,7 +108,7 @@ public class wikilist {
 							}
 							if(!isthere){
 								Files.write(Paths.get("knownwikis.wot"), ot.getBytes(), StandardOpenOption.APPEND);
-								System.out.println(nme);
+								System.out.println("Recorded: " + nme + ":end:");
 							}
 						}
 						go=!stuff();

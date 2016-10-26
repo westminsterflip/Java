@@ -18,9 +18,7 @@ public class wikilist {
 	
 	@SuppressWarnings("unused")
 	public void lister() throws InterruptedException{
-		try{PrintWriter pw = new PrintWriter("knownwikis.wot");
-			pw.close();
-			for(int y = 0;y<209;y++){
+		for(int y = 0;y<209;y++){
 				let.add(0);
 			}
 			for(int y = 0;y<1;y++){
@@ -71,9 +69,11 @@ public class wikilist {
 								nme+=(char)(int)n;
 							}
 						}
-						if(nme.charAt(nme.length()-1)=='_'){
-							System.out.println("TRIGGERED");
-							nme=nme.substring(0, nme.length()-2);
+						while(nme.charAt(nme.length()-1)=='_'){
+							//System.out.println("TRIGGERED");
+							//System.out.println("Name b4: " + nme);
+							nme=nme.substring(0, nme.length()-1);
+							//System.out.println("Name axter: " + nme);
 						}
 						int tries = 1;
 						boolean con = false;
@@ -89,16 +89,16 @@ public class wikilist {
 							tries++;
 						}
 						if(con){
-							String ot = ":::" + nme + ":::" + '\n';
+							String ot = ":::" + nme + ":::";
 							File je = new File("knownwikis.wot");
 							boolean isthere = false;
 							try {
 							    Scanner scanner = new Scanner(je);
-							    int lineNum = 0;
 							    while (scanner.hasNextLine()) {
 							        String line = scanner.nextLine();
-							        lineNum++;
-							        if(ot.equals(line)) { 
+							        //System.out.println("Text to be written><"+ot+"><end");
+							        //System.out.println("Current line><"+line+"><end");
+							        if(ot.equals(line)) {
 							        	isthere=true;
 							        }
 							    }
@@ -107,8 +107,14 @@ public class wikilist {
 								e.printStackTrace();
 							}
 							if(!isthere){
+								ot+='\n';
 								Files.write(Paths.get("knownwikis.wot"), ot.getBytes(), StandardOpenOption.APPEND);
 								System.out.println("Recorded: " + nme + ":end:");
+								ArrayList<Integer> john = new ArrayList<Integer>(nme.length());
+								for(int y=0;y<nme.length();y++){
+									john.add((Integer)(int)nme.charAt(y));
+								}
+								//System.out.println("In ASCII: " + john);
 							}
 						}
 						go=!stuff();
@@ -126,10 +132,7 @@ public class wikilist {
 					t.printStackTrace();
 				}
 			}
-			System.out.println("out has been closed");
-		}catch(IOException e){
-			e.printStackTrace();
-		}
+			//System.out.println("out has been closed");
 	}
 	
 	public String letstring(){

@@ -7,10 +7,12 @@ import java.net.UnknownHostException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class wikilist {
 	public String j;
+	public ArrayList<String> list = new ArrayList<String>();
 	
 	public wikilist() throws InterruptedException, IOException{
 		System.out.println("class start");
@@ -37,10 +39,12 @@ public class wikilist {
 			int linen = 0;
 			while (scanner.hasNextLine()) {
 				linen++;
-				initial = scanner.nextLine();
+				list.add(scanner.nextLine());
 		    }
 			if(linen<2||update)
 				initial = "%21%21";
+			else
+				initial = list.get(list.size()-1);
 		    scanner.close();
 		} catch(FileNotFoundException e) { 
 			e.printStackTrace();
@@ -62,7 +66,7 @@ public class wikilist {
 					while(!found){
 						URL url = null;
 						//System.out.println(nextpage);
-						System.out.println("looped " + firstpage);
+						//System.out.println("looped");
 						if(firstpage){
 							url = new URL("https://en.wikipedia.org/wiki/Special:AllPages?from=" + initial + "&to=&namespace=0&hideredirects=1");
 						}else{
@@ -96,30 +100,18 @@ public class wikilist {
 					        URLConnection conic = url.openConnection();
 					        InputStream ist =conic.getInputStream();
 					        BufferedReader brq = new BufferedReader(new InputStreamReader(ist));
-					        //lines=0;
-					        while((james = brq.readLine())!=null){
-					        	//System.out.println(lines);
-					        	//System.out.println(james);
+					        while((james = brq.readLine())!=null&&james.indexOf("</ul>")==-1){
 					        	if(james.indexOf("<li><a href=\"/wiki/")!=-1){
 					        		int tmp3 = james.indexOf("<li><a href=\"/wiki/");
 					        		String artname = james.substring(tmp3+19);
 					        		artname = artname.substring(0,artname.indexOf("\""));
 					        		boolean isthere = false;
-									try {
-									    Scanner scanner = new Scanner(known);
-									    while (scanner.hasNextLine()) {
-									        String line = scanner.nextLine();
-									        if(artname.equals(line)) {
-									        	isthere=true;
-									        }
-									    }
-									    scanner.close();
-									} catch(FileNotFoundException e) { 
-										e.printStackTrace();
-									}
+									if(list.indexOf(artname)!=-1)
+										isthere = true;
 									if(!isthere){
 										System.out.println(artname);
 										Files.write(Paths.get("knownwikis.wot"), (artname + '\n').getBytes(), StandardOpenOption.APPEND);
+										list.add(artname);
 									}
 					        	}
 					        }

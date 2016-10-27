@@ -14,12 +14,14 @@ import java.util.Scanner;
 
 public class getknown {
 	
-	public getknown(){
-		maindl();
+	public getknown(String pth){
+		maindl(pth);
 	}
 	
 	@SuppressWarnings("unused")
-	public void maindl(){
+	public void maindl(String path){
+		if(path.charAt(path.length()-1)!='\\')
+			path+='\\';
 		try{
 			File known = new File("knownwikis.wot");
 			Scanner scanner2 = new Scanner(known);
@@ -34,7 +36,7 @@ public class getknown {
 		    while (scanner2.hasNextLine()) {
 		    	String line = scanner2.nextLine();
 		    	int tries = 1;
-		    	String flname = line.substring(3,line.indexOf(":::",2));
+		    	String flname = line;
 		    	while(tries < 4){
 					if(connected){
 						URL url = new URL("https://en.wikipedia.org/wiki/" + flname);
@@ -89,7 +91,7 @@ public class getknown {
 					        	page=fixlinks;
 					        }
 					        if(page.indexOf("Wikipedia does not have an article with this exact name.")==-1&&page.indexOf("Redirected from")==-1){
-					        	PrintWriter writer = new PrintWriter(flname + ".html");
+					        	PrintWriter writer = new PrintWriter(path + flname + ".html");
 					        	writer.println(page);
 					        	writer.close();
 					        	System.out.println(url);
@@ -130,9 +132,12 @@ public class getknown {
 		catch(IOException t){}
 	}
 	
-	@SuppressWarnings("unused")
-	public static void main(String[] boe){
+	//@SuppressWarnings("unused")
+	/*public static void main(String[] boe){
+		InputStreamReader j = new InputStreamReader(System.in);
+		BufferedReader oi = new BufferedReader(j);
+		System
 		getknown unknown = new getknown();
-	}
+	}*/
 	
 }

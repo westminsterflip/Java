@@ -1,6 +1,7 @@
 import java.io.*;
 
 public class runner {
+	String filepath;
 	
 	public runner() throws IOException{
 		try{
@@ -22,13 +23,18 @@ public class runner {
 		System.out.println("c) View list of known articles (List of URL parts, not particularly readable)");
 		System.out.println("d) Compile/Update article list");
 		System.out.println("e) Delete duplicate articles (There should be no need to run this)");
+		System.out.println("f) Specify filepath (If you do not specify a filepath, the default will be used)");
 		char choice = Character.toLowerCase(oi.readLine().charAt(0));
 		switch(choice){
-			case 'a': getknown unknown = new getknown();break;
+			case 'a': getknown unknown = new getknown(filepath);break;
 			case 'b': System.out.println("This is still broke");break;
 			case 'c': System.out.println("This is still broke");break;
 			case 'd': wikilist lickywist = new wikilist();break;
 			case 'e': clean dirty = new clean();break;
+			case 'f': InputStreamReader j1 = new InputStreamReader(System.in);
+			BufferedReader oi1 = new BufferedReader(j1);
+			System.out.print("Filepath: ");
+			filepath = oi1.readLine();break;
 			default : System.out.println("Come back when you're ready to actually do something");
 		}
 	}

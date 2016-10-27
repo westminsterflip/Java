@@ -79,7 +79,7 @@ public class wikilist {
 					        while ((james = br.readLine()) != null&&lines<90){
 					        	if(lines==89){
 					        		int tmp = james.indexOf("<a href=\"");
-					        		if(firstpage){
+					        		if(firstpage&&update){
 					        			nextpage = "https://en.wikipedia.org" + james.substring(tmp + 9, james.indexOf("\"",tmp+9));
 					        		}else{
 					        			int tmp1 = james.indexOf("Previous page");
@@ -109,8 +109,6 @@ public class wikilist {
 									    Scanner scanner = new Scanner(known);
 									    while (scanner.hasNextLine()) {
 									        String line = scanner.nextLine();
-									        //System.out.println("Text to be written><"+ot+"><end");
-									        //System.out.println("Current line><"+line+"><end");
 									        if(artname.equals(line)) {
 									        	isthere=true;
 									        }
@@ -123,12 +121,8 @@ public class wikilist {
 										System.out.println(artname);
 										Files.write(Paths.get("knownwikis.wot"), (artname + '\n').getBytes(), StandardOpenOption.APPEND);
 									}
-					        	}//else if(james.indexOf("/wiki/")!=-1){
-					        		//System.out.println(james);
-					        	//}
-					        	//lines++;
+					        	}
 					        }
-					       // Thread.sleep(1000000);
 				        }
 				        catch(FileNotFoundException y){
 				        	System.out.print("failed");

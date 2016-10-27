@@ -16,20 +16,19 @@ public class runner {
 		InputStreamReader j = new InputStreamReader(System.in);
 		BufferedReader oi = new BufferedReader(j);
 		System.out.println("What would you like to do?");
-		System.out.println("a) Download more articles (Just downloads a bunch of stuff, don't use)");
-		System.out.println("b) Check for updates on known articles/Download from list (Will not work without having run e)");
-		System.out.println("c) Search the known library");
-		System.out.println("d) View list of known articles (This list is not the same as a list of downloaded articles)");
-		System.out.println("e) Make article list w/o downloading");
-		System.out.println("f) Delete duplicate articles");
+		//System.out.println("a) Download more articles (Just downloads a bunch of stuff, don't use)");
+		System.out.println("a) Download from list (Will not work without having run d)");
+		System.out.println("b) Search the known library");
+		System.out.println("c) View list of known articles (List of URL parts, not particularly readable)");
+		System.out.println("d) Compile/Update article list");
+		System.out.println("e) Delete duplicate articles (There should be no need to run this)");
 		char choice = Character.toLowerCase(oi.readLine().charAt(0));
 		switch(choice){
-			case 'a': wikidl canidownloadtheinternetsplease = new wikidl();break;
-			case 'b': getknown unknown = new getknown();break;
+			case 'a': getknown unknown = new getknown();break;
+			case 'b': System.out.println("This is still broke");break;
 			case 'c': System.out.println("This is still broke");break;
-			case 'd': System.out.println("This is still broke");break;
-			case 'e': wikilist lickywist = new wikilist();break;
-			case 'f': clean dirty = new clean();break;
+			case 'd': wikilist lickywist = new wikilist();break;
+			case 'e': clean dirty = new clean();break;
 			default : System.out.println("Come back when you're ready to actually do something");
 		}
 	}

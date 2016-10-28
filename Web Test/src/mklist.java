@@ -11,7 +11,7 @@ public class mklist {
 	ArrayList<String> list = new ArrayList<String>();
 	
 	public mklist(String pth){
-		
+		makesey(pth);
 	}
 	
 	public void makesey(String path){

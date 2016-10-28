@@ -28,7 +28,7 @@ public class runner {
 		switch(choice){
 			case 'a': getknown unknown = new getknown(filepath);break;
 			case 'b': System.out.println("This is still broke");break;
-			case 'c': System.out.println("This is still broke");break;
+			case 'c': mklist nolist = new mklist(filepath);break;
 			case 'd': wikilist lickywist = new wikilist();break;
 			case 'e': clean dirty = new clean(filepath);break;
 			case 'f': InputStreamReader j1 = new InputStreamReader(System.in);

@@ -32,7 +32,6 @@ public class getknown {
 			update = true;
 		}
 		File li = new File("knownwikis.wot");
-		File readli = new File(path + "list\\readablelist.27");
 		try {
 			Scanner lsscn = new Scanner(li);
 			String john = null;

@@ -32,6 +32,7 @@ public class wikilist {
 		String nextpage = "";
 		boolean go = true;
 		boolean firstpage = true;
+		String artname="";
 		try{boolean con = true;
 		String initial = "";
 		File known = new File("knownwikis.wot");
@@ -68,12 +69,25 @@ public class wikilist {
 					System.out.println("Now checking: " + url);
 			        String james = null;
 			        URLConnection conic = url.openConnection();
-			        InputStream ist =conic.getInputStream();
+			        boolean worked = false;
+			        InputStream ist = null;
+			        while(!worked){
+			        	try{
+				        	ist =conic.getInputStream();
+				        	worked=true;
+				        }
+				        catch(IOException t){}
+			        }
 			        BufferedReader brq = new BufferedReader(new InputStreamReader(ist));
-			        while((james = brq.readLine())!=null&&james.indexOf("</ul>")==-1){
+			        int u = 0;
+			        while(u < 95){
+			        	brq.readLine();
+			        	u++;
+			        }
+			        while((james = brq.readLine())!=null&&u<444){
 			        	if(james.indexOf("<li><a href=\"/wiki/")!=-1){
 			        		int tmp3 = james.indexOf("<li><a href=\"/wiki/");
-			        		String artname = james.substring(tmp3+19);
+			        		artname = james.substring(tmp3+19);
 			        		artname = artname.substring(0,artname.indexOf("\""));
 			        		boolean isthere = false;
 							if(list.indexOf(artname)!=-1)
@@ -84,8 +98,9 @@ public class wikilist {
 								list.add(artname);
 							}
 			        	}
+			        	u++;
 			        }
-			        initial = list.get(list.size()-1);
+			        initial = artname;
 				}else{
 					System.out.println("No conneection, will try again in 10 seconds");
 					Thread.sleep(10000);
@@ -95,7 +110,7 @@ public class wikilist {
 		}
 		catch(MalformedURLException t){System.out.println("BROKEN1");}
 		catch(FileNotFoundException t){System.out.println("BROKEN2");}
-		catch(IOException t){System.out.println("BROKEN3");}
+		catch(IOException t){t.printStackTrace();}
 	}
 			
 	@SuppressWarnings("unused")

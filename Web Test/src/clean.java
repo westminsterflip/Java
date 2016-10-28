@@ -7,14 +7,14 @@ public class clean {
 	
 	public ArrayList<String> filenames = new ArrayList<String>();
 	
-	public clean(){
-		undupe();
+	public clean(String pth){
+		undupe(pth);
 	}
 	
-	public void undupe(){
-		File je = new File("knownwikis.wot");
+	public void undupe(String path){
+		File readli = new File(path + "list\\readablelist.27");
 		try{
-		    Scanner scanner = new Scanner(je);
+		    Scanner scanner = new Scanner(readli);
 		    while (scanner.hasNextLine()) {
 		        String line = scanner.nextLine();
 		        String flname = line.substring(3,line.indexOf(":::",2)) + ".html";
@@ -28,7 +28,7 @@ public class clean {
 		    	boolean found = false;
 			    while (scanner1.hasNextLine()&&!found){ 
 			    	String line = scanner1.nextLine();
-			    	if(line.indexOf("Redirected from")!=-1){
+			    	if(line.indexOf("Redirected from")!=-1||line.indexOf("Wikipedia does not have an article with this exact name.")!=-1){
 			    		found=true;
 			    	}
 			    }
@@ -42,9 +42,9 @@ public class clean {
 		}
 	}
 	
-	@SuppressWarnings("unused")
+	/*@SuppressWarnings("unused")
 	public static void main(String[] crepes){
 		clean dirty = new clean();
-	}
+	}*/
 	
 }

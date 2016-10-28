@@ -34,57 +34,85 @@ public class wikilist {
 		boolean firstpage = true;
 		String artname="";
 		try{boolean con = true;
-		String initial = "";
-		File known = new File("knownwikis.wot");
-		try {Scanner scanner = new Scanner(known);
-			int linen = 0;
-			while (scanner.hasNextLine()) {
-				linen++;
-				list.add(scanner.nextLine());
-		    }
-			if(linen<2||update)
-				initial = "%21%21";
-			else
-				initial = list.get(list.size()-1);
-		    scanner.close();
-		} catch(FileNotFoundException e) { 
-			e.printStackTrace();
-		}
+			String initial = "";
+			File known = new File("knownwikis.wot");
+			try {Scanner scanner = new Scanner(known);
+				int linen = 0;
+				while (scanner.hasNextLine()) {
+					linen++;
+					list.add(scanner.nextLine());
+			    }
+				if(linen<2||update)
+					initial = "%21%21";
+				else
+					initial = list.get(list.size()-1);
+			    scanner.close();
+			} catch(FileNotFoundException e) { 
+				e.printStackTrace();
+			}
 			while(go){
-				try{
-					URL testurl = new URL("https://en.wikipedia.org");
-					HttpURLConnection tstur = (HttpURLConnection)testurl.openConnection();
-					Object tstdta = tstur.getContent();
-				}
-				catch(UnknownHostException tsu){con=false;}
-				catch(IOException tsu){con=false;}
+				con=false;
 				while(!con){
-					System.out.println("NOCONNECTION");
-					Thread.sleep(10000);
+					try{
+						URL testurl = new URL("https://en.wikipedia.org");
+						HttpURLConnection tstur = (HttpURLConnection)testurl.openConnection();
+						Object tstdta = tstur.getContent();
+						con=true;
+					}
+					catch(UnknownHostException tsu){}
+					catch(IOException tsu){}
+					if(!con){
+						System.out.println("NOCONNECTION");
+						Thread.sleep(10000);
+					}
 				}
 				boolean found=false;
 				if(con){
 					URL url = null;
+					URL url1 = null;
 					url = new URL("https://en.wikipedia.org/wiki/Special:AllPages?from=" + initial + "&to=&namespace=0&hideredirects=1");
+					url1 = new URL("https://en.wikipedia.org/wiki/Special:AllPages?from=" + list.get(list.indexOf(initial)-1) + "&to=&namespace=0&hideredirects=1");
 					System.out.println("Now checking: " + url);
 			        String james = null;
 			        URLConnection conic = url.openConnection();
 			        boolean worked = false;
 			        InputStream ist = null;
-			        while(!worked){
+			        int tries = 0;
+			        while(!worked&&tries<5){
 			        	try{
 				        	ist =conic.getInputStream();
 				        	worked=true;
 				        }
-				        catch(IOException t){}
+				        catch(IOException t){
+				        	System.out.println("An error ocurred, trying again");
+				        	Thread.sleep(1000);
+				        	tries++;
+				        }
 			        }
+			        if(!worked&&tries>=5){
+			        	while(!worked){
+			        		try{
+			        			conic = url1.openConnection();
+					        	ist =conic.getInputStream();
+					        	worked=true;
+					        }
+					        catch(IOException t){
+					        	System.out.println("An error ocurred, will try again");
+					        	Thread.sleep(1000);
+					        }
+			        	}
+		        	}
 			        BufferedReader brq = new BufferedReader(new InputStreamReader(ist));
 			        int u = 0;
 			        while(u < 95){
 			        	brq.readLine();
 			        	u++;
 			        }
+			        go = false;
 			        while((james = brq.readLine())!=null&&u<444){
+			        	if(james.indexOf("Next page")!=-1){
+			        		go = true;
+			        	}
 			        	if(james.indexOf("<li><a href=\"/wiki/")!=-1){
 			        		int tmp3 = james.indexOf("<li><a href=\"/wiki/");
 			        		artname = james.substring(tmp3+19);
@@ -104,8 +132,8 @@ public class wikilist {
 				}else{
 					System.out.println("No conneection, will try again in 10 seconds");
 					Thread.sleep(10000);
-				}
-				//go=false;
+			}
+			//go=false;
 			}
 		}
 		catch(MalformedURLException t){System.out.println("BROKEN1");}

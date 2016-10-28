@@ -20,9 +20,9 @@ public class runner {
 		//System.out.println("a) Download more articles (Just downloads a bunch of stuff, don't use)");
 		System.out.println("a) Download from list (Will not work without having run d)");
 		System.out.println("b) Search the known library");
-		System.out.println("c) View list of known articles (List of URL parts, not particularly readable)");
+		System.out.println("c) Generate list of downloaded articles");
 		System.out.println("d) Compile/Update article list");
-		System.out.println("e) Delete duplicate articles (There should be no need to run this)");
+		System.out.println("e) Delete duplicate articles (There should be no need to run this, but wont work withough having run a)");
 		System.out.println("f) Specify filepath (If you do not specify a filepath, the default will be used)");
 		char choice = Character.toLowerCase(oi.readLine().charAt(0));
 		switch(choice){
@@ -30,7 +30,7 @@ public class runner {
 			case 'b': System.out.println("This is still broke");break;
 			case 'c': System.out.println("This is still broke");break;
 			case 'd': wikilist lickywist = new wikilist();break;
-			case 'e': clean dirty = new clean();break;
+			case 'e': clean dirty = new clean(filepath);break;
 			case 'f': InputStreamReader j1 = new InputStreamReader(System.in);
 			BufferedReader oi1 = new BufferedReader(j1);
 			System.out.print("Filepath: ");

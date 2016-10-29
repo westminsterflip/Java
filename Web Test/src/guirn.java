@@ -3,6 +3,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -13,6 +14,7 @@ import javax.swing.JRadioButton;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+@SuppressWarnings("serial")
 public class guirn extends JFrame implements ActionListener{
 	JPanel but = new JPanel();
 	JPanel buf = new JPanel();
@@ -23,13 +25,18 @@ public class guirn extends JFrame implements ActionListener{
 	JRadioButton sch = new JRadioButton("Search downloaded library");
 	JButton go = new JButton("Go");
 	Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
-	String filepath = null;
+	static String filepath = null;
+	int todo=0;
 
 	public guirn(String flpth){
 		super("Wikipedia-Downloader");
 		filepath = flpth;
-		if(filepath.charAt(filepath.length()-1)!=-1)
-			filepath+='\\';
+		if(filepath.length()!=0)
+			if(filepath.charAt(filepath.length()-1)!='\\')
+				filepath+='\\';
+		File m = new File(filepath);
+		if(!m.exists())
+			m.mkdirs();
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 	    } 
@@ -56,6 +63,8 @@ public class guirn extends JFrame implements ActionListener{
 		gnli.addActionListener(this);
 		cln.addActionListener(this);
 		sch.addActionListener(this);
+		go.addActionListener(this);
+		lst.setSelected(true);
 		n.add(lst);
 		n.add(dl);
 		n.add(gnli);
@@ -78,10 +87,26 @@ public class guirn extends JFrame implements ActionListener{
 		int wifd = (int)Math.round((scr.getWidth()-getWidth())/2);
 		int hig = (int)Math.round((scr.getHeight()-getHeight())/2);
 		setLocation(wifd,hig);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
+	@SuppressWarnings("unused")
 	public void actionPerformed(ActionEvent e) {
-		
+		if(e.getSource().equals(lst)){
+			todo = 0;
+		}else if(e.getSource().equals(dl)){
+			todo = 1;
+		}else if(e.getSource().equals(gnli)){
+			todo = 2;
+		}else if(e.getSource().equals(cln)){
+			todo = 3;
+		}else if(e.getSource().equals(sch)){
+			todo = 4;
+		}else if(e.getSource().equals(go)){
+			switch(todo){
+				case 0: dispose();listop n = new listop();break;
+			}
+		}
 	}
 	
 }

@@ -12,23 +12,15 @@ import java.util.Scanner;
 
 public class wikilist {
 	public String j;
-	public ArrayList<String> list = new ArrayList<String>();
+	public static ArrayList<String> list = new ArrayList<String>();
 	
-	public wikilist() throws InterruptedException, IOException{
+	public wikilist(boolean up) throws InterruptedException, IOException{
 		System.out.println("class start");
-		lister();
+		lister(up);
 	}
 	
 	@SuppressWarnings("unused")
-	public void lister() throws InterruptedException, IOException{
-		InputStreamReader j = new InputStreamReader(System.in);
-		BufferedReader oi = new BufferedReader(j);
-		System.out.println("Compile (a) or Update (b)?");
-		char comup = oi.readLine().charAt(0);
-		boolean update = false;
-		if(comup=='b'){
-			update = true;
-		}
+	public void lister(boolean update) throws InterruptedException, IOException{
 		String nextpage = "";
 		boolean go = true;
 		boolean firstpage = true;
@@ -132,8 +124,7 @@ public class wikilist {
 				}else{
 					System.out.println("No conneection, will try again in 10 seconds");
 					Thread.sleep(10000);
-			}
-			//go=false;
+				}
 			}
 		}
 		catch(MalformedURLException t){System.out.println("BROKEN1");}
@@ -143,7 +134,7 @@ public class wikilist {
 			
 	@SuppressWarnings("unused")
 	public static void main(String[] james) throws InterruptedException, IOException{
-		wikilist wl = new wikilist();
+		wikilist wl = new wikilist(Boolean.parseBoolean(james[0]));
 	}
 	
 }

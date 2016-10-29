@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 
 import javax.swing.*;
 
@@ -45,6 +46,7 @@ public class flnameset extends JFrame implements ActionListener{
 		ctr.add(pthbx, BorderLayout.EAST);
 		Dimension j = new Dimension(100,26);
 		ok.setPreferredSize(j);
+		pthbx.setText(System.getProperty("user.dir"));
 		brows.setPreferredSize(j);
 		ok.addActionListener(this);
 		brows.addActionListener(this);
@@ -73,11 +75,15 @@ public class flnameset extends JFrame implements ActionListener{
 		}else{
 			setVisible(false);
 			JFileChooser neat = new JFileChooser();
-			neat.setCurrentDirectory(null);
+			neat.setCurrentDirectory(new File(System.getProperty("user.dir")));
 			neat.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			neat.setAcceptAllFileFilterUsed(false);
 			if(neat.showOpenDialog(this)==JFileChooser.APPROVE_OPTION){
-				pthbx.setText(neat.getSelectedFile().getAbsolutePath());
+				if(neat.getSelectedFile().getAbsolutePath().length()==0){
+					pthbx.setText(neat.getCurrentDirectory().getAbsolutePath());
+				}else{
+					pthbx.setText(neat.getSelectedFile().getAbsolutePath());
+				}
 			}
 			setVisible(true);
 		}

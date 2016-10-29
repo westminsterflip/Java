@@ -27,6 +27,7 @@ public class newey extends JFrame implements ActionListener{
 		nw.addActionListener(this);
 		le.addActionListener(this);
 		pack();
+		setResizable(false);
 		int wifd = (int)Math.round((scr.getWidth()-getWidth())/2);
 		int hig = (int)Math.round((scr.getHeight()-getHeight())/2);
 		setLocation(wifd,hig);

@@ -1,6 +1,10 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.swing.*;
 
 @SuppressWarnings("serial")
@@ -68,12 +72,19 @@ public class listop extends JFrame implements ActionListener{
 	
 	@SuppressWarnings("unused")
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource().equals(up))
-			update=true;
+		if(e.getSource().equals(up)){
+			update = true;
+		}
+		try {
+			PrintWriter kk = new PrintWriter(new File("wls.bat"));
+			kk.print("java wikilist "+update);
+		} catch (FileNotFoundException e2) {
+			e2.printStackTrace();
+		}
 		Runtime rt = Runtime.getRuntime();
 		setVisible(false);
 		try {
-			Process pr = rt.exec("java wikilist "+update);
+			Process pr = rt.exec("cmd /c start wls.bat");
 		} catch (IOException e1){
 			e1.printStackTrace();
 		}

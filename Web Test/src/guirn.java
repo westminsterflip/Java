@@ -4,7 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -109,13 +111,25 @@ public class guirn extends JFrame implements ActionListener{
 				case 1: dispose();dlop m = new dlop();break;
 				case 2: go.setEnabled(false);Runtime rt = Runtime.getRuntime();
 						try {
-							Process pr = rt.exec("java mklist "+filepath);
+							PrintWriter kk = new PrintWriter(new File("ml.bat"));
+							kk.print("java mklist "+filepath);
+						} catch (FileNotFoundException e2) {
+							e2.printStackTrace();
+						}
+						try {
+							Process pr = rt.exec("cmd /c start ml.bat");
 						}catch (IOException e1){
 							e1.printStackTrace();
 						}go.setEnabled(true);break;
 				case 3: go.setEnabled(false);Runtime rt1 = Runtime.getRuntime();
 						try {
-							Process pr = rt1.exec("java clean "+filepath);
+							PrintWriter kk = new PrintWriter(new File("c.bat"));
+							kk.print("java clean "+filepath);
+						} catch (FileNotFoundException e2) {
+							e2.printStackTrace();
+						}
+						try {
+							Process pr = rt1.exec("cmd /c start c.bat");
 						}catch (IOException e1){
 							e1.printStackTrace();
 						}go.setEnabled(true);break;

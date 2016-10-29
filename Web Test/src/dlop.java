@@ -1,6 +1,10 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.swing.*;
 
 @SuppressWarnings("serial")
@@ -70,10 +74,16 @@ public class dlop extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource().equals(up))
 			update=true;
+		try {
+			PrintWriter kk = new PrintWriter(new File("gk.bat"));
+			kk.print("java getknown "+guirn.filepath+" "+update);
+		} catch (FileNotFoundException e2) {
+			e2.printStackTrace();
+		}
 		Runtime rt = Runtime.getRuntime();
 		setVisible(false);
 		try {
-			Process pr = rt.exec("java getknown "+guirn.filepath +" "+update);
+			Process pr = rt.exec("cmd /c start gk.bat");
 		} catch (IOException e1){
 			e1.printStackTrace();
 		}

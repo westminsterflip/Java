@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -106,6 +107,19 @@ public class guirn extends JFrame implements ActionListener{
 			switch(todo){
 				case 0: dispose();listop n = new listop();break;
 				case 1: dispose();dlop m = new dlop();break;
+				case 2: go.setEnabled(false);Runtime rt = Runtime.getRuntime();
+						try {
+							Process pr = rt.exec("java mklist "+filepath);
+						}catch (IOException e1){
+							e1.printStackTrace();
+						}go.setEnabled(true);break;
+				case 3: go.setEnabled(false);Runtime rt1 = Runtime.getRuntime();
+						try {
+							Process pr = rt1.exec("java clean "+filepath);
+						}catch (IOException e1){
+							e1.printStackTrace();
+						}go.setEnabled(true);break;
+				case 4: dispose();srchgui s = new srchgui();break;
 			}
 		}
 	}

@@ -1,8 +1,6 @@
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,12 +10,6 @@ public class libsrch {
 	public boolean al;
 	
 	public libsrch(String path, String tbf, boolean in) throws IOException{
-		InputStreamReader k = new InputStreamReader(System.in);
-		BufferedReader n = new BufferedReader(k);
-		System.out.println("Include results in files? (Will probably return many more more, but not relavent results.");
-		System.out.println("This method will take much longer.  true or false)");
-		in = Boolean.parseBoolean(n.readLine());
-		al=in;
 		File li = new File(path + "list\\readablelist.27");
 		try{
 			Scanner lsscn = new Scanner(li);

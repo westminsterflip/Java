@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class srchgui extends JFrame implements ActionListener{
 	JTextField srch4 = new JTextField(50);
 	JButton srch = new JButton("Search");

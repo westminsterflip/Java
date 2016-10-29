@@ -11,22 +11,20 @@ public class libsrch {
 	ArrayList<String> lstin = new ArrayList<String>();
 	public boolean al;
 	
-	public libsrch(String path, String tbf) throws IOException{
+	public libsrch(String path, String tbf, boolean in) throws IOException{
 		InputStreamReader k = new InputStreamReader(System.in);
 		BufferedReader n = new BufferedReader(k);
 		System.out.println("Include results in files? (Will probably return many more more, but not relavent results.");
 		System.out.println("This method will take much longer.  true or false)");
-		boolean in = Boolean.parseBoolean(n.readLine());
+		in = Boolean.parseBoolean(n.readLine());
 		al=in;
 		File li = new File(path + "list\\readablelist.27");
 		try{
 			Scanner lsscn = new Scanner(li);
 			String john = null;
-			boolean found = false;
 			while((john=lsscn.nextLine())!=null){
 				if(john.indexOf(tbf)!=-1){
 					list.add(john);
-					found = true;
 				}
 				File tmp = new File(path + john + ".html");
 				if(tmp.exists()&&in){
@@ -37,6 +35,7 @@ public class libsrch {
 							lstin.add(john);
 						}
 					}
+					flscn.close();
 				}
 			}
 			lsscn.close();

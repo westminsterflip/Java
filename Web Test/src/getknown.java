@@ -16,25 +16,17 @@ import java.util.Scanner;
 public class getknown {
 	ArrayList<String> list = new ArrayList<String>();
 	
-	public getknown(String pth) throws IOException{
-		updl(pth);
+	public getknown(String pth, boolean up) throws IOException{
+		updl(pth,up);
 	}
 	
 	@SuppressWarnings("unused")
-	public void updl(String path) throws IOException{
+	public void updl(String path, boolean update) throws IOException{
 		try{
 			if(path.length()==0)
 				path="";
 		}catch(NullPointerException t){
 			path="";
-		}
-		InputStreamReader j = new InputStreamReader(System.in);
-		BufferedReader oi = new BufferedReader(j);
-		System.out.println("Add missing files (a) or Update (b)?");
-		char comup = oi.readLine().charAt(0);
-		boolean update = false;
-		if(comup=='b'){
-			update = true;
 		}
 		File li = new File("knownwikis.wot");
 		System.out.println(li.exists());
@@ -152,11 +144,12 @@ public class getknown {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	public static void main(String[] arg) throws IOException{
-		/*try {
-			getknown m = new getknown(arg[0]);
+		try {
+			getknown m = new getknown(arg[0], Boolean.parseBoolean(arg[1]));
 		} catch (IOException e) {
 			e.printStackTrace();
-		}*/
+		}
 	}
 }

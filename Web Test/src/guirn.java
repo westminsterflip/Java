@@ -105,6 +105,7 @@ public class guirn extends JFrame implements ActionListener{
 		}else if(e.getSource().equals(go)){
 			switch(todo){
 				case 0: dispose();listop n = new listop();break;
+				case 1: dispose();dlop m = new dlop();break;
 			}
 		}
 	}

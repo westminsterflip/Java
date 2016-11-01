@@ -77,6 +77,7 @@ public class dlop extends JFrame implements ActionListener{
 		try {
 			PrintWriter kk = new PrintWriter(new File("gk.bat"));
 			kk.print("java getknown "+guirn.filepath+" "+update);
+			kk.close();
 		} catch (FileNotFoundException e2) {
 			e2.printStackTrace();
 		}

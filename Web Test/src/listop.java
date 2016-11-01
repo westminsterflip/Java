@@ -78,6 +78,7 @@ public class listop extends JFrame implements ActionListener{
 		try {
 			PrintWriter kk = new PrintWriter(new File("wls.bat"));
 			kk.print("java wikilist "+update);
+			kk.close();
 		} catch (FileNotFoundException e2) {
 			e2.printStackTrace();
 		}

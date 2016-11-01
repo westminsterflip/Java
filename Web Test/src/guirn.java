@@ -113,6 +113,7 @@ public class guirn extends JFrame implements ActionListener{
 						try {
 							PrintWriter kk = new PrintWriter(new File("ml.bat"));
 							kk.print("java mklist "+filepath);
+							kk.close();
 						} catch (FileNotFoundException e2) {
 							e2.printStackTrace();
 						}
@@ -125,6 +126,7 @@ public class guirn extends JFrame implements ActionListener{
 						try {
 							PrintWriter kk = new PrintWriter(new File("c.bat"));
 							kk.print("java clean "+filepath);
+							kk.close();
 						} catch (FileNotFoundException e2) {
 							e2.printStackTrace();
 						}

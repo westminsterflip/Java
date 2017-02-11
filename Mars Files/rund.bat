@@ -1,0 +1,1 @@
+cmd /c start stpthd.bat

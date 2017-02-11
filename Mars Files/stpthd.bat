@@ -1,0 +1,2 @@
+set path=%path%;C:\Program Files\Java\jdk1.8.0_112\bin
+jar cvfm mars.jar mainclass.txt docs help images mars ALUcontrolDatapath.xml Config.properties Mars.java MARSlicense.txt controlDatapath.xml CreateMarsJar.bat mainclass.txt Mars.class MipsXRayOpcode.xml Settings.properties Syscall.properties

@@ -1,5 +1,6 @@
 package jide;
 import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,7 +14,8 @@ public class jidest {
 	public static boolean is64 = false;
 	public final static Dimension scrSize= Toolkit.getDefaultToolkit().getScreenSize();
 	public static File settingsFile = null;
-	public static double x_size = 0,y_size=0;
+	public static double x_size = 0,y_size=0,x_loc=-8,y_loc=0;
+	public final static Dimension scrSizeUs = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getSize();
 	
 	public jidest() throws FileNotFoundException{
 		new yatespash();
@@ -37,6 +39,7 @@ public class jidest {
 				settingsFile.createNewFile();
 				PrintWriter ne = new PrintWriter(settingsFile);
 				ne.println("window.size:0,0");
+				ne.println("window.location:-8,0");
 				ne.flush();
 				ne.close();
 			} catch (IOException e) {

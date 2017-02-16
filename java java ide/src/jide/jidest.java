@@ -1,14 +1,18 @@
 package jide;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 //YATE
 public class jidest {
 	public static String YATE_FOLDER_PATH=null;
 	public static char OS = 'o';
 	public static boolean is64 = false;
-	public static Dimension scrSize= null;
+	public final static Dimension scrSize= Toolkit.getDefaultToolkit().getScreenSize();
+	public static File settingsFile = null;
 	
 	public jidest() throws FileNotFoundException{
 		new yatespash();
@@ -26,6 +30,18 @@ public class jidest {
 		default: path="";
 		}
 		YATE_FOLDER_PATH=path;
+		settingsFile = new File(path+"Settings");
+		if(!settingsFile.exists())
+			try {
+				settingsFile.createNewFile();
+				PrintWriter ne = new PrintWriter(settingsFile);
+				ne.println("window.ratio:1,1");
+				ne.flush();
+				ne.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		new File(path).mkdir();
 		new mainwin();
 		

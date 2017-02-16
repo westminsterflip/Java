@@ -2,7 +2,6 @@ package jide;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -15,11 +14,10 @@ import javax.swing.JWindow;
 @SuppressWarnings("serial")
 public class yatespash extends JWindow{
 	public yatespash(){
-		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 		ImageBackgroundPanel cont = new ImageBackgroundPanel();
 		this.setContentPane(cont);
-		int wid=scr.width/4,hig=scr.height/4;
-		setBounds((scr.width-wid)/2,(scr.height-hig)/2,wid,hig);
+		int wid=jidest.scrSize.width/4,hig=jidest.scrSize.height/4;
+		setBounds((jidest.scrSize.width-wid)/2,(jidest.scrSize.height-hig)/2,wid,hig);
 		JLabel title = new JLabel("     YATE");
 		title.setFont(new Font("Univers",Font.PLAIN,110));
 		title.setForeground(Color.lightGray);

@@ -13,6 +13,7 @@ public class jidest {
 	public static boolean is64 = false;
 	public final static Dimension scrSize= Toolkit.getDefaultToolkit().getScreenSize();
 	public static File settingsFile = null;
+	public static double x_rat = 1,y_rat=1;
 	
 	public jidest() throws FileNotFoundException{
 		new yatespash();

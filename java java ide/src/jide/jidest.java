@@ -13,7 +13,7 @@ public class jidest {
 	public static boolean is64 = false;
 	public final static Dimension scrSize= Toolkit.getDefaultToolkit().getScreenSize();
 	public static File settingsFile = null;
-	public static double x_rat = 1,y_rat=1;
+	public static double x_size = 0,y_size=0;
 	
 	public jidest() throws FileNotFoundException{
 		new yatespash();
@@ -36,7 +36,7 @@ public class jidest {
 			try {
 				settingsFile.createNewFile();
 				PrintWriter ne = new PrintWriter(settingsFile);
-				ne.println("window.ratio:1,1");
+				ne.println("window.size:0,0");
 				ne.flush();
 				ne.close();
 			} catch (IOException e) {

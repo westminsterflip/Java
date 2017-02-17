@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
@@ -34,8 +35,9 @@ public class aSWarning extends JDialog implements ActionListener{
 	JPanel idprotect = new JPanel();
 	
 	public aSWarning(ArrayList<String> filelist){
-		Image m1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images\\icon.png"));
-		Image m = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images\\warning.png"));
+		setTitle("YATE File Recovery");
+		Image m1 = Toolkit.getDefaultToolkit().getImage(jidest.class.getResource("/images"+File.separator+"icon.png"));
+		Image m = Toolkit.getDefaultToolkit().getImage(jidest.class.getResource("/images"+File.separator+"warning.png"));
 		setIconImage(m1);
 		m=m.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
 		Icon dos = new ImageIcon(m);
@@ -64,8 +66,6 @@ public class aSWarning extends JDialog implements ActionListener{
 		setVisible(true);
 	}
 	
-	
-
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		

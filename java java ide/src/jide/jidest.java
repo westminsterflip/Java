@@ -15,6 +15,7 @@ public class jidest {
 	public static File settingsFile = null;
 	public static double x_size = 0,y_size=0,x_loc=-8,y_loc=0;
 	public final static Dimension scrSizeUs = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getSize();
+	public final Object classex = getClass();
 	
 	public jidest() throws FileNotFoundException{
 		try {

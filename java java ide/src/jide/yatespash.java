@@ -21,7 +21,7 @@ import jide.jidest;
 public class yatespash extends JWindow{
 	@SuppressWarnings("unused")
 	public yatespash() throws FileNotFoundException{
-		ImageBackgroundPanel cont = new ImageBackgroundPanel(this.getClass().getResource("/images\\splash.png"));
+		ImageBackgroundPanel cont = new ImageBackgroundPanel(this.getClass().getResource("/images"+File.separator+"splash.png"));
 		this.setContentPane(cont);
 		int wid=jidest.scrSize.width/4,hig=jidest.scrSize.height/4;
 		setBounds((jidest.scrSize.width-wid)/2,(jidest.scrSize.height-hig)/2,wid,hig);

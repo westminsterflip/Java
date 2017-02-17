@@ -1,27 +1,35 @@
 package jide;
 
+import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
 
 import jide.parts.aSWarning;
+import jide.parts.menubar;
 
 
 @SuppressWarnings("serial")
 public class mainwin extends JFrame implements ComponentListener{
+	static ArrayList<String> autosavePile = new ArrayList<String>();
+	static ArrayList<File> autosaveFilePile = new ArrayList<File>();
+	JTabbedPane files = new JTabbedPane();
 	@SuppressWarnings("unused")
 	public mainwin() throws FileNotFoundException{
-		new File(jidest.YATE_FOLDER_PATH+"\\class files").mkdir();
-		File asaves = new File(jidest.YATE_FOLDER_PATH+"\\autosaves");
+		super("YATE: Yet Another Text Editor");
+		new File(jidest.YATE_FOLDER_PATH+File.separator+"class files").mkdir();
+		File asaves = new File(jidest.YATE_FOLDER_PATH+File.separator+"autosaves");
 		asaves.mkdir();
-		Image m = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images\\icon.png"));
+		Image m = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images"+File.separator+"icon.png"));
 		setIconImage(m);
 		Scanner winsizescan = new Scanner(jidest.settingsFile);
 		boolean found = false;
@@ -67,6 +75,9 @@ public class mainwin extends JFrame implements ComponentListener{
 			}
 		}
 		setLocation((int)jidest.x_loc,(int)jidest.y_loc);
+		menubar menu = new menubar();
+		add(menu,BorderLayout.NORTH);
+		//add(files);
 		this.addComponentListener(this);
 		setWinSize();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -159,6 +170,28 @@ public class mainwin extends JFrame implements ComponentListener{
 	@Override
 	public void componentShown(ComponentEvent arg0) {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	public static void open(String fileName) throws FileNotFoundException{
+		File fileopen = new File(jidest.YATE_FOLDER_PATH+File.separator+"autosaves"+File.separator+fileName+".as");
+		if(!fileopen.exists())
+			if(!new File(jidest.YATE_FOLDER_PATH+File.separator+"autosaves"+File.separator+fileName+".s").exists())
+				try {
+					fileopen.createNewFile();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			else
+				fileopen = new File(jidest.YATE_FOLDER_PATH+File.separator+"autosaves"+File.separator+fileName+".s");
+		autosaveFilePile.add(fileopen);
+		Scanner autosaveRead = new Scanner(fileopen);
+		String autosaveString = "";
+		while(autosaveRead.hasNextLine()){
+			autosaveString+=(autosaveRead.nextLine()+System.lineSeparator());
+		}
+		autosaveRead.close();
+		autosavePile.add(autosaveString);
 		
 	}
 }

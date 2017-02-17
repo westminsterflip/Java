@@ -2,8 +2,11 @@ package jide;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+
 import javax.swing.UIManager;
 
 //YATE
@@ -16,6 +19,9 @@ public class jidest {
 	public static double x_size = 0,y_size=0,x_loc=-8,y_loc=0;
 	public final static Dimension scrSizeUs = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getSize();
 	public final Object classex = getClass();
+	public static int asFrequency = 15;
+	public static ArrayList<KeyEvent> keysToWatch = new ArrayList<KeyEvent>();
+	public static String jdkPath = "jdk";
 	
 	public jidest() throws FileNotFoundException{
 		try {
@@ -24,7 +30,7 @@ public class jidest {
    	    catch (Exception e) {
    	    	e.printStackTrace();
    	    }
-		new yatespash();
+		new mainwin();
 	}
 	
 	public static char osc(){

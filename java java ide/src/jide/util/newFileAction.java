@@ -15,7 +15,7 @@ import jide.mainwin;
 @SuppressWarnings("serial")
 public class newFileAction extends icaction{
 	public newFileAction(String NewSize){
-		super("File",(Icon)(new ImageIcon(Toolkit.getDefaultToolkit().getImage(jidest.class.getResource("/images"+File.separator+NewSize+".png")))),"Create a new file",(Integer)KeyEvent.VK_N,KeyStroke.getKeyStroke(KeyEvent.VK_N,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+		super("New",(Icon)(new ImageIcon(Toolkit.getDefaultToolkit().getImage(jidest.class.getResource("/images"+File.separator+NewSize+".png")))),"Create a new file",(Integer)KeyEvent.VK_N,KeyStroke.getKeyStroke(KeyEvent.VK_N,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 	}
 	
 	public void actionPerformed(ActionEvent e){

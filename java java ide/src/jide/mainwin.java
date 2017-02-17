@@ -7,16 +7,21 @@ import java.awt.event.ComponentListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JFrame;
+
+import jide.parts.aSWarning;
 
 
 @SuppressWarnings("serial")
 public class mainwin extends JFrame implements ComponentListener{
+	@SuppressWarnings("unused")
 	public mainwin() throws FileNotFoundException{
 		new File(jidest.YATE_FOLDER_PATH+"\\class files").mkdir();
-		new File(jidest.YATE_FOLDER_PATH+"\\autosaves").mkdir();
-		Image m = Toolkit.getDefaultToolkit().getImage("src\\images\\icon.png");
+		File asaves = new File(jidest.YATE_FOLDER_PATH+"\\autosaves");
+		asaves.mkdir();
+		Image m = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images\\icon.png"));
 		setIconImage(m);
 		Scanner winsizescan = new Scanner(jidest.settingsFile);
 		boolean found = false;
@@ -55,10 +60,23 @@ public class mainwin extends JFrame implements ComponentListener{
 			jidest.y_loc=0;
 			setSize((int)jidest.x_size,(int)jidest.y_size-8);
 		}
+		ArrayList<String> nme = new ArrayList<String>();
+		for(String as:asaves.list()){
+			if(as.endsWith(".as")){
+				nme.add(as.substring(0, as.indexOf(".as")));
+			}
+		}
 		setLocation((int)jidest.x_loc,(int)jidest.y_loc);
 		this.addComponentListener(this);
 		setWinSize();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		
+		
+		if(nme.size()!=0){
+			yatespash.getWindows()[0].setVisible(false);
+			aSWarning nm = new aSWarning(nme);
+		}
 	}
 	
 	void setWinSize() throws FileNotFoundException{

@@ -4,8 +4,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
+import javax.swing.UIManager;
 
 //YATE
 public class jidest {
@@ -18,40 +17,16 @@ public class jidest {
 	public final static Dimension scrSizeUs = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getSize();
 	
 	public jidest() throws FileNotFoundException{
+		try {
+   			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+   	    }
+   	    catch (Exception e) {
+   	    	e.printStackTrace();
+   	    }
 		new yatespash();
-		String path = System.getProperty("user.home");
-		switch(osc()){
-		case 'w': path+="\\AppData\\Roaming\\YATE\\";
-			if(System.getProperty("os.arch").equals("amd64"))
-				is64=true;break;
-		case 'm': path+="/Library/Application Support/YATE/";
-			if(System.getProperty("os.arch").equals("ppc"))
-				is64=true;break;
-		case 'l': path+="/.YATE/";
-			if(System.getProperty("os.arch").equals("amd64"))
-				is64=true;break;
-		default: path="";
-		}
-		YATE_FOLDER_PATH=path;
-		settingsFile = new File(path+"Settings");
-		if(!settingsFile.exists())
-			try {
-				settingsFile.createNewFile();
-				PrintWriter ne = new PrintWriter(settingsFile);
-				ne.println("window.size:0,0");
-				ne.println("window.location:-8,0");
-				ne.flush();
-				ne.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		new File(path).mkdir();
-		new mainwin();
-		
 	}
 	
-	private char osc(){
+	public static char osc(){
 		char ou = 'o';
 		String tob = System.getProperty("os.name").toLowerCase();
 		if(tob.indexOf("win")!=-1)

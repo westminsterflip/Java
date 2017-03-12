@@ -4,7 +4,6 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import javax.swing.UIManager;
@@ -22,31 +21,23 @@ public class jidest {
 	public static int asFrequency = 15;
 	public static ArrayList<KeyEvent> keysToWatch = new ArrayList<KeyEvent>();
 	public static String jdkPath = "jdk";
-	
-	public jidest() throws FileNotFoundException{
+	public static String lastDir = "";
+	public static String fontName = null;
+	public static int fontSize = 0;
+	public static int fontFileNumber=2089;
+	public static boolean checkOnOpen = true;
+	public static mainwin MainWindow;
+	public jidest(){
 		try {
    			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
    	    }
    	    catch (Exception e) {
    	    	e.printStackTrace();
    	    }
-		new mainwin();
+		MainWindow=new mainwin();
 	}
 	
-	public static char osc(){
-		char ou = 'o';
-		String tob = System.getProperty("os.name").toLowerCase();
-		if(tob.indexOf("win")!=-1)
-			ou = 'w';
-		else if(tob.indexOf("mac")!=-1)
-			ou = 'm';
-		else if(tob.indexOf("nix")!=-1||tob.indexOf("nux")!=-1||tob.indexOf("aix")!=-1)
-			ou = 'l';
-		OS=ou;
-		return ou;
-	}
-	
-	public static void main(String[] js) throws FileNotFoundException{
+	public static void main(String[] js){
 		new jidest();
 	}
 }

@@ -7,13 +7,10 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import static java.nio.file.StandardCopyOption.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
@@ -28,7 +25,7 @@ import jide.jidest;
 import jide.mainwin;
 
 @SuppressWarnings("serial")
-public class aSWarning extends JDialog implements ActionListener{
+public class aSWarning extends JDialog implements ActionListener,WindowListener{
 	JTextArea files = new JTextArea();
 	JLabel warning;
 	JButton discardAll = new JButton("Discard All");
@@ -41,8 +38,10 @@ public class aSWarning extends JDialog implements ActionListener{
 	JPanel warningLine = new JPanel();
 	JPanel idprotect = new JPanel();
 	ArrayList<String> fllist;
-	
-	public aSWarning(ArrayList<String> filelist){
+	mainwin parent;
+	boolean save = false;
+	public aSWarning(ArrayList<String> filelist,mainwin parent){
+		this.parent=parent;
 		fllist=filelist;
 		setTitle("YATE File Recovery");
 		Image m1 = Toolkit.getDefaultToolkit().getImage(jidest.class.getResource("/images"+File.separator+"icon.png"));
@@ -70,11 +69,14 @@ public class aSWarning extends JDialog implements ActionListener{
 		discardAll.addActionListener(this);
 		saveAll.addActionListener(this);
 		viewAll.addActionListener(this);
+		saveAll.setPreferredSize(new Dimension(81,23));
+		viewAll.setPreferredSize(new Dimension(81,23));
 		setModal(true);
 		files.setEditable(false);
 		pack();
 		setLocation((int)Math.round((jidest.scrSize.getWidth()-getWidth())/2.0),(int)Math.round((jidest.scrSize.getHeight()-getHeight())/2.0));
 		setResizable(false);
+		this.addWindowListener(this);
 	}
 	
 	@Override
@@ -84,7 +86,7 @@ public class aSWarning extends JDialog implements ActionListener{
 			saveAll.setEnabled(false);
 			viewAll.setEnabled(false);
 			for(String fileName:fllist){
-				new File(jidest.YATE_FOLDER_PATH+File.separator+"autosaves"+File.separator+fileName+".as").delete();
+				new File(jidest.YATE_FOLDER_PATH+File.separator+"autosaves"+File.separator+fileName+"_as").delete();
 			}
 			dispose();
 		}else if(e.getSource().equals(saveAll)){
@@ -92,22 +94,7 @@ public class aSWarning extends JDialog implements ActionListener{
 			saveAll.setEnabled(false);
 			viewAll.setEnabled(false);
 			for(String filename:fllist){
-				File file = new File(jidest.YATE_FOLDER_PATH+File.separator+"autosaves"+File.separator+filename+".as");
-				String savePath="";
-				try {
-					Scanner pathFinder = new Scanner(file);
-					savePath = pathFinder.nextLine();
-					pathFinder.close();
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				try {
-					Files.copy(file.toPath(),new File(savePath).toPath(),REPLACE_EXISTING);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				jidest.MainWindow.save(filename);
 			}
 			dispose();
 		}else if(e.getSource().equals(viewAll)){
@@ -115,14 +102,56 @@ public class aSWarning extends JDialog implements ActionListener{
 			saveAll.setEnabled(false);
 			viewAll.setEnabled(false);
 			for(String fileName:fllist){
-				try {
-					mainwin.open(fileName);
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				parent.open(jidest.YATE_FOLDER_PATH + "autosaves" + File.separator + fileName + "_as");
 			}
+			save=true;
 			dispose();
 		}
+	}
+
+	@Override
+	public void windowActivated(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosed(WindowEvent arg0) {
+		if(!save)
+			for(String fileName:fllist){
+				new File(jidest.YATE_FOLDER_PATH+File.separator+"autosaves"+File.separator+fileName+"_as").delete();
+			}
+	}
+
+	@Override
+	public void windowClosing(WindowEvent arg0) {
+		if(!save)
+			for(String fileName:fllist){
+				new File(jidest.YATE_FOLDER_PATH+File.separator+"autosaves"+File.separator+fileName+"_as").delete();
+			}
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowOpened(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }

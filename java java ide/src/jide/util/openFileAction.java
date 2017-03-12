@@ -13,11 +13,11 @@ import jide.jidest;
 @SuppressWarnings("serial")
 public class openFileAction extends icaction{
 	public openFileAction(String NewSize,boolean isButton){
-		super("",(Icon)(new ImageIcon(Toolkit.getDefaultToolkit().getImage(jidest.class.getResource("/images"+File.separator+NewSize+".png")))),"Create a new file (CTRL+O)",(Integer)KeyEvent.VK_O,KeyStroke.getKeyStroke(KeyEvent.VK_O,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+		super("",(Icon)(new ImageIcon(Toolkit.getDefaultToolkit().getImage(jidest.class.getResource("/images/"+NewSize+".png")))),"Create a new file (CTRL+O)",(Integer)KeyEvent.VK_O,KeyStroke.getKeyStroke(KeyEvent.VK_O,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 	}
 	
 	public openFileAction(String NewSize){
-		super("Open",(Icon)(new ImageIcon(Toolkit.getDefaultToolkit().getImage(jidest.class.getResource("/images"+File.separator+NewSize+".png")))),null,(Integer)KeyEvent.VK_O,KeyStroke.getKeyStroke(KeyEvent.VK_O,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+		super("Open",(Icon)(new ImageIcon(Toolkit.getDefaultToolkit().getImage(jidest.class.getResource("/images/"+NewSize+".png")))),null,(Integer)KeyEvent.VK_O,KeyStroke.getKeyStroke(KeyEvent.VK_O,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 	}
 	
 	public void actionPerformed(ActionEvent e){

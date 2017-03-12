@@ -132,7 +132,7 @@ public class mainwin extends JFrame implements ComponentListener{
 		new File(jidest.YATE_FOLDER_PATH+File.separator+"class files").mkdir();
 		File asaves = new File(jidest.YATE_FOLDER_PATH+File.separator+"autosaves");
 		asaves.mkdir();
-		Image m = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images"+File.separator+"icon.png"));
+		Image m = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/icon.png"));
 		setIconImage(m);
 		Scanner winsizescan=null;
 		try {
@@ -249,7 +249,7 @@ public class mainwin extends JFrame implements ComponentListener{
 				jidest.MainWindow.splash.test.dispose();
 				jidest.MainWindow.splash.outputback.dispose();
 				if(nme.size()!=0){
-					aSWarning nm = new aSWarning(nme,(mainwin) files.getParent());
+					aSWarning nm = new aSWarning(nme,jidest.MainWindow);
 					setVisible(true);
 					splash.dispose();
 					nm.setVisible(true);
@@ -455,7 +455,8 @@ public class mainwin extends JFrame implements ComponentListener{
 					while(autosaveRead.hasNextLine()){
 						autosaveString+=(autosaveRead.nextLine()+System.lineSeparator());
 					}
-					autosaveString=autosaveString.substring(0,autosaveString.lastIndexOf(System.lineSeparator()));
+					if(autosaveString.indexOf(System.lineSeparator())!=-1)
+						autosaveString=autosaveString.substring(0,autosaveString.lastIndexOf(System.lineSeparator()));
 					autosaveRead.close();
 				}
 				fileopen = new File(jidest.YATE_FOLDER_PATH+File.separator+"autosaves"+File.separator+tfileName+"_s");

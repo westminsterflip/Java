@@ -44,8 +44,8 @@ public class aSWarning extends JDialog implements ActionListener,WindowListener{
 		this.parent=parent;
 		fllist=filelist;
 		setTitle("YATE File Recovery");
-		Image m1 = Toolkit.getDefaultToolkit().getImage(jidest.class.getResource("/images"+File.separator+"icon.png"));
-		Image m = Toolkit.getDefaultToolkit().getImage(jidest.class.getResource("/images"+File.separator+"warning.png"));
+		Image m1 = Toolkit.getDefaultToolkit().getImage(jidest.class.getResource("/images/icon.png"));
+		Image m = Toolkit.getDefaultToolkit().getImage(jidest.class.getResource("/images/warning.png"));
 		setIconImage(m1);
 		m=m.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
 		Icon dos = new ImageIcon(m);

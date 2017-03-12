@@ -8,7 +8,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.io.File;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -29,7 +28,7 @@ public class yatespash extends JWindow{
 	public JLabel output = new JLabel("");
 	public JWindow outputback = new JWindow();
 	public yatespash(){
-		ImageBackgroundPanel cont = new ImageBackgroundPanel(this.getClass().getResource("/images"+File.separator+"splash.png"));
+		ImageBackgroundPanel cont = new ImageBackgroundPanel(this.getClass().getResource("/images/splash.png"));
 		add(cont);
 		int wid=jidest.scrSize.width/4,hig=jidest.scrSize.height/4;
 		setBounds((jidest.scrSize.width-wid)/2,(jidest.scrSize.height-hig)/2,wid,hig);

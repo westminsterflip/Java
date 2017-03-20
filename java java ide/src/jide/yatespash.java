@@ -27,40 +27,36 @@ public class yatespash extends JWindow{
 	JPanel opbc = new JPanel();
 	public JLabel output = new JLabel("");
 	public JWindow outputback = new JWindow();
+	JLabel title;
 	public yatespash(){
 		ImageBackgroundPanel cont = new ImageBackgroundPanel(this.getClass().getResource("/images/splash.png"));
 		add(cont);
 		int wid=jidest.scrSize.width/4,hig=jidest.scrSize.height/4;
 		setBounds((jidest.scrSize.width-wid)/2,(jidest.scrSize.height-hig)/2,wid,hig);
-		JLabel title = new JLabel("     YATE");
+		title = new JLabel("     YATE");
 		title.setVisible(true);
 		title.setFont(new Font("Univers",Font.PLAIN,getWidth()/4));
-		//output.setLocation(x, y);
 		title.setForeground(Color.lightGray);
 		cont.add(title,BorderLayout.NORTH);
 		setVisible(true);
-		test.setBackground(Color.darkGray);
-	//	testpro.add(test);
-		
-		testproColor.setSize(640,10);
+	}
+	
+	public void build(){
+		test.setBackground(Color.darkGray);testproColor.setSize(640,10);
 		testproColor.setBackground(Color.lightGray);
-		testpro.add(testproColor);
-		//testpro.setBackground(Color.red);
-		//add(testpro,BorderLayout.SOUTH);
-		
-		testColor.setSize(0,10);
+		testpro.add(testproColor);testColor.setSize(0,10);
 		testColor.setBackground(Color.darkGray);
 		test.add(testColor);
 		test.setSize(0, 10);
 		opbc.setBackground(Color.darkGray);
-		outputback.setSize(350, 30);
+		outputback.setSize(this.getWidth()/3*2, 30);
 		opbc.setLayout(new FlowLayout(FlowLayout.LEFT));
 		opbc.add(output);
 		output.setFont(new Font("Univers=",Font.PLAIN,14));
 		output.setForeground(Color.lightGray);
-		opbc.setSize(350,30);
+		opbc.setSize(this.getWidth()/3*2,30);
 		outputback.add(opbc);
-		testpro.setSize(640,10);
+		testpro.setSize(this.getWidth(),10);
 		testpro.setLocation(this.getLocation().x, this.getLocation().y+getHeight()-10);
 		test.setLocation(this.getLocation().x, this.getLocation().y+getHeight()-10);
 		outputback.setLocation(this.getLocation().x+this.getWidth()-350, this.getLocation().y+title.getHeight());

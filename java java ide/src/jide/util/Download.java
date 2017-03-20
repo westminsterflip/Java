@@ -1,6 +1,8 @@
 package jide.util;
 
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -37,8 +39,10 @@ public class Download implements Runnable{
 		    			fos.write(buffer, 0, len);
 		    		}
 		    		fos.close();
-		    		Font tnof = Font.createFont(Font.TRUETYPE_FONT,newFile);
-		    		GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(tnof);
+		    		try{
+		    			Font tnof = Font.createFont(Font.TRUETYPE_FONT,newFile);
+		    			GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(tnof);
+		    		}catch(FontFormatException e){}
 	    		}
 	    		ze = zis.getNextEntry();
 	    	}
@@ -47,29 +51,16 @@ public class Download implements Runnable{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		if(cnt>jidest.MainWindow.splash.ttfpro.getMaximum()){
-			try{
-				List<String> lines = Files.readAllLines(jidest.settingsFile.toPath());
-				PrintWriter lineChanger = new PrintWriter(jidest.settingsFile);
-				for(String exciting:lines){
-					if(exciting.startsWith("font.file.number")){
-						lineChanger.println("font.file.number:"+cnt);
-					}else{
-						lineChanger.println(exciting);
-					}
-				}
-				lineChanger.flush();
-				lineChanger.close();
-			}catch(IOException e){
-				e.printStackTrace();
-			}
-		}
 		try{
 			List<String> lines = Files.readAllLines(jidest.settingsFile.toPath());
 			PrintWriter lineChanger = new PrintWriter(jidest.settingsFile);
 			for(String exciting:lines){
-				if(exciting.startsWith("check.font.download.on.start")){
+				if(exciting.startsWith("font.file.number")){
+						lineChanger.println("font.file.number:"+cnt);
+				}else if(exciting.startsWith("check.font.download.on.start")){
 					lineChanger.println("check.font.download.on.start:"+false);
+				}else if(exciting.startsWith("fonts.were.downloaded")){
+					lineChanger.println("fonts.were.downloaded:true");
 				}else{
 					lineChanger.println(exciting);
 				}
@@ -79,6 +70,7 @@ public class Download implements Runnable{
 		}catch(IOException e){
 			e.printStackTrace();
 		}
+		jidest.wasDownloaded=true;
 		jidest.MainWindow.splash.dispose();
 		jidest.MainWindow.splash.test.setVisible(false);
 		jidest.MainWindow.splash.testpro.setVisible(false);
@@ -88,10 +80,12 @@ public class Download implements Runnable{
 		if(jidest.MainWindow.nme.size()!=0){
 			aSWarning nm = new aSWarning(jidest.MainWindow.nme,jidest.MainWindow);
 			jidest.MainWindow.setVisible(true);
+			jidest.MainWindow.files.setMinimumSize(new Dimension(jidest.MainWindow.getWidth()/3*2,200));
 			jidest.MainWindow.splash.dispose();
 			nm.setVisible(true);
 		}else{
 			jidest.MainWindow.setVisible(true);
+			jidest.MainWindow.files.setMinimumSize(new Dimension(jidest.MainWindow.getWidth()/3*2,200));
 			jidest.MainWindow.splash.dispose();
 		}
 	}

@@ -11,15 +11,19 @@ public class editorScroll extends JScrollPane implements ComponentListener{
 	public String content;
 	static String name="";
 	//JPanel panel = new JPanel();
-	public editorScroll(String content,String fileName, Dimension availableSize){
+	public editorScroll(String content,String fileName, Dimension availableSize, String encoding){
 		super();
-		editorinst=new editor(content,fileName);
+		editorinst=new editor(content,fileName,encoding);
 		TextLineNumber tln = new TextLineNumber(editorinst,1);
 		this.setViewportView(editorinst);
 		this.setRowHeaderView(tln);
 		this.content=content;
 		setSize(availableSize);
 		name=fileName;
+	}
+	
+	public String getEncoding(){
+		return editorinst.encoding;
 	}
 	
 	public String getName(){

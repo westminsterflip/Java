@@ -27,6 +27,8 @@ public class jidest {
 	public static int fontFileNumber=2089;
 	public static boolean checkOnOpen = true;
 	public static mainwin MainWindow;
+	public static boolean wasDownloaded = false;
+	public static boolean isMaximized = false;
 	public jidest(){
 		try {
    			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

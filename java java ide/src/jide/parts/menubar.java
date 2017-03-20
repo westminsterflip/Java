@@ -3,8 +3,8 @@ package jide.parts;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
 import jide.util.SaveAllFileAction;
+import jide.util.UndoAction;
 import jide.util.newFileAction;
 import jide.util.openFileAction;
 import jide.util.saveAsFileAction;
@@ -18,6 +18,7 @@ public class menubar extends JMenuBar{
 	public JMenuItem save;
 	public JMenuItem saveas;
 	public JMenuItem saveall;
+	public JMenuItem undo;
 	public menubar(){
 		super();
 		file.add(new JMenuItem(new newFileAction("New16")));
@@ -26,9 +27,12 @@ public class menubar extends JMenuBar{
 		save = new JMenuItem(new saveFileAction("Save16"));
 		saveas = new JMenuItem(new saveAsFileAction());
 		saveall = new JMenuItem(new SaveAllFileAction());
+		undo = new JMenuItem(new UndoAction());
 		file.add(save);
 		file.add(saveas);
 		file.add(saveall);
+		edit.add(undo);
+		edit.addSeparator();
 		add(file);
 		add(edit);
 		add(java);
